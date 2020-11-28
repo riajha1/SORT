@@ -1,0 +1,140 @@
+@import "../../../../stylesheets/abstracts/variable";
+@import "../../../../stylesheets/abstracts/placeholder";
+.navbar {
+    & .navbar__link__arrow {
+        color: $dark-color !important;
+        font-size: .89em;
+        cursor: pointer;
+    }
+    & .navbar-toggler {
+        color: rgba(0, 0, 0, .5);
+        border-color: rgba(0, 0, 0, .1);
+        & .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3e%3cpath stroke='rgba(0, 0, 0, 0.5)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+        }
+    }
+    & .navbar-nav {
+        & .nav-item {
+            display: inline-block;
+            &.print-icon {
+                height: 40px;
+                cursor: pointer;
+            }
+            &:last-child::after {
+                content: " ";
+            }
+            &:nth-child(4)::after {
+                content: " ";
+            }
+            &::after {
+                padding-left: 0.5rem;
+                color: #2E2E38;
+                content: "|";
+                @media (max-width: $break-small) {
+                    content: " " !important;
+                }
+            }
+            & .nav-link {
+                font-family: $EYInterstate-Light;
+                color: $dark-color;
+                font-size: .89rem;
+                display: inline-block;
+                padding-right: 0px;
+                &:hover {
+                    font-weight: bold;
+                    text-decoration: underline;
+                    & i {
+                        text-decoration: none !important;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.section__independence {
+    @extend %marginsection;
+    & .section__independence__title {
+        @extend %film;
+        & a {
+            @extend %filmIcon;
+            font-size: .99rem;
+            background-color: transparent;
+            & i {
+                font-size: .99rem !important;
+                color: $white-color;
+            }
+        }
+    }
+    & .independence__restrictions {
+        a {
+            color: $dark-color;
+            text-decoration: underline;
+        }
+        & .independence__restrictions--grey {
+            background: $grey3-color;
+            padding: 7px 20px;
+            font-family: $EYInterstate-Light;
+            font-size: .9rem;
+            & p {
+                position: relative;
+                padding-left: 2rem;
+                & i {
+                    position: absolute;
+                    left: 0;
+                    top: 2px;
+                    font-size: 1.3rem;
+                }
+            }
+            & button {
+                font-family: $EYInterstate-Light;
+                font-size: .9rem;
+                border: none;
+                cursor: pointer;
+                color: $dark-color;
+                padding: 0px;
+                text-decoration: underline;
+                &:hover {
+                    text-decoration: underline;
+                }
+                &:focus {
+                    outline: 0;
+                    box-shadow: 0 0 0 0.2rem transparent;
+                }
+            }
+        }
+    }
+}
+
+.section__considerations {
+    @extend %marginsection;
+    & .section__considerations__title {
+        @extend %film;
+    }
+    & .section__considerations__info {
+        & .section__considerations__info__text {
+            font-family: $EYInterstate-Light !important;
+            font-size: .9rem !important;
+            font-weight: bold;
+            margin-bottom: .45rem;
+            & a {
+                font-family: $EYInterstate-Light;
+                color: $dark-color;
+                text-decoration: underline;
+                font-weight: bold;
+                font-size: .9rem !important;
+                border: none;
+                margin-bottom: 1px;
+                cursor: pointer
+            }
+        }
+    }
+}
+
+.title_code {
+    font-weight: bold;
+}
+.icon-pointer
+{
+cursor: pointer;
+}

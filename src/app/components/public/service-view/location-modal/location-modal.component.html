@@ -1,0 +1,27 @@
+<div class="modal-header">
+    <h4 class="modal-title">Locations Offered</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <mat-tree class="greyBackground" [dataSource]="dataSource" [treeControl]="treeControl">
+        <!-- Hijos del nodo principal
+            matTreeNodePadding: padding de los nodos hijos -->
+        <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
+            <mat-checkbox class="checklist-leaf-node" [checked]="node.selected" (change)="allItemSelectionToggle(node)" [disabled]="true"><span (click)="countrySelection(node.name)" [ngClass]="node.selected ? 'country-link' : 'country-link-disabled'">{{node.name}}</span></mat-checkbox>
+        </mat-tree-node>
+        <mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding>
+            <!-- Boton de icono, colapsa para mostrar los hijos, este es el item papá -->
+            <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'toggle ' + node.name" class="btn-tree">
+                    <mat-icon class="mat-icon-rtl-mirror">
+                        {{treeControl.isExpanded(node) ? 'remove' : 'add'}}
+                    </mat-icon>
+            </button>
+            <mat-checkbox class="checklist-leaf-node" [indeterminate]="descendantsPartiallySelected(node)" [checked]="node.selected" (change)="allItemSelectionToggle(node)" [disabled]="true">{{node.name}}</mat-checkbox>
+        </mat-tree-node>
+    </mat-tree>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+</div>

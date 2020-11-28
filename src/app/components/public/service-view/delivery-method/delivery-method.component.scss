@@ -1,0 +1,95 @@
+@import "../../../../../stylesheets/abstracts/variable";
+@import "../../../../../stylesheets/abstracts/placeholder";
+.delivery-section {
+    position: relative;
+    & .delivery-fix-flag {
+        position: absolute;
+        top: -100px;
+    }
+}
+
+.section__delivery {
+    @extend %marginsection;
+    border: none;
+    border: 1px solid $grey3-color;
+    & .section__delivery__title {
+        @extend %film;
+        background: $grey3-color;
+        color: $dark-color;
+        border-top: 1px solid $grey3-color;
+        padding-left: .7rem;
+        margin-bottom: .8rem;
+        font-size: 1rem;
+        & a {
+            @extend %filmIcon;
+            font-size: 0.99rem;
+            background-color: transparent;
+            & i {
+                font-size: 0.99rem !important;
+                color: $dark-color;
+            }
+        }
+    }
+    & .section__delivery__left {
+        padding: 0px 23px 7px 23px;
+        & p {
+            font-family: $EYInterstate-Light;
+            font-size: .82rem;
+            line-height: 1.2;
+            font-weight: bold;
+        }
+        & .nav-pills {
+            & .nav-link {
+                font-family: $EYInterstate-Light;
+                color: $dark-color;
+                border: 1px solid $grey2-color;
+                font-size: .85rem;
+                &.active {
+                    border-radius: 0;
+                    background: $grey2-color;
+                    font-weight: bold;
+                    & .custom-radio {
+                        & .custom-control-label {
+                            &::before {
+                                border-color: $dark-color;
+                                background-color: $white-color;
+                            }
+                            &::after {
+                                background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='100' width='100'%3E%3Ccircle cx='50' cy='50' r='40' stroke='black' fill='%232E2E38' /%3E Sorry, your browser does not support inline SVG. %3C/svg%3E ");
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    & .section__delivery__right {
+        background: $grey3-color;
+        & .tab-content {
+            height: 100%;
+            & .tab-pane {
+                font-family: $noto-sans;
+                padding: 24px 25px 24px 25px;
+                height: inherit;
+                & h6 {
+                    font-family: $EYInterstate-Light;
+                    font-weight: bold;
+                    padding-bottom: 24px;
+                    margin-bottom: auto;
+                    line-height: 24px;
+                }
+                & p,
+                li {
+                    font-family: $noto-sans;
+                    font-size: .85rem;
+                }
+            }
+        }
+    }
+}
+
+@media(min-width:1450px) {
+    .tab-content {
+        max-width: 1000px;
+    }
+}

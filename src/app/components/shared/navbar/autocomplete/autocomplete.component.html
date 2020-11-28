@@ -1,0 +1,20 @@
+<!--Autocomplete input -->
+<form class="form-inline d-flex navbar__form__content" [formGroup]="searchForm" (ngSubmit)="search()">
+    <div class="input-group navbar__form__form mr-1">
+        <input type="text" class="form-control navbar__form__input border-0" placeholder="Search keywords or finance code" formControlName="search" aria-label="Search Information" aria-describedby="basic-addon2" (focusout)="hideDropdown()">
+        <div class="input-group-append">
+            <button type="submit" class="btn navbar__form__button border-0" (keyup.enter)="search()"> <i class="material-icons">search</i></button>
+        </div>
+        <ul class="navbar__form_suggestion" *ngIf="dropdownsuggest">
+            <li *ngIf="autocompleteResult.length === 0 && !loadingSearch" class="font-weight-bold">No services matched the search criteria</li>
+            <h6 *ngIf="autocompleteResult.length > 10" class="dropdown-header">First 10 results</h6>
+            <li *ngIf="loadingSearch" class="dropdown-header animated loading-li" [ngClass]="{'fadeIn':loadingSearch,'fadeOut':!loadingSearch}"><i class="material-icons material-spin custom-font">sync</i>Loading...</li>
+            <ng-container *ngFor="let item of autocompleteResult; let i= index">
+                <li class="animated fadeIn" *ngIf="i<10" (click)="redirect(item.idService)">
+                    <span class="prefix">{{item.prefix}}</span><span *ngIf="item.code !== ''">{{item.code}}</span><span>{{item.name}}</span>
+                </li>
+                <li class="animated fadeIn" *ngIf="i == autocompleteResult.length - 1" class="text-center" (click)="search()"><b>See all matches</b></li>
+            </ng-container>
+        </ul>
+    </div>
+</form>

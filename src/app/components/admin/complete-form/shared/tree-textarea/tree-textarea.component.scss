@@ -1,0 +1,43 @@
+@import "../../../../../../stylesheets/abstracts/variable";
+@import "../../../../../../stylesheets/base/base_form";
+.country-textarea {
+    width: 100%;
+}
+
+::ng-deep .mat-tree-node.parentNode .box_item {
+    width: 100%;
+    border-bottom: 1px solid $grey2-color;
+    padding-bottom: 6px;
+    margin-bottom: 6px;
+}
+
+::ng-deep .mat-tree-node .box_item .mat-checkbox-inner-container {
+    margin-top: 1px;
+}
+
+::ng-deep .mat-icon-button.btn-margin_top .mat-button-wrapper .mat-icon {
+    margin-top: 1px;
+}
+
+::ng-deep .mat-tree-node .box_item .mat-checkbox-disabled .mat-checkbox-label,
+::ng-deep .mat-tree-node .country-textarea .mat-checkbox-disabled .mat-checkbox-label {
+    color: $dark-color;
+}
+
+.area-label {
+    font-family: $EYInterstate-Light;
+    font-size: 12px;
+}
+
+.box-buttons {
+    position: relative;
+    & button {
+        color: $dark-color;
+        font-family: $EYInterstate-Light;
+        font-weight: bold;
+        font-size: 12px;
+        position: absolute;
+        right: 0;
+        z-index: 2;
+    }
+}

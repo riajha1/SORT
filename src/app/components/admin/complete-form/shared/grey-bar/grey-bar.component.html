@@ -1,0 +1,59 @@
+<div class="container-fluid bg spacing-around">
+  <span class="global_local"
+    *ngIf="greyBarData !== undefined && greyBarData.originOfService !== ''">{{greyBarData.originOfService}}</span>
+  <span class="font-weight-bold font-s"
+    *ngIf="greyBarData !== undefined && greyBarData.serviceLinePrefix !== '' || greyBarData !== undefined && greyBarData.serviceTitle !== ''">
+    {{greyBarData.serviceLinePrefix}}
+    <small
+      *ngIf="greyBarData !== undefined && greyBarData.serviceLinePrefix !== '' && greyBarData.serviceTitle !== ''">-</small>
+    {{greyBarData.serviceTitle}}
+  </span>
+
+  <button class="btn float-right p-0 mt_6">
+    <span class="material-icons mail-icon-round ">mail </span>
+  </button>
+
+  <button class="btn float-right p-0 mr-2 mt_6">
+    <span class="material-icons  mail-icon-round">delete</span>
+  </button>
+
+  <button class="btn float-right p-0 mr-2 mt_6"*ngIf="showEditIcon" (click)="openModal(editModal)">
+    <span class="material-icons  mail-icon-round ">create</span>
+  </button>
+</div>
+<!-- Edit Service -->
+<ng-template #editModal let-modal>
+  <app-loading [show]="loadingFavorites"></app-loading>
+  <div *ngIf="!loadingFavorites" class="animated fadeIn">
+    <div class="modal-header">
+      <h4 class="modal-title">Edit Service</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="row">
+        <div class="col-12">
+          <p class="mb-1">Please select the stage and press OK to proceed.</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-8">
+          <!-- {{serviceStatusList | json}} -->
+          <ng-select appendTo="body" [items]="serviceStatusList" [searchable]="false" [clearable]="false" [multiple]="false"
+           [(ngModel)]="selectedStatus" bindLabel="StatusName">
+          </ng-select>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <div class="col-12">
+      <button class="col-2 btn float-right btn-warning" type="button" [disabled] ="this.selectedStatus.BusinessName == undefined"
+        (click)="modal.close('save');duplicateService(greyBarData.idService)">OK</button>
+      <button type="button" class="col-2 btn float-left btn-outline-dark"
+        (click)="modal.close('Close click');">Cancel</button>
+    </div>
+  </div>
+
+</ng-template>

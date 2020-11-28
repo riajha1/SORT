@@ -1,0 +1,37 @@
+@import "../../../../../stylesheets/abstracts/variable";
+.second-text,
+.modal-title {
+    font-family: $EYInterstate-Light;
+    color: $dark-color;
+}
+
+.second-text {
+    font-size: .8rem;
+}
+
+.modal-title {
+    font-weight: bold;
+}
+
+.nav-link {
+    border-radius: 0px;
+    font-family: $EYInterstate-Light;
+    color: $dark-color;
+    &.active {
+        font-weight: bold;
+        color: $dark-color;
+    }
+}
+
+.top-border{
+    padding-left: 6px;
+    padding-right: 0px;
+    margin-left: -6px;
+    border-top: 1px solid #ccc;
+}
+
+.image-size{
+    width: 40px;
+    height: 40px;
+    margin-right: 0.5rem;
+}

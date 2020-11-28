@@ -1,0 +1,87 @@
+@import "../../../../../stylesheets/abstracts/variable";
+.nav-link.print {
+    font-family: $EYInterstate-Light;
+    color: $dark-color;
+    font-size: .89rem;
+    display: inline-block;
+    padding-right: 0px;
+    cursor: pointer;
+    &:hover {
+        font-weight: bold;
+        text-decoration: underline;
+        & i {
+            text-decoration: none !important;
+        }
+    }
+}
+
+.print-view {
+    .small-text {
+        font-size: .75rem;
+    }
+    .header-bar {
+        background-color: $dark-color;
+        ;
+        & img {
+            width: 30px;
+            height: auto;
+        }
+        & span.small-text {
+            font-family: $EYInterstate-Light;
+            font-size: 0.72rem;
+            color: white;
+            margin-left: 3px;
+            &.location {
+                margin-left: 7px !important;
+            }
+        }
+        & span.text-sort {
+            font-family: $EYInterstate-Light;
+            font-size: 0.72rem;
+            color: white;
+            margin-left: 7px;
+            margin-top: 11px;
+            &:before {
+                padding-right: 0.5rem;
+                color: white;
+                content: "|";
+            }
+        }
+    }
+    .first-section {
+        font-family: "EYFontLight", "Noto Sans", Arial, sans-serif;
+        & .title {
+            font-weight: bold;
+            font-size: 1.3rem;
+        }
+        & .headline {
+            font-family: "Noto Sans";
+            font-weight: bold;
+            font-size: .9rem;
+        }
+        & .description {
+            font-family: "EYFontLight", "Noto Sans", Arial, sans-serif;
+            font-size: 0.875rem !important;
+        }
+    }
+    .breadcrumb {
+        background: transparent;
+        font-family: $EYInterstate-Light;
+        font-size: .75rem;
+        font-weight: bold;
+        letter-spacing: .1px;
+        & .comma {
+            margin-right: 0.3rem;
+            margin-left: -.2rem;
+        }
+        & span:last-child span:last-child {
+            display: none;
+        }
+    }
+    .dateUpdate {
+        text-align: center !important;
+        font-size: .75rem;
+        color: $grey5-color;
+        padding-right: 8px;
+    }
+}

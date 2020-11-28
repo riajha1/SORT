@@ -1,0 +1,142 @@
+@import "../../../../../stylesheets/abstracts/variable";
+.sidebar__title {
+    font-family: $EYInterstate-Bold;
+    color: $white-color;
+    text-align: left;
+    font-size: 1.45em;
+    display: flex;
+    align-items: center;
+    position: relative;
+    & i {
+        background: $yellow-color;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        padding-top: 5px;
+        padding-left: 3px;
+        color: $dark-color;
+        text-align: center;
+        margin-right: 10px;
+        font-size: 1.4rem;
+        &:last-child {
+            position: absolute;
+            right: 0;
+            cursor: pointer;
+        }
+    }
+    & button {
+        position: absolute;
+        right: 20px;
+        color: $yellow-color;
+        border-color: $yellow-color;
+        &:hover {
+            background-color: $dark-color;
+            color: $yellow-color;
+        }
+    }
+}
+
+.filterOptions {
+    & .filter-item {
+        padding: 5px 18px 0px 31px;
+        &:last-child {
+            margin-bottom: 4rem;
+        }
+        & .filter-item__link {
+            font-family: $EYInterstate-Light;
+            width: 100%;
+            text-align: left;
+            padding: 0px 0px 5px 0px;
+            color: $white-color;
+            border-bottom-width: thin;
+            border-bottom-style: solid;
+            border-bottom-color: $white-color;
+            font-size: .875rem;
+            font-weight: bold;
+            position: relative;
+            &:focus {
+                outline: 0;
+                box-shadow: 0 0 0 0.2rem transparent;
+            }
+            &::after {
+                font-family: "Font Awesome 5 free";
+                font-weight: 900;
+                content: "\f077";
+                position: absolute;
+                top: 0px;
+                right: 20px;
+                color: $yellow-color;
+            }
+            &.collapsed::after {
+                content: "\f078";
+            }
+            &:hover,
+            &:active,
+            &:focus {
+                text-decoration: none;
+            }
+        }
+    }
+    & .card-body {
+        background: $dark-color;
+        padding-left: 5px;
+        padding-top: 8px;
+        font-size: .7rem;
+        letter-spacing: .4px;
+        & .custom-control input+label {
+            color: $white-color;
+        }
+    }
+}
+
+.styled-checkbox {
+    &+label {
+        position: relative;
+        cursor: pointer;
+        padding: 6px 0 0 6px;
+        font-family: $EYInterstate-Light;
+        font-size: .75rem;
+        &:before {
+            content: '';
+            margin-right: 10px;
+            display: inline-block;
+            vertical-align: text-top;
+            width: 20px;
+            height: 20px;
+            border-color: $white-color;
+            background: $dark-color;
+            border-radius: 0px;
+        }
+        & .styled-checkbox {
+            &:focus+label:before {
+                box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.12);
+            }
+            &:disabled+label {
+                color: $dark-color;
+                cursor: auto;
+                &:before {
+                    box-shadow: none;
+                    background: $white-color;
+                }
+            }
+        }
+    }
+    &:checked+label {
+        font-weight: bold;
+        &:after {
+            font-family: "Font Awesome 5 free";
+            font-weight: 900;
+            font-size: 12px;
+            content: "\f00c";
+            position: absolute;
+            left: -24px;
+            top: 4px;
+            width: 20px;
+            height: 20px;
+            padding-left: 4px;
+            padding-top: 1px;
+            color: $dark-color;
+            background: $white-color;
+        }
+    }
+}

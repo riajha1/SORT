@@ -1,0 +1,48 @@
+<section class="col-12 mb-3 section__header p-0" *ngIf="header">
+    <div class="fix-flag-header" #headerDiv></div>
+    <div class="div_header">
+        <nav aria-label="breadcrumb" *ngIf="breadcrumb" class="breadcrumb">
+            <div class="row">
+                <div class="col pr-0 py-0">
+                    <span matTooltip="Origin of Service" matTooltipPosition="above" class="global_local mr-3">{{originServiceString}}</span> 
+                    <span *ngFor="let b of breadcrumb.sl; let i = index" matTooltip="Service Line" #ref matTooltipPosition="above">{{b}}
+                        <span *ngIf="breadcrumb.sl.length !== i + 1" class="comma">,</span>
+                    <span *ngIf="breadcrumb.sl.length === i + 1" class="mx-2">|</span>
+                    </span>
+                    <span *ngFor="let b of breadcrumb.ssl; let i = index" matTooltip="Sub Service Line" #ref matTooltipPosition="above">{{b}}
+                        <span *ngIf="breadcrumb.ssl.length !== i + 1" class="comma">,</span>
+                    <span *ngIf="breadcrumb.ssl.length === i + 1" class="mx-2">|</span></span>
+                    <span *ngFor="let b of breadcrumb.competency; let i = index" matTooltip="Competency/Domain" #ref matTooltipPosition="above"> {{b}}
+                        <span *ngIf="breadcrumb.competency.length !== i + 1" class="comma">,</span>
+                    <span *ngIf="breadcrumb.competency.length === i + 1" class="mx-2">|</span></span>
+                    <span *ngFor="let b of breadcrumb.solution; let i = index" matTooltip="Solution" #ref matTooltipPosition="above"> {{b}}
+                        <span *ngIf="breadcrumb.solution.length !== i + 1" class="comma">,</span>
+                    <span *ngIf="breadcrumb.solution.length === i + 1" class="mx-2">|</span></span>
+
+                    <span *ngFor="let b of breadcrumb.filter; let i = index" matTooltip="Field of Play" #ref matTooltipPosition="above"> {{b}}
+                        <span *ngIf="breadcrumb.filter.length !== i + 1" class="comma">,</span>
+                    <span *ngIf="breadcrumb.filter.length === i + 1" class="mx-2">|</span></span>
+
+                    <span *ngFor="let b of breadcrumb.sector; let i = index" matTooltip="Sector" #ref matTooltipPosition="above">{{b}}
+                        <span *ngIf="breadcrumb.sector.length !== i + 1" class="comma">,</span>
+                    <span *ngIf="breadcrumb.sector.length === i + 1" class="mx-2">|</span></span>
+                    <span *ngFor="let b of breadcrumb.client; let i = index" matTooltip="Client Need" #ref matTooltipPosition="above">{{b}}
+                        <span *ngIf="breadcrumb.client.length !== i + 1" class="comma">,</span>
+                    <span *ngIf="breadcrumb.client.length === i + 1" class="mx-2">|</span></span>
+                </div>
+                <div class="col-auto dateUpdate__box" *ngIf="dateUpdated !== ''">
+                    <p class="dateUpdate mb-0">Last Updated: {{dateUpdated}}</p>
+                </div>
+            </div>
+        </nav>
+        <h1 class="section__header__title" appHighlight [searchedWords]="listOfWords" classToApply="highlight-word" [text]="header.title"></h1>
+        <div class="section__header__subtitle mb-2" appHighlight [searchedWords]="listOfWords" classToApply="highlight-word" [text]="header.headline"></div>
+        <app-read-more [height]="42" [enable]="header.readmore" [targetdiv]="headerDiv" [highLight]="listOfWords" [text]="header.description">
+            <div class="section__header__description" appHighlight [searchedWords]="listOfWords" classToApply="highlight-word" [text]="header.description">
+            </div>
+            <p *ngIf="header.collateral != ''" class="section__header__additional">Additional Reference Materials</p>
+            <div class="section__header__description" appHighlight [searchedWords]="listOfWords" classToApply="highlight-word" [text]="header.collateral"></div>
+            <!-- <div class="section__header__description" [innerHTML]="header.collateral | safehtml"></div> -->
+        </app-read-more>
+    </div>
+</section>

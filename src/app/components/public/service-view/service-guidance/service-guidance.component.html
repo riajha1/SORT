@@ -1,0 +1,20 @@
+<div class="service-section" *ngIf="guidance && guidance.qualityConsiderations !== '' || guidanceRegionLocation.region !== '' || guidanceRegionLocation.location !== ''">
+    <div class="service-fix-flag" #serviceDiv></div>
+    <div class="section_independent__item">
+        <h1 class="section_independent__title">Service Line Guidance</h1>
+        <div class="col-12 independent_description" *ngIf="guidance">
+            <span *ngIf="guidance.qualityConsiderations !== '' && guidanceRegionLocation.region !== '' || guidance.qualityConsiderations !== '' && guidanceRegionLocation.location !== ''"><b>Global Considerations:</b></span>
+            <app-read-more [height]="168" *ngIf="guidance.qualityConsiderations !== ''" [enable]="enableReadmore" [targetdiv]="serviceDiv">
+                <section *ngIf="guidance.qualityConsiderations !== ''" [innerHTML]="guidance.qualityConsiderations | safehtml"></section>
+            </app-read-more>
+            <span class="mt-2" *ngIf="guidanceRegionLocation && guidanceRegionLocation.region !== '' && country !== 'GLB'"><br><br><b>{{guidanceRegionLocation.regionCode}} Considerations:</b></span>
+            <app-read-more [height]="168" *ngIf="guidanceRegionLocation.region !== ''" [enable]="guidanceRegionLocation.region.length >= 300" [targetdiv]="serviceDiv">
+                <section *ngIf="guidanceRegionLocation.region  !== ''" [innerHTML]="guidanceRegionLocation.region | safehtml"></section>
+            </app-read-more>
+            <span class="mt-2" *ngIf="guidanceRegionLocation && guidanceRegionLocation.location !== '' && country !== 'GLB'"><br><br><b>{{guidanceRegionLocation.locationCode}} Considerations:</b></span>
+            <app-read-more [height]="168" *ngIf="guidanceRegionLocation.location !== ''" [enable]="guidanceRegionLocation.location.length >= 300 " [targetdiv]="serviceDiv">
+                <section *ngIf="guidanceRegionLocation.location !== ''" [innerHTML]="guidanceRegionLocation.location | safehtml"></section>
+            </app-read-more>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,28 @@
+<app-grey-bar [greyBarData]="greyBarData" [showEditIcon]="showEditIcon" (valueChange)="loadingToGetSavedData($event)"></app-grey-bar>
+<main class="mt-4">
+    <div class="row">
+        <app-sidebar [sidebar]="sidebar" (activeTabCompleteForm)="showTab($event)" [label]="labelSidebar"></app-sidebar>
+        <main role="main" class="main main_height">
+            <app-intake [active]="sidebar[0].active" [IdService]="IdService" [serviceDetailSaved]="serviceDetail" (getServiceDetail)="getServiceDetail()" (updateIdService)="updateIdService($event)" (getIdProgress)="getIdProgress($event)" (updateProgress)="updateProgress($event)"
+                (serviceline)="getserviceline($event)" (updateGreyBar)="updateGreyBar($event)" (enableDelivery)="getcheckeddeliverary($event)" [readonly]="readonly"></app-intake>
+            <app-location [active]="sidebar[1].active" [IdService]="IdService" [locationDatabase]="location" (updateProgress)="updateProgress($event)" (defaultTreeCountry)="getDefaultTree($event)" (locationByService)="getLocationServiceTree($event)" (countryList)="getCountryList($event)"
+                (getLocationById)="getLocationById()" [readonly]="readonly"></app-location>
+            <app-business-contacts [active]="sidebar[2].active" [IdService]="IdService" [tree]="defaultTreeCountry" [businessContactsGlobal]="businessContactsGlobal" [businessContactsLocal]="businessContactsLocal" [locationsSaved]="locationServiceTree" [enableLocal]="enableLocalTree"
+                [countryList]="countryList" (updateProgress)="updateProgress($event)" (getBusinessContact)="getBusinessContact()" [readonly]="readonly"></app-business-contacts>
+            <app-ey-technology [active]="sidebar[3].active" [IdService]="IdService" [progressStatus]="progressStatusTechnology" [EYGuidanceTechnology]="EYGuidanceTechnology" [TechnologiesTools]="TechnologiesTools" (loadingToGetSavedData)="loadingToGetSavedData($event)"
+                (getEyTechnologyById)="getEyTechnologyById()" (updateProgress)="updateProgress($event)" [readonly]="readonly"></app-ey-technology>
+            <app-guidance [active]="sidebar[4].active" [IdService]="IdService" [progressStatus]="progressStatusGuidance" [tree]="defaultTreeCountry" [locationsSaved]="locationServiceTree" [enableLocal]="enableLocalTree" [countryList]="countryList" [SLguidanceGlobal]="SLguidanceGlobal"
+                [SLguidanceLocal]="SLguidanceLocal" (loadingToGetSavedData)="loadingToGetSavedData($event)" (getGuidanceById)="getGuidanceById()" (updateProgress)="updateProgress($event)" [readonly]="readonly"></app-guidance>
+            <app-quality-independence-contacts [active]="sidebar[5].active" [IdService]="IdService" [qualityContactsGlobal]="qualityContactsGlobal" [qualityContactsLocal]="qualityContactsLocal" [tree]="defaultTreeCountry" [locationsSaved]="locationServiceTree" [enableLocal]="enableLocalTree"
+                [countryList]="countryList" (updateProgress)="updateProgress($event)" (getQualityContact)="getQualityContact()" [readonly]="readonly"></app-quality-independence-contacts>
+            <app-permissibility [active]="sidebar[6].active" [IdService]="IdService" [activityGrid]="activityGrid" [permissibilityGlobal]="permissibilityGlobal" [permissibilityLocal]="permissibilityLocal" [serviceline]="serviceline" [tree]="defaultTreeCountry" [locationsSaved]="locationServiceTree"
+                [enableLocal]="enableLocalTree" [countryList]="countryList" (updateProgress)="updateProgress($event)" (getPermissibilityById)="getPermissibilityById()" [readonly]="readonly"></app-permissibility>
+            <app-independence-consideration [active]="sidebar[7].active" [IdService]="IdService" [tree]="defaultTreeCountry" [locationsSaved]="locationServiceTree" [enableLocal]="enableLocalTree" [countryList]="countryList" [independenceConsiderationGlobal]="independenceConsiderationGlobal"
+                [independenceConsiderationLocal]="independenceConsiderationLocal" (loadingToGetSavedData)="loadingToGetSavedData($event)" (getIndependenceConsiderationById)="getIndependenceConsiderationById()" (updateProgress)="updateProgress($event)" [readonly]="readonly"></app-independence-consideration>
+            <conflict-consideration [active]="sidebar[8].active" [deliverySaved]="deliverySaved" [IdService]="IdService" [selectedDelivery]="selectedDelivery" [serviceline]="serviceline" (updateProgress)="updateProgress($event)" (enableDelivery)="getcheckeddeliverary($event)" [readonly]="readonly"></conflict-consideration>
+            <app-other [active]="sidebar[9].active" [IdService]="IdService" [otherDetailSaved]="otherDetail" [progressStatus]="progressStatusOther" (updateProgress)="updateProgress($event)" (getOtherById)="getOtherById()" [readonly]="readonly"></app-other>
+            <app-publish [active]="sidebar[10].active" [progress]="sidebar[10].progress.toString()" [published]="publishLocations" [IdService]="IdService" [basicData]="greyBarData" [tree]="defaultTreeCountry" [locationsSaved]="locationServiceTree" [enableLocal]="enableLocalTree"
+                [countryList]="countryList" [readonly]="readonly"></app-publish>
+        </main>
+    </div>
+</main>

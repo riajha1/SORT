@@ -1,0 +1,82 @@
+@import "../../../../../stylesheets/abstracts/variable";
+@import "../../../../../stylesheets/abstracts/placeholder";
+.example-tree-invisible {
+    display: none;
+}
+
+.example-tree ul,
+.example-tree li {
+    margin-top: 0;
+    margin-bottom: 0;
+    list-style-type: none;
+}
+
+:host::ng-deep .mat-checkbox-layout {
+    margin: .4rem 0px !important;
+}
+
+::ng-deep .mat-tree-node {
+    min-height: 28px !important;
+}
+
+::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background,
+.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+    background-color: $dark-color;
+}
+
+::ng-deep .mat-checkbox-disabled .mat-checkbox-label {
+    color: rgba(0,0,0,.54) !important;
+}
+
+::ng-deep .mat-checkbox-layout .mat-checkbox-label {
+    font-family: $EYInterstate-Light;
+    font-size: .75rem;
+}
+
+::ng-deep .mat-icon-button.btn-tree {
+    border: 1px solid $dark-color !important;
+    border-radius: 0!important;
+    margin-right: 4px !important;
+    width: 15px !important;
+    height: 15px !important;
+    line-height: 16px !important;
+    &:focus {
+        outline: 0;
+        box-shadow: 0 0 0 0.2rem transparent;
+    }
+    & .mat-icon {
+        line-height: 13px !important;
+        height: 17px;
+        width: 14px;
+    }
+    & .material-icons {
+        font-size: .75rem;
+    }
+}
+
+::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background, .mat-checkbox-disabled.mat-checkbox-indeterminate
+.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+    background-color: $dark-color !important;
+}
+
+::ng-deep .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+    background-color: $dark-color !important;
+}
+
+::ng-deep .mat-tree-node .box_item .mat-checkbox-disabled .mat-checkbox-label,
+::ng-deep .mat-tree-node .country-textarea .mat-checkbox-disabled .mat-checkbox-label {
+    color: $dark-color;
+}
+
+.country-link-disabled {
+    pointer-events: none;
+    color: rgba(0,0,0,.54) !important;
+}
+
+.country-link {
+    color: #007bff;
+    cursor: pointer;
+    &:hover {
+        text-decoration: underline;
+    }
+}   

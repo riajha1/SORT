@@ -1,0 +1,95 @@
+@import "../../../../../stylesheets/abstracts/variable";
+.modal-header {
+    .modal-title {
+        font-family: $EYInterstate-Light;
+        font-weight: bold;
+        font-size: 1.1rem;
+    }
+}
+
+.btn-custom-link {
+    background-color: $dark-color;
+    color: $white-color;
+    font-size: .75rem;
+    height: 96%;
+    &:hover {
+        text-decoration: underline;
+    }
+    &:focus {
+        outline: 0;
+        box-shadow: 0 0 0 0.2rem transparent;
+    }
+}
+
+.iframe-height {
+    min-height: 600px;
+}
+
+.favorites-div {
+    height: 123px;
+    border-bottom: 1px solid #dee2e6;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    & .favorites-item {
+        & .btn-group {
+            width: 100%;
+            & button:first-child {
+                width: 90%;
+                text-align: left;
+                font-size: .75rem
+            }
+        }
+        & a {
+            font-family: $EYInterstate-Light;
+            font-size: .8rem;
+            color: $dark-color;
+        }
+        & button {
+            color: $grey1-color;
+            &:hover {
+                color: $dark-color;
+            }
+            &:focus {
+                outline: 0;
+                box-shadow: 0 0 0 0.2rem transparent;
+            }
+            & i {
+                font-size: 1.2rem;
+            }
+        }
+    }
+}
+
+.btn-heart {
+    border: none;
+    background-color: transparent;
+    padding: 6px 2px;
+    margin-left: 8px;
+    margin-bottom: -6px;
+    &:focus {
+        outline: 0;
+        box-shadow: 0 0 0 0.2rem transparent;
+    }
+    & i {
+        font-size: 1rem;
+        &:hover {
+            color: $grey4-color;
+        }
+    }
+}
+
+.iframe-div {
+    & iframe {
+        border: 2px solid $dark-color;
+    }
+}
+
+@media (max-width: $break-medium) {
+    button.btn-custom-link {
+        padding-left: 0px !important;
+    }
+}
+
+.w-50 {
+    width: 150px !important;
+}

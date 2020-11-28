@@ -1,0 +1,133 @@
+<div class="container-fluid pr-0 animated fadeIn mb-3 mt-5" *ngIf="active">
+    <main *ngIf="IdService !== 0">
+        <div class="col-12 px-0">
+            <h3>Business Contacts</h3>
+            <p>You must enter a global contact/global organization.</p>
+        </div>
+        <div class="col-12 mb-2 px-0 bussiness-global">
+            <div class="row">
+                <div class="col-12">
+                    <h5 class="required-label">Global contacts</h5>
+                </div>
+                <div class="col-sm-12 col-md-6">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6 pr-0">
+                            <app-people-picker [ClearAfterSave]="clearEmployee" (SetSelectedEmployee)="SetSelectedEmployee($event)" [readonly]="this.readonly" (RemoveEmployee)="RemoveEmployee($event)"></app-people-picker>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <div class="form-group">
+                                <label for="title">Add Title</label>
+                                <input type="text" class="form-control" [readonly]="this.readonly" #contactTitle>
+                            </div>
+                        </div>
+                        <div class="col-12 mb-3 form-button">
+                            <button type="button" class="col-sm-12 col-md-6 col-lg-4 py-2 btn float-left btn-outline-dark" [disabled]="this.readonly" (click)="addContact()">
+                                <span class="pt-2">Save Contact</span>
+                            </button>
+                        </div>
+                        <div class="col-12" *ngIf="businessContact.length > 0">
+                            <table class="table table-bordered table-sm table-hover">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Order</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Title</th>
+                                        <th scope="col"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let contact of businessContact">
+                                        <td>
+                                            <ng-select [searchable]="false" [clearable]="false" [items]="ArrayOrder" class="dropdown__order" [(ngModel)]="contact.Order" (click)="updatePosition(contact.Order)" (change)="onChangeOrder(contact)" [disabled]="this.readonly">
+                                            </ng-select>
+                                        </td>
+                                        <td>
+                                            <p class="mb-0">{{contact.Name}}</p>
+                                        </td>
+                                        <td>
+                                            <p class="mb-0">{{contact.Title}}</p>
+                                        </td>
+                                        <td>
+                                            <button class="btn p-1" (click)="removeContact(contact.Name)" [disabled]="this.readonly">
+                                                <span class="material-icons text-red" >cancel</span>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6 pr-0">
+                            <div class="form-group">
+                                <label for="url">Organization chart URL</label>
+                                <input type="text" class="form-control" [readonly]="this.readonly" #url>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <div class="form-group">
+                                <label for="titleurl">Organization chart name</label>
+                                <input type="text" class="form-control" [readonly]="this.readonly" #urlname>
+                            </div>
+                        </div>
+                        <div class="col-12 mb-3 form-button">
+                            <button type="button" class="col-sm-12 col-md-6 col-lg-4 py-2 btn float-left btn-outline-dark" [disabled]="this.readonly" (click)="addURL()">
+                               <span class="pt-2">Save Org. Chart</span>
+                            </button>
+                        </div>
+                        <div class="col-12" *ngIf="orgContact.length > 0">
+                            <table class="table table-bordered table-sm table-hover">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Organization chart URL</th>
+                                        <th scope="col">Organization chart name</th>
+                                        <th scope="col"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let contact of orgContact">
+                                        <td class="url-box dont-break-out">
+                                            <a [href]="contact.Url" target="_blanck">{{contact.Url}}</a>
+                                        </td>
+                                        <td>
+                                            <p class="mb-0">{{contact.Location}}</p>
+                                        </td>
+                                        <td>
+                                            <button class="btn" (click)="removeURL(contact.Url)" [disabled]="this.readonly">
+                                                <span class="material-icons text-red">cancel</span>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Local business contacts -->
+            <div class="col-12 pb-2 px-0" *ngIf="enableLocal">
+                <h5 class="mb-4">Local contacts</h5>
+                <app-tree-modal (sendNode)="getContactsByNode($event)" [dataSourceTree]="tree" [locationsSaved]="locationsSaved" [dataStore]="nodeContacts" [countryList]="countryList" [clearTree]="clearTree" (setclearTree)="setClearFlag($event)" [forceTree]="forceTree"
+                    (setForceTree)="setForceFlag($event)" [IdService]="IdService"></app-tree-modal>
+            </div>
+            <!-- End Local business contacts -->
+        </div>
+
+        <hr>
+        <div class="col-12">
+            <div class="row">
+                <div class="col-6 form-button">
+                    <button type="button" class="col-4 py-2 btn float-left btn-outline-dark" (click)="cancelContact()">Cancel</button>
+                </div>
+                <div class="col-6 form-button">
+                    <button class="col-4 py-2 btn float-right btn-warning" type="button" (click)="submit()">Save</button>
+                </div>
+            </div>
+        </div>
+    </main>
+    <div *ngIf="IdService === 0" class="col-12 d-flex align-items-center justify-content-center min-height">
+        <h5>You need to create a record in Service Details.</h5>
+    </div>
+</div>

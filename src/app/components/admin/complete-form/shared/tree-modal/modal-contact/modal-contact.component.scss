@@ -1,0 +1,41 @@
+@import "../../../../../../../stylesheets/abstracts/variable";
+@import "../../../../../../../stylesheets/base/base_form";
+.padding-top-form {
+    padding-top: 2.5px;
+}
+
+.modal-label {
+    font-size: 11px;
+    color: #2E2E38;
+    min-height: 15px;
+    font-family: "EYFontLight", "Noto Sans", Arial, sans-serif;
+    width: 100%;
+    margin-bottom: 0px;
+}
+
+table {
+    font-size: .65rem;
+    font-family: $EYInterstate-Light;
+    & tr {
+        & th {
+            font-weight: bold;
+        }
+        & td {
+            padding: .4rem !important;
+            vertical-align: middle;
+            &:not(.url-box):first-child {
+                width: 50% !important;
+            }
+            &:last-child {
+                text-align: center;
+                width: 60px !important;
+                & button {
+                    &:focus {
+                        outline: 0;
+                        box-shadow: 0 0 0 0.2rem transparent;
+                    }
+                }
+            }
+        }
+    }
+}

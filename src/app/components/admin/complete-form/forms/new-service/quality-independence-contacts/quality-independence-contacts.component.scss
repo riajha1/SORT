@@ -1,0 +1,57 @@
+@import "../../../../../../../stylesheets/abstracts/variable";
+@import "../../../../../../../stylesheets/base/base_form";
+.bussiness-global {
+    min-height: 272px;
+}
+
+.min-height {
+    min-height: 400px;
+}
+
+::ng-deep .ng-select.ng-select-single.dropdown__order .ng-select-container {
+    width: 100% !important;
+}
+
+table {
+    font-size: .65rem;
+    font-family: $EYInterstate-Light;
+    & tr {
+        & th {
+            font-weight: bold;
+        }
+        & td {
+            padding: .4rem !important;
+            vertical-align: middle;
+            &:not(.url-box):first-child {
+                width: 60px !important;
+            }
+            &:last-child {
+                text-align: center;
+                width: 60px !important;
+                & button {
+                    &:focus {
+                        outline: 0;
+                        box-shadow: 0 0 0 0.2rem transparent;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.dont-break-out {
+    width: 50%;
+    /* These are technically the same, but use both */
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    -ms-word-break: break-all;
+    /* This is the dangerous one in WebKit, as it breaks things wherever */
+    word-break: break-all;
+    /* Instead use this non-standard one: */
+    word-break: break-word;
+    /* Adds a hyphen where the word breaks, if supported (No Blink) */
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+}

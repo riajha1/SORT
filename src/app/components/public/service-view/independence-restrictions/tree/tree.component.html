@@ -1,0 +1,447 @@
+<div class="col-12 min-height" *ngIf="loadingResult">
+    <app-loading [show]="loadingResult"></app-loading>
+</div>
+<div class="col-12 grey-bar" *ngIf="greyBarData.originOfService !== '' || greyBarData.serviceLinePrefix !== '' || greyBarData.serviceTitle !== ''">
+    <span class="origin" *ngIf="greyBarData.originOfService !== ''">{{greyBarData.originOfService}}</span>
+    <span *ngIf="greyBarData.serviceLinePrefix !== '' || greyBarData.serviceTitle !== ''">{{greyBarData.serviceLinePrefix}} <span *ngIf="greyBarData.serviceTitle !== ''">- {{greyBarData.serviceTitle}}</span></span>
+</div>
+<div class="container-fluid p-0 animated fadeIn mt-5">
+    <a class="navbar-brand navbar__link__arrow" (click)="back()">
+        <i class="material-icons"> arrow_back</i>
+        <span class="pl-1">BACK</span>
+    </a>
+    <div class="row mx-0">
+        <div class="col animated fadeIn p-0" *ngIf="serviceId !== 0 ">
+            <main class="animated fadeIn min-height-main" *ngIf="!loadingResult">
+                <div class="row mx-0">
+                    <div class="col-5 mb-3 px-0">
+                        <h3>Independence Permissibility</h3>
+                    </div>
+                    <div class="col-7 mb-3">
+                        <div class="_d-flex top-bg">
+                            <span class="d-flex nowrap"><i class="material-icons text-green mat-icon_cust">done</i>Allowed</span>
+                            <span class="d-flex nowrap"><i class="material-icons text-orange mat-icon_cust">warning</i>Allowed Subject to Certain Considerations</span>
+                            <span class="d-flex nowrap"><i class="material-icons text-red mat-icon_cust">error</i>Advanced Approval</span>
+                            <span class="d-flex nowrap"><i class="material-icons mat-icon_cust">not_interested</i>Prohibited</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mx-0 global-box" #stickyGlobal [ngClass]="{'stiky': sticky}">
+                    <div class="col-12 px-0">
+                        <app-independence-restrictions-excel [serviceId]="serviceId" [ngClass]="{'mt-1':sticky}"></app-independence-restrictions-excel>
+                    </div>
+                    <div class="independence__restrictions__grid">
+                        <div class="row mx-0">
+                            <div class="col my-2 pr-0" [ngStyle]="{'padding-left': '125px' }">
+                                <div class="row mx-0" *ngIf="permsibilityget">
+                                    <div class="col independence__restrictions__grid__item">
+                                        <h6 class="text-center">SEC Channel 1 PIE</h6>
+                                        <div class="row grid__box" [ngStyle]="{'margin-right': '-12px'}">
+                                            <div class="w-50 d-flex flex-column border">
+                                                <p class="text-center">{{ permsibilityget.Secchannel1Pieone }}</p>
+                                            </div>
+                                            <div class="w-50 d-flex flex-column border">
+                                                <p class="text-center">{{permsibilityget.Secchannel1Pietwo}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="independence__restrictions__grid__item" [ngClass]="{'col-4':  permsibilityget.Euchannel1Piethree !== null && derogation === 0, 'col': permsibilityget.Euchannel1Piethree === null || (derogation === 0 || derogation === 2 || derogation === 1)}">
+                                        <h6 class="text-center">EU Channel 1 PIE</h6>
+                                        <div class="row grid__box" [ngStyle]="{'margin-right': '-12px'}">
+                                            <div class="d-flex flex-column border" [ngClass]="{'w-3':  permsibilityget.Euchannel1Piethree !== null && derogation === 0, 'w-50': permsibilityget.Euchannel1Piethree === null || (derogation === 0 || derogation === 1) }" *ngIf="derogation === 0 || derogation === 1">
+                                                <p class="text-center">
+                                                    {{ permsibilityget.Euchannel1Pieone }}</p>
+                                            </div>
+                                            <div class="d-flex flex-column border" [ngClass]="{'w-3':  permsibilityget.Euchannel1Piethree !== null && derogation === 0, 'w-50': permsibilityget.Euchannel1Piethree === null || (derogation === 0 || derogation === 2)  }" *ngIf="derogation === 0 || derogation === 2">
+                                                <p class="text-center">
+                                                    {{ permsibilityget.Euchannel1Pietwo}}</p>
+                                            </div>
+                                            <div *ngIf="permsibilityget.Euchannel1Piethree !== null" class="d-flex flex-column border" [ngClass]="{'w-3':  permsibilityget.Euchannel1Piethree !== null && derogation === 0, 'w-50': permsibilityget.Euchannel1Piethree === null || (derogation === 0 || derogation === 2 || derogation === 1)  }">
+                                                <p class="text-center">
+                                                    {{ permsibilityget.Euchannel1Piethree }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col independence__restrictions__grid__item">
+                                        <div class="row">
+                                            <div class="col px-1">
+                                                <h6 class="text-center" [ngClass]="{'small-title':permsibilityget.Euchannel1Piethree !== null}">Other Channel 1 Listed PIE</h6>
+                                            </div>
+                                        </div>
+                                        <div class="row grid__box" [ngStyle]="{'margin-right': '-12px'}">
+                                            <div class="w-50 d-flex flex-column border">
+                                                <p class="text-center"> {{permsibilityget.OtherChannel1Pieone}}</p>
+                                            </div>
+                                            <div class="w-50 d-flex flex-column border">
+                                                <p class="text-center"> {{permsibilityget.OtherChannel1Pietwo}} </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col independence__restrictions__grid__item">
+                                        <h6 class="text-center">Other Channel 1</h6>
+                                        <div class="row grid__box" [ngStyle]="{'margin-right': '-12px'}">
+                                            <div class="w-50 d-flex flex-column border">
+                                                <p class="text-center">{{permsibilityget.OtherChannel1}}</p>
+                                            </div>
+                                            <div class="w-50 d-flex flex-column border">
+                                                <p class="text-center"> {{permsibilityget.OtherChannel1Nsa}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="independence__restrictions__grid__item col-modify">
+                                        <h6 class="text-center">Channel 2</h6>
+                                        <div class="w-100 grid__box d-flex flex-column border">
+                                            <p class="text-center"> {{permsibilityget.Channel2}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="col-12 pb-3 box-buttons mb-0 text-right">
+                        <button class="btn btn-link" (click)="showAll('show')" type="button" *ngIf="showHideButton">Show all</button>
+                        <button class="btn btn-link" (click)="showAll('hide')" type="button" *ngIf="!showHideButton">Hide all</button>
+                    </p>
+                    <div class="independence__restrictions__grid">
+                        <div class="row mx-0" [ngStyle]="{'height': '40px' }">
+                            <div class="required-label pt-4" [ngStyle]="{'width': '125px', 'padding-left': '15px' }">Global</div>
+                            <div class="col my-3 px-0">
+                                <div class="row  mx-0">
+                                    <div class="col independence__restrictions__grid__item">
+                                        <div class="row grid__box">
+                                            <div class="w-50 d-flex flex-column" [ngClass]="{'opacity': permissibilityGlobal.SecauditedHighlight === 2}">
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-12" [ngSwitch]="permissibilityGlobal.SecauditedValue">
+                                                        <ng-container *ngFor="let iconArray of iconArray">
+                                                            <span *ngSwitchCase="iconArray.value" class="d-flex justify-content-center align-items-center text-center" matTooltip="{{iconArray.label}}" matTooltipPosition="above">
+                                                                <i *ngIf="iconArray.icon !== null" class="material-icons" [ngStyle]="{'color': iconArray.color === '' ? defaultColor : iconArray.color}">{{iconArray.icon}}</i>
+                                                                <small class="transparent-bg" *ngIf="iconArray.icon === null">{{iconArray.value}}</small>
+                                                            </span>
+                                                        </ng-container>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="w-50 d-flex flex-column" [ngClass]="{'opacity': permissibilityGlobal.SecsubjectHighlight === 2}">
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-12" [ngSwitch]="permissibilityGlobal.SecsubjectValue">
+                                                        <ng-container *ngFor="let iconArray of iconArray">
+                                                            <span *ngSwitchCase="iconArray.value" class="d-flex justify-content-center align-items-center text-center" matTooltip="{{iconArray.label}}" matTooltipPosition="above">
+                                                                <i *ngIf="iconArray.icon !== null" class="material-icons" [ngStyle]="{'color': iconArray.color === '' ? defaultColor : iconArray.color}">{{iconArray.icon}}</i>
+                                                                <small class="transparent-bg" *ngIf="iconArray.icon === null">{{iconArray.value}}</small>
+                                                            </span>
+                                                        </ng-container>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="independence__restrictions__grid__item" [ngClass]="{'col-4':  permsibilityget.Euchannel1Piethree !== null && derogation === 0, 'col': permsibilityget.Euchannel1Piethree === null || (derogation === 0 || derogation === 2 || derogation === 1)}">
+                                        <div class="row grid__box">
+                                            <div class="d-flex flex-column" [ngClass]="{'w-3':  permsibilityget.Euchannel1Piethree !== null && derogation === 0, 'w-50': permsibilityget.Euchannel1Piethree === null || (derogation === 0 || derogation === 1),'opacity': permissibilityGlobal.EuauditedHighlight === 2 }"
+                                                *ngIf="derogation === 0 || derogation === 1">
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-12" [ngSwitch]="permissibilityGlobal.EuauditedValue">
+                                                        <ng-container *ngFor="let iconArray of iconArray">
+                                                            <span *ngSwitchCase="iconArray.value" class="d-flex justify-content-center align-items-center text-center" matTooltip="{{iconArray.label}}" matTooltipPosition="above">
+                                                                <i *ngIf="iconArray.icon !== null" class="material-icons" [ngStyle]="{'color': iconArray.color === '' ? defaultColor : iconArray.color}">{{iconArray.icon}}</i>
+                                                                <small class="transparent-bg" *ngIf="iconArray.icon === null">{{iconArray.value}}</small>
+                                                            </span>
+                                                        </ng-container>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex flex-column" [ngClass]="{'w-3':  permsibilityget.Euchannel1Piethree !== null && derogation === 0, 'w-50': permsibilityget.Euchannel1Piethree === null || (derogation === 0 || derogation === 2), 'opacity': permissibilityGlobal.EusubjectHighlight === 2 }"
+                                                *ngIf="derogation === 0 || derogation === 2">
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-12" [ngSwitch]="permissibilityGlobal.EusubjectValue">
+                                                        <ng-container *ngFor="let iconArray of iconArray">
+                                                            <span *ngSwitchCase="iconArray.value" class="d-flex justify-content-center align-items-center text-center" matTooltip="{{iconArray.label}}" matTooltipPosition="above">
+                                                                <i *ngIf="iconArray.icon !== null" class="material-icons" [ngStyle]="{'color': iconArray.color === '' ? defaultColor : iconArray.color}">{{iconArray.icon}}</i>
+                                                                <small class="transparent-bg" *ngIf="iconArray.icon === null">{{iconArray.value}}</small>
+                                                            </span>
+                                                        </ng-container>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div *ngIf="permsibilityget && permsibilityget.Euchannel1Piethree !== null" class="d-flex flex-column" [ngClass]="{'w-3':  permsibilityget.Euchannel1Piethree !== null && derogation === 0, 'w-50': permsibilityget.Euchannel1Piethree === null || (derogation === 0 || derogation === 2 || derogation === 1), 'opacity': permissibilityGlobal.EuAuditedNoValuationHighlight === 2  }">
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-12" [ngSwitch]="permissibilityGlobal.EuAuditedNoValuationValue">
+                                                        <ng-container *ngFor="let iconArray of iconArray">
+                                                            <span [ngStyle]="{'margin-right': '4px'}" *ngSwitchCase="iconArray.value" class="d-flex justify-content-center align-items-center text-center" matTooltip="{{iconArray.label}}" matTooltipPosition="above">
+                                                                <i *ngIf="iconArray.icon !== null" class="material-icons" [ngStyle]="{'color': iconArray.color === '' ? defaultColor : iconArray.color}">{{iconArray.icon}}</i>
+                                                                <small class="transparent-bg" *ngIf="iconArray.icon === null">{{iconArray.value}}</small>
+                                                            </span>
+                                                        </ng-container>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col independence__restrictions__grid__item">
+                                        <div class="row grid__box">
+                                            <div class="w-50 d-flex flex-column" [ngClass]="{'opacity': permissibilityGlobal.OtAuditedHighlight === 2}">
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-12" [ngSwitch]="permissibilityGlobal.OtAuditedValue">
+                                                        <ng-container *ngFor="let iconArray of iconArray">
+                                                            <span *ngSwitchCase="iconArray.value" class="d-flex justify-content-center align-items-center text-center" matTooltip="{{iconArray.label}}" matTooltipPosition="above">
+                                                                <i *ngIf="iconArray.icon !== null" class="material-icons" [ngStyle]="{'color': iconArray.color === '' ? defaultColor : iconArray.color}">{{iconArray.icon}}</i>
+                                                                <small class="transparent-bg" *ngIf="iconArray.icon === null">{{iconArray.value}}</small>
+                                                            </span>
+                                                        </ng-container>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="w-50 d-flex flex-column" [ngClass]="{'opacity': permissibilityGlobal.OtSubjectHighlight === 2}">
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-12" [ngSwitch]="permissibilityGlobal.OtSubjectValue">
+                                                        <ng-container *ngFor="let iconArray of iconArray">
+                                                            <span *ngSwitchCase="iconArray.value" class="d-flex justify-content-center align-items-center text-center" matTooltip="{{iconArray.label}}" matTooltipPosition="above">
+                                                                <i *ngIf="iconArray.icon !== null" class="material-icons" [ngStyle]="{'color': iconArray.color === '' ? defaultColor : iconArray.color}">{{iconArray.icon}}</i>
+                                                                <small class="transparent-bg" *ngIf="iconArray.icon === null">{{iconArray.value}}</small>
+                                                            </span>
+                                                        </ng-container>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col independence__restrictions__grid__item">
+                                        <div class="row grid__box">
+                                            <div class="w-50 d-flex flex-column" [ngClass]="{'opacity': permissibilityGlobal.Ch1Highlight === 2}">
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-12" [ngSwitch]="permissibilityGlobal.Ch1Value">
+                                                        <ng-container *ngFor="let iconArray of iconArray">
+                                                            <span *ngSwitchCase="iconArray.value" class="d-flex justify-content-center align-items-center text-center" matTooltip="{{iconArray.label}}" matTooltipPosition="above">
+                                                                <i *ngIf="iconArray.icon !== null" class="material-icons" [ngStyle]="{'color': iconArray.color === '' ? defaultColor : iconArray.color}">{{iconArray.icon}}</i>
+                                                                <small class="transparent-bg" *ngIf="iconArray.icon === null">{{iconArray.value}}</small>
+                                                            </span>
+                                                        </ng-container>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="w-50 d-flex flex-column" [ngClass]="{'opacity': permissibilityGlobal.Ch1NsaHighlight === 2}">
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-12" [ngSwitch]="permissibilityGlobal.Ch1nsaValue">
+                                                        <ng-container *ngFor="let iconArray of iconArray">
+                                                            <span *ngSwitchCase="iconArray.value" class="d-flex justify-content-center align-items-center text-center" matTooltip="{{iconArray.label}}" matTooltipPosition="above">
+                                                                <i *ngIf="iconArray.icon !== null" class="material-icons" [ngStyle]="{'color': iconArray.color === '' ? defaultColor : iconArray.color}">{{iconArray.icon}}</i>
+                                                                <small class="transparent-bg" *ngIf="iconArray.icon === null">{{iconArray.value}}</small>
+                                                            </span>
+                                                        </ng-container>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="independence__restrictions__grid__item col-modify">
+                                        <div class="w-100 d-flex flex-column" [ngClass]="{'opacity': permissibilityGlobal.Ch2Highlight === 2}">
+                                            <div class="form-row">
+                                                <div class="form-group col-md-12" [ngSwitch]="permissibilityGlobal.Ch2Value">
+                                                    <ng-container *ngFor="let iconArray of iconArray">
+                                                        <span *ngSwitchCase="iconArray.value" class="d-flex justify-content-center align-items-center text-center" matTooltip="{{iconArray.label}}" matTooltipPosition="above">
+                                                            <i *ngIf="iconArray.icon !== null" class="material-icons" [ngStyle]="{'color': iconArray.color === '' ? defaultColor : iconArray.color}">{{iconArray.icon}}</i>
+                                                            <small class="transparent-bg" *ngIf="iconArray.icon === null">{{iconArray.value}}</small>
+                                                        </span>
+                                                    </ng-container>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Tree -->
+                <div class="pt-4 px-0 independence__restrictions__grid" [ngClass]="{'stiky-margin': sticky}">
+                    <!-- <app-loading [show]="loading"></app-loading> -->
+                    <mat-tree class="greyBackground" [dataSource]="dataSource" [treeControl]="treeControl">
+                        <!-- children of main node -->
+                        <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding [ngClass]="{'pl-custom pb-2' : node.level === 3}">
+                            <div class="d-flex flex-row country-textarea">
+                                <span class="material-icons deviation-local" *ngIf="node.deviation === true">error_outline</span>
+                                <mat-checkbox class="checklist-leaf-node custom-width" [checked]="node.selected" [disabled]="true">{{node.name.length > 13 ? (node.name | slice:0:11)+'...' : node.name }}</mat-checkbox>
+                                <div class="col px-0" *ngIf="node.selected">
+                                    <div class="form-row">
+                                        <!-- {{node | json}} -->
+                                        <div class="col pr-0">
+                                            <div class="col-12 px-0 row mx-0">
+                                                <div class="w-50" [ngClass]="{'opacity': node.permissibility.SecauditedHighlight === 2}">
+                                                    <div class="form-row">
+                                                        <div class="col-md-12" [ngSwitch]="node.permissibility.SecauditedValue">
+                                                            <ng-container *ngFor="let iconArray of iconArray">
+                                                                <span *ngSwitchCase="iconArray.value" [ngClass]="{'highlight-deviation': node.permissibility.SecauditedValue !== node.permissibilityGlobal.SecauditedValue}" class="tree-options d-flex justify-content-center align-items-center text-center" matTooltip="{{iconArray.label}}"
+                                                                    matTooltipPosition="above">
+                                                                    <i *ngIf="iconArray.icon !== null" class="material-icons" [ngStyle]="{'color': iconArray.color === '' ? defaultColor : iconArray.color}">{{iconArray.icon}}</i>
+                                                                    <small class="transparent-bg" *ngIf="iconArray.icon === null">{{iconArray.value}}</small>
+                                                                </span>
+                                                            </ng-container>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="w-50" [ngClass]="{'opacity': node.permissibility.SecsubjectHighlight === 2}">
+                                                    <div class="form-row">
+                                                        <div class="col-md-12" [ngSwitch]="node.permissibility.SecsubjectValue">
+                                                            <ng-container *ngFor="let iconArray of iconArray">
+                                                                <span *ngSwitchCase="iconArray.value" [ngClass]="{ 'highlight-deviation': node.permissibility.SecsubjectValue !== node.permissibilityGlobal.SecsubjectValue}" class="tree-options d-flex justify-content-center align-items-center text-center" matTooltip="{{iconArray.label}}"
+                                                                    matTooltipPosition="above">
+                                                                    <i *ngIf="iconArray.icon !== null" class="material-icons" [ngStyle]="{'color': iconArray.color === '' ? defaultColor : iconArray.color}">{{iconArray.icon}}</i>
+                                                                    <small class="transparent-bg" *ngIf="iconArray.icon === null">{{iconArray.value}}</small>
+                                                                </span>
+                                                            </ng-container>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="pr-0" [ngClass]="{'col-4':  permsibilityget.Euchannel1Piethree !== null && derogation === 0, 'col': permsibilityget.Euchannel1Piethree === null || (derogation === 0 || derogation === 2 || derogation === 1)}">
+                                            <div class="col-12 px-0 row mx-0">
+                                                <div [ngClass]="{'w-3':  permsibilityget.Euchannel1Piethree !== null && derogation === 0, 'w-50': permsibilityget.Euchannel1Piethree === null || (derogation === 0 || derogation === 1), 'opacity': node.permissibility.EuauditedHighlight === 2}" *ngIf="derogation === 0 || derogation === 1">
+                                                    <div class="form-row">
+                                                        <div class="col-md-12" [ngSwitch]="node.permissibility.EuauditedValue">
+                                                            <ng-container *ngFor="let iconArray of iconArray">
+                                                                <span *ngSwitchCase="iconArray.value" [ngClass]="{'highlight-deviation': node.permissibility.EuauditedValue !== node.permissibilityGlobal.EuauditedValue}" class="tree-options d-flex justify-content-center align-items-center text-center" matTooltip="{{iconArray.label}}"
+                                                                    matTooltipPosition="above">
+                                                                    <i *ngIf="iconArray.icon !== null" class="material-icons" [ngStyle]="{'color': iconArray.color === '' ? defaultColor : iconArray.color}">{{iconArray.icon}}</i>
+                                                                    <small class="transparent-bg" *ngIf="iconArray.icon === null">{{iconArray.value}}</small>
+                                                                </span>
+                                                            </ng-container>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div [ngClass]="{'w-3':  permsibilityget.Euchannel1Piethree !== null && derogation === 0, 'w-50': permsibilityget.Euchannel1Piethree === null || (derogation === 0 || derogation === 2), 'opacity': node.permissibility.EusubjectHighlight === 2}" *ngIf="derogation === 0 || derogation === 2">
+                                                    <div class="form-row">
+                                                        <div class="col-md-12" [ngSwitch]="node.permissibility.EusubjectValue">
+                                                            <ng-container *ngFor="let iconArray of iconArray">
+                                                                <span [ngClass]="{'highlight-deviation': node.permissibility.EusubjectValue !== node.permissibilityGlobal.EusubjectValue}" *ngSwitchCase="iconArray.value" class="tree-options d-flex justify-content-center align-items-center text-center" matTooltip="{{iconArray.label}}"
+                                                                    matTooltipPosition="above">
+                                                                    <i *ngIf="iconArray.icon !== null" class="material-icons" [ngStyle]="{'color': iconArray.color === '' ? defaultColor : iconArray.color}">{{iconArray.icon}}</i>
+                                                                    <small class="transparent-bg" *ngIf="iconArray.icon === null">{{iconArray.value}}</small>
+                                                                </span>
+                                                            </ng-container>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="w-30" *ngIf="permsibilityget && permsibilityget.Euchannel1Piethree !== null" class="d-flex flex-column" [ngClass]="{'w-3':  permsibilityget.Euchannel1Piethree !== null && derogation === 0, 'w-50': permsibilityget.Euchannel1Piethree === null || (derogation === 0 || derogation === 2 || derogation === 1), 'opacity': node.permissibility.EuAuditedNoValuationHighlight === 2}">
+                                                    <div class="form-row">
+                                                        <div class="col-md-12" [ngSwitch]="node.permissibility.EuAuditedNoValuationValue">
+                                                            <ng-container *ngFor="let iconArray of iconArray">
+                                                                <span *ngSwitchCase="iconArray.value" [ngStyle]="{'margin-left': '2px', 'margin-right': '0px'}" [ngClass]="{'highlight-deviation': node.permissibility.EuAuditedNoValuationValue !== node.permissibilityGlobal.EuAuditedNoValuationValue}" class="tree-options d-flex justify-content-center align-items-center text-center"
+                                                                    matTooltip="{{iconArray.label}}" matTooltipPosition="above">
+                                                                    <i *ngIf="iconArray.icon !== null" class="material-icons" [ngStyle]="{'color': iconArray.color === '' ? defaultColor : iconArray.color}">{{iconArray.icon}}</i>
+                                                                    <small class="transparent-bg" *ngIf="iconArray.icon === null">{{iconArray.value}}</small>
+                                                                </span>
+                                                            </ng-container>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col pr-0">
+                                            <div class="col-12 px-0 row mx-0">
+                                                <div class="w-50" [ngClass]="{'opacity': node.permissibility.OtAuditedHighlight === 2}">
+                                                    <div class="form-row">
+                                                        <div class="col-md-12" [ngSwitch]="node.permissibility.OtAuditedValue">
+                                                            <ng-container *ngFor="let iconArray of iconArray">
+                                                                <span *ngSwitchCase="iconArray.value" [ngClass]="{'highlight-deviation': node.permissibility.OtAuditedValue !== node.permissibilityGlobal.OtAuditedValue}" class="tree-options d-flex justify-content-center align-items-center text-center" matTooltip="{{iconArray.label}}"
+                                                                    matTooltipPosition="above">
+                                                                    <i *ngIf="iconArray.icon !== null" class="material-icons" [ngStyle]="{'color': iconArray.color === '' ? defaultColor : iconArray.color}">{{iconArray.icon}}</i>
+                                                                    <small class="transparent-bg" *ngIf="iconArray.icon === null">{{iconArray.value}}</small>
+                                                                </span>
+                                                            </ng-container>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="w-50" [ngClass]="{'opacity': node.permissibility.OtSubjectHighlight === 2}">
+                                                    <div class="form-row">
+                                                        <div class="col-md-12" [ngSwitch]="node.permissibility.OtSubjectValue">
+                                                            <ng-container *ngFor="let iconArray of iconArray">
+                                                                <span *ngSwitchCase="iconArray.value" [ngStyle]="{'margin-left': '1px'}" [ngClass]="{'highlight-deviation': node.permissibility.OtSubjectValue !== node.permissibilityGlobal.OtSubjectValue}" class="tree-options d-flex justify-content-center align-items-center text-center"
+                                                                    matTooltip="{{iconArray.label}}" matTooltipPosition="above">
+                                                                    <i *ngIf="iconArray.icon !== null" class="material-icons" [ngStyle]="{'color': iconArray.color === '' ? defaultColor : iconArray.color}">{{iconArray.icon}}</i>
+                                                                    <small class="transparent-bg" *ngIf="iconArray.icon === null">{{iconArray.value}}</small>
+                                                                </span>
+                                                            </ng-container>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col pr-0">
+                                            <div class="col-12 px-0 row mx-0">
+                                                <div class="w-50" [ngClass]="{'opacity': node.permissibility.Ch1Highlight === 2}">
+                                                    <div class="form-row">
+                                                        <div class="col-md-12" [ngSwitch]="node.permissibility.Ch1Value">
+                                                            <ng-container *ngFor="let iconArray of iconArray">
+                                                                <span *ngSwitchCase="iconArray.value" [ngClass]="{'highlight-deviation': node.permissibility.Ch1Value !== node.permissibilityGlobal.Ch1Value}" class="tree-options d-flex justify-content-center align-items-center text-center" matTooltip="{{iconArray.label}}"
+                                                                    matTooltipPosition="above">
+                                                                    <i *ngIf="iconArray.icon !== null" class="material-icons" [ngStyle]="{'color': iconArray.color === '' ? defaultColor : iconArray.color}">{{iconArray.icon}}</i>
+                                                                    <small class="transparent-bg" *ngIf="iconArray.icon === null">{{iconArray.value}}</small>
+                                                                </span>
+                                                            </ng-container>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="w-50" [ngClass]="{'opacity': node.permissibility.Ch1NsaHighlight === 2}">
+                                                    <div class="form-row">
+                                                        <div class="col-md-12" [ngSwitch]="node.permissibility.Ch1NsaValue">
+                                                            <ng-container *ngFor="let iconArray of iconArray">
+                                                                <span *ngSwitchCase="iconArray.value" [ngStyle]="{'margin-left': '2px', 'margin-right': '0px'}" [ngClass]="{'highlight-deviation': node.permissibility.Ch1NsaValue !== node.permissibilityGlobal.Ch1NsaValue}" class="tree-options d-flex justify-content-center align-items-center text-center"
+                                                                    matTooltip="{{iconArray.label}}" matTooltipPosition="above">
+                                                                    <i *ngIf="iconArray.icon !== null" class="material-icons" [ngStyle]="{'color': iconArray.color === '' ? defaultColor : iconArray.color}">{{iconArray.icon}}</i>
+                                                                    <small class="transparent-bg" *ngIf="iconArray.icon === null">{{iconArray.value}}</small>
+                                                                </span>
+                                                            </ng-container>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-modify pr-0">
+                                            <div class="col-12 px-0 row mx-0">
+                                                <div class="w-100" [ngClass]="{'opacity': node.permissibility.Ch2Highlight === 2}">
+                                                    <div class="form-row">
+                                                        <div class="col-md-12" [ngSwitch]="node.permissibility.Ch2Value">
+                                                            <ng-container *ngFor="let iconArray of iconArray">
+                                                                <span *ngSwitchCase="iconArray.value" [ngStyle]="{'margin-left': '2px', 'margin-right': '0px'}" [ngClass]="{'highlight-deviation': node.permissibility.Ch2Value !== node.permissibilityGlobal.Ch2Value}" class="tree-options d-flex justify-content-center align-items-center text-center"
+                                                                    matTooltip="{{iconArray.label}}" matTooltipPosition="above">
+                                                                    <i *ngIf="iconArray.icon !== null" class="material-icons" [ngStyle]="{'color': iconArray.color === '' ? defaultColor : iconArray.color}">{{iconArray.icon}}</i>
+                                                                    <small class="transparent-bg" *ngIf="iconArray.icon === null">{{iconArray.value}}</small>
+                                                                </span>
+                                                            </ng-container>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </mat-tree-node>
+                        <mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding class="parentNode" [ngClass]="{'pl-1_5 pr-0':node.level === 1, 'pl-custom-tree pr-0' : node.level === 2, 'd-none': node.level === 0 }">
+                            <!-- deviation icon -->
+                            <span *ngIf="node.level === 1 && node.name !== 'Americas' && node.deviation" class="material-icons deviation-area">error_outline</span>
+                            <span *ngIf="node.level === 1 && node.name === 'Americas' && node.deviation" class="material-icons deviation-area-america">error_outline</span>
+                            <span *ngIf="node.level === 2 && node.deviation" class="material-icons deviation-region">error_outline</span>
+                            <!-- icon button, main node -->
+                            <div class="box_item" [ngClass]="{'borderTop': node.level === 1 && node.name === 'Americas'}">
+                                <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'toggle ' + node.name" class="btn-tree btn-margin_top">
+                                    <mat-icon class="mat-icon-rtl-mirror">
+                                        {{treeControl.isExpanded(node) ? 'remove' : 'add'}}
+                                    </mat-icon>
+                                </button>
+                                <mat-checkbox class="checklist-leaf-node" [indeterminate]="descendantsPartiallySelected(node)" [checked]="node.selected" [disabled]="true" *ngIf="node.level !== 1">
+                                    {{node.name}}
+                                </mat-checkbox>
+                                <!-- Label Area level -->
+                                <span *ngIf="node.level === 1" class="area-label">{{node.name}}</span>
+                            </div>
+
+
+                        </mat-tree-node>
+                    </mat-tree>
+                </div>
+            </main>
+        </div>
+    </div>
+</div>

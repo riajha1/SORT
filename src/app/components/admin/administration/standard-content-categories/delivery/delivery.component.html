@@ -1,0 +1,63 @@
+<app-loading [show]="loading"></app-loading>
+<main *ngIf="!loading" class="my-4">
+    <section class="animated fast fadeIn" *ngIf="!showForm">
+        <div class="col-10 offset-1">
+            <h4 class="title__section">
+                <button class="btn" (click)="show()">
+                    <i class="material-icons"> arrow_back</i>
+                    <span class="pl-1">BACK</span>
+                </button><br>
+                <span *ngIf="!this.updateData">New Form of Delivery</span>
+                <span *ngIf="this.updateData">Update Form of Delivery</span>
+            </h4>
+            <form [formGroup]="deliveryForm" (ngSubmit)="submit()">
+                <div class="form-row">
+                    <div class="col-12">
+                        <label>Delivery name</label>
+                        <input class="form-control" type="text" formControlName="deliveryname" [class.is-invalid]="!deliveryForm.get('deliveryname').valid && deliveryForm.get('deliveryname').touched">
+                        <span *ngIf="!deliveryForm.get('deliveryname').valid && deliveryForm.get('deliveryname').touched" class="help-block text-danger">
+                            <span *ngIf="deliveryForm.get('deliveryname').errors?.deliveryNameIsBusy">The name of Form of Delivery already exists.</span>
+                        <span *ngIf="deliveryForm.get('deliveryname').errors?.required">This field is required!</span>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Form of Delivery guidance</label>
+                    <ckeditor [config]="editorConfig" [editor]="Editor" id="deliveryDescription" (change)="changeEditor($event)" [(ngModel)]="editorData" [ngModelOptions]="{standalone: true}"></ckeditor>
+                </div>
+                <button class="btn btn-primary" type="submit" [disabled]="!deliveryForm.valid">Save form</button>
+            </form>
+        </div>
+    </section>
+    <section class="animated fast fadeIn" *ngIf="showForm">
+        <div class="col-10 offset-1">
+            <h4 class="title__section">
+                <button class="btn" (click)="show()">
+                    <i class="material-icons">add_circle</i>
+                </button> Form of Delivery
+            </h4>
+            <table class="table table-sm border">
+                <thead>
+                    <tr>
+                        <th scope="col">Order</th>
+                        <th scope="col">Delivery name</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of delivery;let i = index">
+                        <td scope="row">
+                            <ng-select [searchable]="false" [clearable]="false" [items]="ArrayOrder" [(ngModel)]="item.order" (click)="updatePosition(item.order)" (change)="onChange(item)">
+                            </ng-select>
+                        </td>
+                        <td>{{item.deliveryMethodName}}</td>
+                        <td>
+                            <button class="btn p-0 mr-2"><i class="material-icons" (click)="getDelivery(i)"> edit </i></button>
+                            <button class="btn p-0"><i class="material-icons" (click)="validateDelivery(item)">delete </i></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</main>

@@ -1,0 +1,15 @@
+/* Import varible file */
+
+@import "stylesheets/base/typography";
+@import "stylesheets/abstracts/mixins";
+@import "stylesheets/abstracts/variable";
+@import "stylesheets/base/base";
+@import "stylesheets/base/helpers";
+@import "stylesheets/abstracts/functions";
+
+/* Pagination */
+
+.page-link {
+    color: $dark-color!important;
+    border: none !important;
+}

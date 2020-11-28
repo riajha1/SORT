@@ -1,0 +1,96 @@
+<p class="mb-2"><button type="button" class="btn btn-yellow mb-1 float-right" (click)="exportexcel()">Export to Excel</button></p>
+
+<div id="exportExcelContent" #exportExcelContent style="display: none;">
+    <div class="col-xs-12">
+        <table>
+            <thead>
+                <tr>
+                    <th style="text-align: center; border: 1px solid black; font-size: 14.667px; font-weight: bold;  font-family: 'Calibri (Body)'" colspan="16">
+                        Service Restrictions by Location
+                    </th>
+                </tr>
+                <tr>
+                    <th style="text-align: left; border: 1px solid black; font-size: 14.667px; font-weight: bold;  font-family: 'Calibri (Body)'" colspan="16">
+                        Items marked with an (*) are Location level differences from the values visible at the Global level in the SORT template
+                    </th>
+                </tr>
+                <tr style="  border: 1px solid black">
+                    <th colspan="1" style="text-align: center; border: 1px solid black">Deviation</th>
+
+                    <th colspan="1" style="text-align: center; border: 1px solid black">Region</th>
+                    <th colspan="1" style="text-align: center; border: 1px solid black">Location</th>
+                    <th colspan="1" style="text-align: center; border: 1px solid black">Title of Service</th>
+                    <th colspan="1" style="text-align: center; border: 1px solid black">Conflict Check Required</th>
+
+
+                    <th colspan="2" style="text-align: center; border: 1px solid black"> SEC Channel 1 PIE</th>
+                    <th colspan="3" *ngIf="independenceRestriction.EuAuditedNoValuation !== ''" style="text-align: center; border: 1px solid black"> EU Channel 1 PIE</th>
+                    <th colspan="2" *ngIf="independenceRestriction.EuAuditedNoValuation === ''" style="text-align: center; border: 1px solid black"> EU Channel 1 PIE</th>
+                    <th colspan="2" style="text-align: center; border: 1px solid black"> Other Channel 1 Listed PIE</th>
+                    <th colspan="2" style="text-align: center; border: 1px solid black"> Other Channel 1</th>
+                    <th style="text-align: center; border: 1px solid black">Channel 2</th>
+                </tr>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th style="text-align: center; border: 1px solid black">
+                        {{labelModel.Secchannel1Pieone}}
+                    </th>
+                    <th style="text-align: center; border: 1px solid black">
+                        {{labelModel.Secchannel1Pietwo}}
+                    </th>
+                    <th style="text-align: center; border: 1px solid black">
+                        {{labelModel.Euchannel1Pieone}}
+                    </th>
+                    <th style="text-align: center; border: 1px solid black">
+                        {{labelModel.Euchannel1Pietwo}}
+                    </th>
+                    <th *ngIf="independenceRestriction.EuAuditedNoValuation !== ''" style="text-align: center; border: 1px solid black">
+                        {{labelModel.Euchannel1Piethree}}
+                    </th>
+                    <th style="text-align: center; border: 1px solid black">
+                        {{labelModel.OtherChannel1Pieone}}
+                    </th>
+                    <th style="text-align: center; border: 1px solid black">
+                        {{labelModel.OtherChannel1Pietwo}}
+                    </th>
+                    <th style="text-align: center; border: 1px solid black">
+                        {{labelModel.OtherChannel1}}
+                    </th>
+                    <th style="text-align: center; border: 1px solid black">
+                        {{labelModel.OtherChannel1Nsa !== null ? labelModel.OtherChannel1Nsa : ''}}
+                    </th>
+                    <th style="text-align: center; border: 1px solid black">
+                        {{labelModel.Channel2}}
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let p of independenceRestrictions">
+                    <td style="text-align: center; border: 1px solid black">{{p.Asterisk}}</td>
+                    <td style="text-align: center; border: 1px solid black">{{p.Region}}</td>
+                    <td style="text-align: center; border: 1px solid black">{{p.CountryName}}</td>
+                    <td style="text-align: center; border: 1px solid black">{{p.Name}}</td>
+                    <td *ngIf="p.CheckRequired == 1" style="text-align: center; border: 1px solid black">Mandatory</td>
+                    <td *ngIf="p.CheckRequired == 0" style="text-align: center; border: 1px solid black">Not Required</td>
+                    <td *ngIf="p.CheckRequired == 2" style="text-align: center; border: 1px solid black">Potentially based on the activity</td>
+
+
+                    <td style="text-align: center; border: 1px solid black">{{p.SecauditedValue}}</td>
+                    <td style="text-align: center; border: 1px solid black">{{p.SecsubjectValue}}</td>
+                    <td style="text-align: center; border: 1px solid black">{{p.EuauditedValue}}</td>
+                    <td style="text-align: center; border: 1px solid black">{{p.EusubjectValue}}</td>
+                    <td style="text-align: center; border: 1px solid black" *ngIf="p.EuAuditedNoValuationValue !==''">{{p.EuAuditedNoValuationValue}}</td>
+                    <td style="text-align: center; border: 1px solid black">{{p.OtAuditedValue}}</td>
+                    <td style="text-align: center; border: 1px solid black">{{p.OtSubjectValue}}</td>
+                    <td style="text-align: center; border: 1px solid black">{{p.Ch1value}}</td>
+                    <td style="text-align: center; border: 1px solid black">{{p.Ch1nsavalue}}</td>
+                    <td style="text-align: center; border: 1px solid black">{{p.Ch2value}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

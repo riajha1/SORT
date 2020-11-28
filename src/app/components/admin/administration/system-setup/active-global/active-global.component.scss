@@ -1,0 +1,42 @@
+@import "../../../../../../stylesheets/abstracts/variable";
+@import "../../../../../../stylesheets/base/base_form";
+
+._main {
+  font-size: 0.875em;
+}
+
+// table style starts here
+.container-fluid.global table {
+  border: 1px solid $grey4-color;
+
+  & tr th {
+    border: none !important;
+    color: $white-color !important;
+    background-color: $dark-color !important;
+  }
+
+  & p,
+  a,
+  th {
+    font-size: 0.75rem;
+  }
+
+  & td,
+  th {
+    padding: 12px 10px 12px 10px;
+  }
+
+  & td {
+    vertical-align: middle;
+  }
+}
+
+// table styles end here
+
+.btn-19 {
+  font-size: 19px;
+}
+
+.nowrap {
+  white-space: nowrap;
+}

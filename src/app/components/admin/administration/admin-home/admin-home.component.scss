@@ -1,0 +1,64 @@
+@import "../../../../../stylesheets/abstracts/variable";
+@import "../../../../../stylesheets/base/base_form";
+
+
+._main {
+    font-family: $EYInterstate-Light;
+    font-size: 0.875em;
+}
+
+.top_header {
+  position: absolute;
+  width: 100%;
+  left: 0px;
+  top: 48px;
+  right: 0px;
+
+  & .nav-tabs {
+    background-color: $grey9-color !important;
+    color:$white-color;
+    padding-right: 30px;
+    padding-left: 30px;
+  }
+
+  & .nav-link.active {
+    background-color: $black-color !important;
+    color:$white-color;
+    border-color: transparent;
+    font-weight: bold;
+    border-bottom: 4px solid $yellow-color;
+  }
+
+  & .nav-link:hover {
+      border-color: transparent;
+      border-bottom: 4px solid $yellow-color;
+  }
+
+  & a {
+      color:$white-color;
+  }
+}
+
+.tile
+{
+    border:1px solid $grey8-color;
+    min-height: 160px;
+    padding:1rem 1rem 0rem 1rem;
+
+    &:hover {
+        border:1px solid $grey3-color;
+        box-shadow: 1px 1px 16px 2px $grey5-color;
+        cursor: pointer;
+    }
+}
+
+
+
+.mat-icons {
+    font-size: 2.5rem;
+}
+
+.p-l-r-30 {
+    padding-left: 30px;
+    padding-right: 30px;
+}

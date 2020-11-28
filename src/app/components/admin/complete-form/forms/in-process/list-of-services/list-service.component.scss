@@ -1,0 +1,54 @@
+@import "../../../../../../../stylesheets/abstracts/variable";
+@import "../../../../../../../stylesheets/base/base_form";
+._main {
+    font-family: $EYInterstate-Light;
+    font-size: 0.875em;
+}
+
+// table css starts from here
+.container-fluid.table-default table {
+    border: 1px solid $grey4-color;
+    & p,
+    a,
+    th {
+        font-size: 0.8581em;
+    }
+    & p.btn-link {
+        color: $dark-color;
+        &:hover {
+            cursor: pointer;
+        }
+    }
+    & a {
+        color: $dark-color
+    }
+    & tr th {
+        border: none !important;
+        color: $white-color !important;
+        background-color: $dark-color !important;
+    }
+    & td,
+    th {
+        padding: 12px 10px 12px 10px;
+    }
+}
+
+.badge-light {
+    background-color: transparent;
+    font-family: $EYInterstate-Light;
+    border: .5px solid $dark-color;
+    padding: 6px;
+}
+
+.circle-yellow {
+    background-color: $yellow-color;
+    border-radius: 50%;
+    font-size: .63rem;
+    padding: 1px 4px;
+    font-family: $EYInterstate-Light;
+    font-weight: bold;
+}
+
+.comment-icon {
+    font-size: 1.1rem !important;
+}

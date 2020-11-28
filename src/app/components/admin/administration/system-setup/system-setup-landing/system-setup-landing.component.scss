@@ -1,0 +1,33 @@
+@import "../../../../../../stylesheets/abstracts/variable";
+@import "../../../../../../stylesheets/base/base_form";
+
+._main {
+  font-family: $EYInterstate-Light;
+  font-size: 0.88rem;
+}
+
+
+.system-setup {
+  & .nav-tabs {
+    color: $dark3-color;
+    padding-right: 30px;
+    padding-left: 30px;
+    border-bottom: 1px solid $grey5-color;
+    font-size: 1rem;
+  }
+
+  & .nav-link.active {
+    border-color: transparent;
+    font-weight: bold;
+    border-bottom: 4px solid $dark3-color;
+  }
+
+  & .nav-link:hover {
+    border-color: transparent;
+    border-bottom: 4px solid $dark3-color;
+  }
+
+  & a {
+    color: $dark3-color;
+  }
+}

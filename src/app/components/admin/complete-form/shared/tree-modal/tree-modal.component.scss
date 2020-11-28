@@ -1,0 +1,97 @@
+@import "../../../../../../stylesheets/abstracts/variable";
+@import "../../../../../../stylesheets/base/base_form";
+.country-textarea {
+    width: 100%;
+}
+
+::ng-deep .mat-tree-node.parentNode .box_item {
+    width: 100%;
+    border-bottom: 1px solid $grey2-color;
+    padding-bottom: 6px;
+    margin-bottom: 6px;
+    position: relative;
+}
+
+::ng-deep .mat-tree-node .box_item .mat-checkbox-inner-container {
+    margin-top: 1px;
+}
+
+::ng-deep .mat-icon-button.btn-margin_top .mat-button-wrapper .mat-icon {
+    margin-top: 1px;
+}
+
+::ng-deep .mat-tree-node .box_item .mat-checkbox-disabled .mat-checkbox-label,
+::ng-deep .mat-tree-node .country-textarea .mat-checkbox-disabled .mat-checkbox-label {
+    color: $dark-color;
+}
+
+.area-label {
+    font-family: $EYInterstate-Light;
+    font-size: 12px;
+}
+
+.box-buttons {
+    position: relative;
+    & button {
+        color: $dark-color;
+        font-family: $EYInterstate-Light;
+        font-weight: bold;
+        font-size: 12px;
+        position: absolute;
+        right: 0;
+        z-index: 1000;
+    }
+}
+
+.button-link-add {
+    color: $dark-color;
+    font-family: $EYInterstate-Light;
+    font-weight: bold;
+    font-size: 12px;
+    position: absolute;
+    &.button-region {
+        top: -31px;
+        right: 0px;
+    }
+    &.button-location {
+        top: -31px;
+        right: -14px;
+    }
+}
+
+table {
+    font-size: .65rem;
+    font-family: $EYInterstate-Light;
+    & tr {
+        & th {
+            font-weight: bold;
+        }
+        & td {
+            padding: .4rem !important;
+            vertical-align: middle;
+            &:not(.url-box):first-child {
+                width: 60px !important;
+            }
+            &:last-child {
+                width: 60px !important;
+                & button {
+                    &:focus {
+                        outline: 0;
+                        box-shadow: 0 0 0 0.2rem transparent;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (min-width: 992px) {
+    .modal-xl {
+        max-width: 1200px !important;
+    }
+}
+
+table.tablespace tr td {
+    vertical-align: middle;
+    padding: 1rem 1rem 1rem 0.3rem !important;
+}

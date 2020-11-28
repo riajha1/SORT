@@ -1,0 +1,22 @@
+@import "../../../../../../../stylesheets/abstracts/variable";
+@import "../../../../../../../stylesheets/base/base_form";
+.service-title {
+    font-family: $EYInterstate-Light;
+    font-size: 1.8rem;
+    margin-top: -10px;
+}
+
+.subtitle-publish {
+    font-family: $EYInterstate-Light;
+    font-size: 1.1rem;
+}
+
+.location-box {
+    border-right: 1px solid $dark-color;
+    height: 335px;
+    overflow-y: auto;
+    padding-right: 0px;
+    & .mCSB_scrollTools .mCSB_draggerContainer {
+        margin-right: -3px !important;
+    }
+}

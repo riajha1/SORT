@@ -1,0 +1,21 @@
+@import "../../../../../../../stylesheets/abstracts/variable";
+@import "../../../../../../../stylesheets/base/base_form";
+::ng-deep.p-r.ng-select .ng-select-container {
+    width: 100% !important;
+}
+
+.default-height {
+    min-height: 300px;
+}
+
+.min-height {
+    min-height: 400px;
+}
+
+::ng-deep.other .ng-value-container {
+    padding-top: 15px;
+}
+
+::ng-deep.other .ng-dropdown-panel .ng-dropdown-panel-items .ng-option {
+    height: 40px;
+}

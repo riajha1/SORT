@@ -1,0 +1,34 @@
+@import "../../../../stylesheets/abstracts/variable";
+@import "../../../../stylesheets/base/base_form";
+ 
+._main {
+    font-family: $EYInterstate-Light;
+    font-size: 0.875em;
+}
+// table css starts from here
+.container-fluid.report table {
+border: 1px solid $grey4-color;
+& p , a, th{
+    font-size: 0.8581em;
+}
+
+& a {
+    color: $dark-color
+}
+& tr th {
+    border: none !important;
+    color:$white-color !important;
+    background-color: $dark-color !important;
+}
+
+& td , th {
+    padding: 12px 10px 12px 10px;
+}
+}
+
+// table styles ends here
+._center {
+    display: flex;
+    justify-content: center;
+}
+

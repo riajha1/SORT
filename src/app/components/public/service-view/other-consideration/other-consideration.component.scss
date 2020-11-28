@@ -1,0 +1,9 @@
+@import "../../../../../stylesheets/abstracts/variable";
+@import "../../../../../stylesheets/abstracts/placeholder";
+.section_other {
+    margin-bottom: 1rem;
+    @extend %marginsection;
+    & .section_other__title {
+        @extend %film;
+    }
+}

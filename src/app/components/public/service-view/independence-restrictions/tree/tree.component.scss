@@ -1,0 +1,374 @@
+@import "../../../../../../stylesheets/abstracts/variable";
+::ng-deep .mat-icon-button.btn-tree {
+    border: 1px solid $dark-color !important;
+    border-radius: 0!important;
+    margin-right: 4px !important;
+    width: 15px !important;
+    height: 15px !important;
+    line-height: 16px !important;
+    &:focus {
+        outline: 0;
+        box-shadow: 0 0 0 0.2rem transparent;
+    }
+    & .mat-icon {
+        line-height: 13px !important;
+        height: 17px;
+        width: 14px;
+    }
+    & .material-icons {
+        font-size: .75rem;
+    }
+}
+
+::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background,
+.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+    background-color: $dark-color;
+}
+
+::ng-deep .mat-checkbox-layout .mat-checkbox-label {
+    font-family: $EYInterstate-Light;
+    font-size: .75rem;
+}
+
+::ng-deep.mat-checkbox-layout {
+    margin-bottom: 0px !important;
+}
+
+.grey-bar {
+    font-family: $EYInterstate-Regular;
+    background-color: $grey11-color;
+    position: fixed;
+    top: 98px;
+    left: 0;
+    width: 100%;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    font-weight: 700;
+    font-size: 13px;
+    z-index: 800;
+    & .origin {
+        background-color: $yellow-color;
+        padding: .1rem;
+        margin-right: 3px;
+        border-radius: 10px;
+    }
+}
+
+.navbar__link__arrow {
+    color: $dark-color !important;
+    font-size: .89em;
+    cursor: pointer;
+}
+
+.min-height {
+    min-height: 400px;
+}
+
+.min-height-main {
+    min-height: 468px;
+}
+
+.top-bg {
+    background-color: #fafcff;
+    padding: 5px 0px 6px 0px;
+}
+
+.align-pos {
+    height: 1px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10px;
+}
+
+.mat-icon_cust {
+    font-size: 18px;
+}
+
+.w-30,
+.w-3 {
+    width: 33.333% !important;
+}
+
+.w-100 {
+    width: 100% !important;
+}
+
+.col-modify {
+    width: 10% !important;
+    padding-left: 3px!important;
+}
+
+.small-title {
+    font-size: .7rem !important;
+    margin-bottom: 10px;
+}
+
+.form-row>.col {
+    padding-left: 2px !important;
+}
+
+.independence__restrictions__grid {
+    width: 100%;
+    & .row {
+        & .independence__restrictions__grid__item {
+            // margin-right: 0.2rem;
+            & .row.grid__box,
+            & .w-100.grid__box {
+                height: calc(100% - 24px);
+                & .border {
+                    border-color: $grey4-color !important;
+                }
+            }
+            & .border {
+                border-color: $grey4-color !important;
+            }
+            & h6 {
+                font-size: .81rem;
+                font-family: $EYInterstate-Regular;
+                font-weight: bold;
+            }
+            & .border:first-child {
+                border-color: $grey4-color !important;
+            }
+            & .w-100,
+            & .w-50,
+            & .w-3 {
+                & span {
+                    height: 45px;
+                    background-color: $grey2-color;
+                    border-color: $grey2-color !important;
+                    margin-right: 2.7px !important;
+                    & i {
+                        font-size: 1.1rem;
+                        &.text-green {
+                            color: $green-color;
+                        }
+                        &.text-red {
+                            color: $red-color;
+                        }
+                        &.text-orange {
+                            color: $orange-color;
+                        }
+                    }
+                }
+                & p {
+                    font-family: $noto-sans;
+                    font-weight: bold;
+                    height: 100%;
+                    font-size: .67rem;
+                    margin-bottom: 0px;
+                    padding: 4px;
+                }
+            }
+            & .w-50:not(:first-child),
+            & .w-3:not(:first-child) {
+                border-left-width: 0px !important;
+            }
+        }
+    }
+}
+
+.tree-options {
+    height: 45px;
+    background-color: $grey2-color;
+    border-color: $grey2-color !important;
+    margin-right: 1.7px;
+}
+
+.transparent-bg {
+    background-color: transparent !important;
+}
+
+::ng-deep.permissibility-select .ng-dropdown-panel .ng-dropdown-panel-items .ng-option {
+    text-align: center;
+}
+
+.p-r {
+    margin-right: 1.7px !important;
+}
+
+::ng-deep.permissibility-select .ng-value-container {
+    justify-content: center !important;
+}
+
+::ng-deep .ng-select.ng-select-single.permissibility-select .ng-select-container {
+    width: 100% !important;
+}
+
+._d-flex {
+    display: -webkit-box!important;
+    place-content: space-evenly;
+    display: flex !important;
+}
+
+.nowrap {
+    white-space: nowrap;
+}
+
+::ng-deep.p-r.ng-select .ng-select-container {
+    width: 100% !important;
+}
+
+::ng-deep .ng-select.ng-select-single.permissibility-select.ng-select-disabled .ng-select-container,
+::ng-deep .ng-select.ng-select-single.permissibility-select {
+    background-color: $greyLight-color !important;
+}
+
+// Permissibility Local Styles
+.box-buttons {
+    position: relative;
+    & button {
+        color: $dark-color;
+        font-family: $EYInterstate-Light;
+        font-weight: bold;
+        font-size: 12px;
+        position: absolute;
+        right: 0;
+    }
+}
+
+.color-black {
+    color: $black-color;
+}
+
+// TRee
+::ng-deep .mat-checkbox.checklist-leaf-node.custom-width {
+    min-width: calc(125px - 1.2rem);
+}
+
+::ng-deep .mat-tree-node.parentNode .box_item {
+    width: 100%;
+    border-bottom: 1px solid $grey2-color;
+    padding-bottom: 6px;
+    margin-bottom: 6px;
+}
+
+::ng-deep .mat-tree-node.parentNode {
+    position: relative;
+}
+
+::ng-deep .mat-tree-node .box_item .mat-checkbox-inner-container {
+    margin-top: 1px;
+}
+
+::ng-deep .mat-icon-button.btn-margin_top .mat-button-wrapper .mat-icon {
+    margin-top: 1px;
+}
+
+::ng-deep .mat-tree-node .box_item .mat-checkbox-disabled .mat-checkbox-label,
+::ng-deep .mat-tree-node .country-textarea .mat-checkbox-disabled .mat-checkbox-label {
+    color: $dark-color;
+}
+
+.area-label {
+    font-family: $EYInterstate-Light;
+    font-size: 12px;
+}
+
+.country-textarea {
+    width: 100%;
+    & i {
+        font-size: 1.1rem;
+    }
+}
+
+.pl-custom-tree {
+    padding-left: 15px !important;
+}
+
+.pl-custom {
+    padding-left: 1.2rem !important;
+    padding-right: 11px;
+    position: relative;
+}
+
+.tree-dropdown {
+    & .w-50 {
+        border-right: 2px solid white;
+        &:last-child {
+            border-right: none;
+        }
+    }
+    & .w-30 {
+        width: 33.333% !important;
+        border-right: 2px solid white;
+        &:last-child {
+            border-right: none;
+        }
+    }
+}
+
+::ng-deep .permissibility-select.ng-dropdown-panel .ng-dropdown-panel-items .ng-option {
+    text-align: center;
+}
+
+::ng-deep .permissibility-select.ng-dropdown-panel .ng-dropdown-panel-items .ng-option i,
+.mat-icon_cust {
+    font-size: 18px;
+    align-items: center;
+    margin-right: 4px;
+}
+
+.borderTop {
+    border-top: 1px solid #EBEBEE;
+    padding-top: 5px;
+}
+
+.pl-1_5 {
+    padding-left: 15px !important;
+}
+
+.highlight-deviation {
+    border: 1.5px solid $yellow-color
+}
+
+.opacity {
+    opacity: 0.2;
+}
+
+.global-box {
+    padding-bottom: 20px;
+}
+
+.stiky {
+    background-color: $white-color;
+    position: fixed;
+    top: 125px;
+    left: 0;
+    overflow: hidden;
+    z-index: 10;
+    width: 100%;
+    padding: 0 35px 20px 29px;
+}
+
+.stiky-margin {
+    margin-top: 270px !important;
+}
+
+.deviation {
+    &-local {
+        position: absolute;
+        left: 3px;
+        top: 4px;
+        font-size: 1rem;
+    }
+    &-region {
+        position: absolute;
+        left: 0px;
+        top: 7px;
+        font-size: 1rem;
+    }
+    &-area {
+        position: absolute;
+        left: -1px;
+        top: 9px;
+        font-size: 1rem;
+    }
+    &-area-america {
+        position: absolute;
+        left: -1px;
+        top: 11px;
+        font-size: 1rem;
+    }
+}

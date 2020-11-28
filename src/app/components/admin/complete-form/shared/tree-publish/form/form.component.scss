@@ -1,0 +1,31 @@
+@import "../../../../../../../stylesheets/abstracts/variable";
+@import "../../../../../../../stylesheets/base/base_form";
+.btn-green {
+    background: $green2-color;
+    color: $white-color;
+    font-size: .875rem;
+    font-family: $EYInterstate-Bold;
+    & .material-icons {
+        font-size: 1.2rem !important;
+        padding-right: 5px;
+    }
+    &:hover {
+        background-color: $green-color;
+    }
+    &.btn:disabled {
+        color: $grey5-color !important;
+        background: $grey4-color !important;
+    }
+}
+
+.published {
+    font-family: $EYInterstate-Bold;
+    & .material-icons {
+        font-size: 1.2rem !important;
+        padding-right: 5px;
+    }
+}
+
+::ng-deep .mat-checkbox.checklist-leaf-node.custom-width {
+    min-width: 119px;
+}

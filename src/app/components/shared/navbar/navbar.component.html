@@ -1,0 +1,79 @@
+<nav class="navbar navbar-expand-lg" [style.top.px]="navBarTopHeight">
+    <a class="navbar-brand d-flex align-items-end align-items-center" [routerLink]="['/home']"
+        (click)="removeAllfilter()">
+        <img src="{{environmentURL}}images/ey-logo.svg" alt="logo sort">
+        <span>Service Offering Reference Tool</span>
+    </a>
+    <button *ngIf="showNavBarControlls" class="navbar-toggler" type="button" data-toggle="collapse"
+        data-target="#navbarSort" aria-controls="navbarSort" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSort" *ngIf="showNavBarControlls">
+        <ul class="navbar-nav ml-auto">
+            <li class="d-flex align-items-center pr-1" *ngIf="filterNav">
+                <app-favorites [filterNav]="filterNav"></app-favorites>
+            </li>
+            <li>
+                <app-autocomplete></app-autocomplete>
+            </li>
+            &nbsp;&nbsp;
+            <li class="nav-item">
+                <!--Location Dropdown-->
+                <ng-select [loading]=loadingCountry loadingText='Loading...' name="location-input"
+                    class="location-dropdown" [items]="countryList" clearAllText="Clear" [searchFn]="customSearchFn"
+                    [clearable]="false" bindLabel="countryName" bindValue="countryCode"
+                    [ngModelOptions]="{standalone: true}" [(ngModel)]="selectedCountryCode"
+                    (change)="onChangeCountry(selectedCountryCode)">
+                    <ng-template ng-label-tmp let-item="item" let-search="searchTerm" let-index="index">
+                        <!-- <div *ngIf="item.name === 'Global'"> <i _ngcontent-wxd-c14="" class="material-icons globe-icon">language </i> <strong>{{item.name}} </strong></div>
+                        <div *ngIf="item.name !== 'Global'"> <i _ngcontent-wxd-c14="" class="material-icons globe-icon">language </i> <strong>{{item.name}}</strong></div> -->
+                        <div class="label-icon-country">
+                            <i _ngcontent-wxd-c14="" class="material-icons globe-icon">language </i>
+                            <strong>{{item.name}}</strong>
+                        </div>
+                    </ng-template>
+                    <ng-template ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
+                        <div *ngIf="item.name === 'Global'" class="separate-option"> <span>{{item.name}}</span></div>
+                        <div *ngIf="item.name !== 'Global'"> {{item.name}}</div>
+                    </ng-template>
+                </ng-select>
+            </li>
+            <li class="btn-group admin__dropdown">
+                <!-- home menu list  -->
+                <button
+                    class="navbar__dropdown__button btn btn-sm btn-outline-secondary ml-1 border-0 pl-2 pr-2 dropdown-toggle"
+                    type="button" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false">
+                    <i class="material-icons" [ngClass]="{'font-size':'2rem'}">menu</i>
+                </button>
+                <div class="dropdown-menu dropdown-menu-right dropdown_pos note" [ngClass]="closeflag ? 'show': ''">
+                    <button class=" btn material-icons float-right mb-4 cross" (click)="t()">
+                        <i class="material-icons cross-size">close</i>
+                    </button>
+                    <a class="dropdown-item drop-cust" [routerLink]="['/home']" [routerLinkActive]="['activeitem']"
+                        (click)="closeflag = !closeflag;"> Home</a>
+                    <a class="dropdown-item drop-cust" [routerLink]="['/in-process']"
+                        [routerLinkActive]="['activeitem']" (click)="closeflag = !closeflag;">In-Process Services</a>
+                    <a class="dropdown-item drop-cust" [routerLink]="['/administration']"
+                        [routerLinkActive]="['activeitem']" (click)="closeflag = !closeflag;">Administration</a>
+                    <a class="dropdown-item drop-cust" [routerLink]="['/reports']" [routerLinkActive]="['activeitem']"
+                        (click)="closeflag = !closeflag;">Reports</a>
+                    <a class="dropdown-item drop-cust" [routerLink]="['/logout']" [routerLinkActive]="['activeitem']"
+                        (click)="closeflag = !closeflag;">Logout</a>
+                       
+                    <a class="dropdown-item drop-cust" (click)="policy =!policy;$event.stopPropagation();">Support</a>
+                    <div class="dropdown-item drop-cust" *ngIf="policy === true" style="color:#fff">
+                        <p>SORT Support Site</p>
+                        <p>Contacts</p>
+                        <p (click)="global =!global;$event.stopPropagation();">Global Policy</p>
+                    </div>
+                    <div class="dropdown-item drop-cust" *ngIf="global === true" style="color:#fff">
+                        <p>Client and Engagement Acceptance</p>
+                        <p>EYG Independence</p>
+                        <p>Scope of Services</p>
+                        <p>Conflict of Interest</p>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>

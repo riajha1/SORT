@@ -1,0 +1,63 @@
+<div class="dual-select">
+  <div class="dual-select__left">
+
+    <ul class="dual-select__items">
+      <li *ngFor="let dataColumnList of unselectedListOfColumnInventorys"
+          (click)="togglePendingSelection( dataColumnList )" (dblclick)="addToSelectedColumn( dataColumnList )"
+          class="dual-select__item" [class.dual-select__item--selected]="pendingSelection[ dataColumnList.id ]">
+
+        <div class="list">
+          <div class="list__name">
+            {{ dataColumnList.name }}
+          </div>
+        </div>
+      </li>
+    </ul>
+
+  </div>
+  <div class="dual-select__controls">
+    <button (click)="addAllColumnData()" class="button_cirlcle closeIcon">
+      <span class="material-icons left">chevron_right </span>
+      <span class="material-icons right"> chevron_right </span>
+    </button>
+    <button (click)="addToSelectedColumn()" class="dual-select__control button_cirlcle">
+      <span class="material-icons arrow-mat">chevron_right </span>
+    </button>
+    <button (click)="removeFromSelectedColumn()" class="dual-select__control button_cirlcle">
+      <span class="material-icons arrow-mat">chevron_left</span>
+    </button>
+
+    <button (click)="removeAllColumnData()" class="button_cirlcle closeIcon">
+      <span class="material-icons left">chevron_left</span>
+      <span class="material-icons right">chevron_left</span>
+    </button>
+  </div>
+  <div class="dual-select__right">
+    <ul class="dual-select__items">
+      <ul class="top_grey_text">
+        <li>Area</li>
+        <li>Region</li>
+        <li>SL</li>
+        <li>SSL</li>
+        <li>Competency</li>
+      </ul>
+      <hr>
+      <li *ngFor="let data of selectedListOfColumnInventorys" (click)="togglePendingSelection( data )"
+          (dblclick)="removeFromSelectedColumn( data )" class="dual-select__item dual-select__item--new"
+          [class.dual-select__item--selected]="pendingSelection[ data.id ]">
+
+        <div class="list">
+          <div class="list__name">
+            {{ data.name }}
+          </div>
+        </div>
+
+      </li>
+    </ul>
+  </div>
+</div>
+<div>
+  <span *ngIf="showGlobalIndependenceRestrictionsMag" class="help-block text-danger mr-auto">
+    This is Global permissibility only. Please run the local report to see individual location restrictions.
+  </span>
+</div>

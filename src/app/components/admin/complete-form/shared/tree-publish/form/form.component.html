@@ -1,0 +1,32 @@
+<div class="row ">
+    <mat-checkbox class="checklist-leaf-node custom-width" [checked]="node.selected" [disabled]="true">{{node.name.length > 13 ? (node.name | slice:0:11)+'...' : node.name }}</mat-checkbox>
+    <div class="col pl-0" [ngStyle]="{'padding-top': '3px'}" *ngIf="node.selected">
+        <div class="form-row">
+            <div class="row" [ngStyle]="{'min-width': '100%'}">
+                <div class="col-9">
+                    <div class="row">
+                        <div class="col-6">
+                            <mat-checkbox class="checklist-leaf-node custom-width" [checked]="false" [disabled]="!(progress === '100' && enable)">RIL Certification</mat-checkbox>
+                        </div>
+                        <div class="col-6">
+                            <mat-checkbox class="checklist-leaf-node custom-width" [checked]="false" [disabled]="!(progress === '100' && enable)">RSLQ Certification</mat-checkbox>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3 p-0 text-center">
+                    <button class="btn btn-sm btn-block btn-green" [disabled]="!(progress === '100' && enable) || loadingButton" (click)="publishService(node)">
+                        <span *ngIf="!loadingButton"><span class="material-icons">done</span>Publish</span>
+                        <i *ngIf="loadingButton" class="material-icons material-spin material-2x">sync</i>
+                </button>
+                    <!--<button *ngIf="node.enable" class="btn btn-sm btn-block btn-green" [disabled]="!(progress === '100' && enable) || loadingButton" (click)="publishService(node)">
+                            <span *ngIf="!loadingButton"><span class="material-icons">done</span>Publish</span>
+                            <i *ngIf="loadingButton" class="material-icons material-spin material-2x">sync</i>
+                    </button>
+                    <span *ngIf="!node.enable" class="published">
+                        <span class="material-icons">done</span><span>Published</span>
+                    </span> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

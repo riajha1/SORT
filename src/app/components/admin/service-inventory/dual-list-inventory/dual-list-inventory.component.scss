@@ -1,0 +1,147 @@
+@import "../../../../../stylesheets/abstracts/variable";
+@import '../../../../../stylesheets/base/base_form';
+
+
+:host {
+	display: block ;
+ }
+
+.dual-select {
+	display: flex ;
+	height: 400px ;
+	font-family: $EYInterstate-Light;
+    font-size: 0.875em;
+
+
+	&__left,
+	&__right {
+		flex: 0 0 auto ;
+		width: 40% ;
+	}
+
+	&__controls {
+		justify-content: center ;
+		display: flex ;
+		flex: 0 0 auto ;
+		flex-direction: column ;
+		padding: 0px 35px 0px 35px ;
+	}
+
+	&__control {
+		font-size: 20px ;
+		height: 40px ;
+		margin: 10px 0px 10px 0px ;
+	}
+
+	&__items {
+		border: 1px solid #cccccc ;
+		height: 100% ;
+		list-style-type: none ;
+		margin: 0px 0px 0px 0px ;
+		overflow: auto ;
+		overscroll-behavior: contain ;
+		padding: 0px 0px 0px 0px ;
+	}
+
+	&__item {
+		cursor: pointer ;
+		margin: 0px 0px 0px 0px ;
+		padding: 0px 0px 0px 0px ;
+		user-select: none ;
+			-moz-user-select: none ;
+			-webkit-user-select: none ;
+
+		&:last-child {
+			border-bottom-width: 0px ;
+		}
+
+		&--selected {
+            // background-color: #bfd5ff ;
+            background-color: #ccc;
+		}
+
+		&--new {
+			animation-duration: 2s ;
+			animation-name: dual-select-item-new-fade-in ;
+			animation-timing-function: ease-out ;
+		}
+	}
+}
+
+@keyframes dual-select-item-new-fade-in {
+	0% {
+		background-color: #ffffff ;
+	}
+	25% {
+      //  background-color: #bfd5ff ;
+       background-color: #ccc;;
+	}
+	100% {
+		background-color: #ffffff ;
+	}
+}
+
+.list {
+	padding: 8px 10px 8px 10px ;
+	&__name {
+		overflow: hidden ;
+		text-overflow: ellipsis ;
+		white-space: nowrap ;
+	}
+}
+
+.button_cirlcle{
+    border: 1px solid #ccc;
+    background-color: #fff;
+    border-radius: 70px;
+    border-radius: 50%;
+	height: 62px;
+    width: 62px;
+	box-shadow: 3px 3px 4px 1px #ccc;
+	
+	&:hover {
+		box-shadow: none;
+	}
+
+	& .arrow-mat{
+		font-size: 31px;
+		font-weight: bold;
+	}
+
+ &.closeIcon {
+	 position:relative;
+	 & span.material-icons {
+		position: absolute;
+		font-size: 31px;
+		font-weight: bold;
+		&.right  {
+			top: 15px;
+	 	  right: 20px;
+		}
+		&.left{
+			top: 15px;
+			right: 9px;
+		}
+	 }
+
+ }
+}
+
+button:focus{
+    outline: none;
+}
+
+
+
+.top_grey_text {
+	list-style-type: none;
+    padding-left: 10px;
+	color: #747480;
+	line-height: 30px;
+
+}
+
+.dual-select__right ul.dual-select__items hr{
+	margin-top: 0;
+    margin-bottom: 0;
+} 

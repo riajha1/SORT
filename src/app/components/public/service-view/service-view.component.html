@@ -1,0 +1,126 @@
+<app-loading [show]="loading"></app-loading>
+<div *ngIf="!loading" class="main-container container-fluid animated fadeIn">
+    <div>
+        <nav class="navbar navbar-expand-lg px-0">
+            <a class="navbar-brand navbar__link__arrow" (click)="back()">
+                <i class="material-icons"> arrow_back</i>
+                <span class="pl-1">BACK</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <button class="btn btn-link nav-link" (click)="openLocation()">Locations Offered </button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="btn btn-link nav-link" (click)="openContact()">Contacts</button>
+                    </li>
+                    <li class="nav-item" *ngIf="gtc != ''">
+                        <button class="btn btn-link nav-link" href="#" (click)="openModal('gtc')">GTC Module</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="btn btn-link nav-link" (click)="openFinance(modalFinance)"><span [ngClass]="{'highlight-word':highlightFinanceCode}">Finance Codes</span></button>
+                    </li>
+                    <li class=" print-icon icon-pointer">
+                        <app-print-word [serviceData1]="serviceData" [breadcrumb]="breadcrumb" [dateUpdated]="dateUpdated" [country]="country" [serviceId]="serviceId" [activityGrid]="activityGrid" [allCountries]="CountryData" [permissibility]="permissibility"></app-print-word>
+                    </li>
+                    <li class="nav-item icon-pointer" *ngIf="editIconVisible">
+                        <img src="{{environmentURL}}images/sam-link-icon.svg" class="nav-link" (click)="redirectSam()">
+
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <app-header [listOfWords]="listOfWords" [header]="serviceData.header" [idService]="serviceId" [country]="country" [helpText]="helpText" [breadcrumb]="breadcrumb" [dateUpdated]="dateUpdated" [serviceId]="serviceId"></app-header>
+        <section class="col-12 mb-3 p-0 section__independence">
+            <h1 class="section__independence__title">Independence Restrictions
+                <a href="{{urlIndependenceRestriction}}" target="_blank">
+                    <i class="material-icons">info</i>
+                </a>
+            </h1>
+            <div class="col-12 independence__restrictions">
+                <div class="row">
+                    <div *ngIf="false" class="col-12 h-100 d-flex justify-content-center align-items-center independence__restrictions__default">
+                        <p class="mb-0 text-muted"> Select a Form of Delivery to see Independence Restrictions</p>
+                    </div>
+                    <div class="col-12 independence__restrictions--grey">
+                        <p class="mb-2">
+                            <i class="material-icons mr-2">notifications</i>Restrictions shown here must be evaluated in conjunction with the Independence Considerations section below. Symbols in the grid may change based on Form of Delivery selected.
+                        </p>
+                        <p class="mb-0" *ngIf="activityGrid !== ''">
+                            <i class="material-icons mr-2"> notifications</i> This service has an <button type="button" (click)="openModal('activity')">Activity Grid</button>
+                        </p>
+                    </div>
+                    <app-independence-restrictions (permissibilityOptions)="OverwritePermissibility($event)" [overWrite]="overWritePermissibilityRestriction" [permissibility]="serviceData.independece" [serviceId]="serviceId" [filter]="filter" [countryCodeSelected]="country"></app-independence-restrictions>
+                </div>
+            </div>
+        </section>
+        <section class="col-12 mb-3 p-0 section__considerations" *ngIf="showGlobalIndependenceConsiderations || showCountryIndependenceConsiderations || serviceData.delivery && serviceData.delivery.length >0">
+            <h1 class="section__considerations__title">Independence Considerations</h1>
+            <div class="col-12 py-2 px-4 section__considerations__info">
+                <p *ngIf="!(filter.client.GISId && filter.client.permissibility.length === 0 || !filter.client.GISId && filter.client.ClientName === 'Channel 2' || filter.client.GISId && filter.client.permissibility.length === 1 && filter.client.permissibility[0].ch2)"
+                    class="section__considerations__info__text">Read the <a (click)="openModal('considerations')">Overarching Independence Considerations</a> section before moving into the specific considerations relevant for this service below</p>
+            </div>
+            <app-delivery-method *ngIf="serviceData.delivery && serviceData.delivery.length >0" (permissibilityOptions)="OverwritePermissibility($event)" [delivery]="serviceData.delivery" [items]="totalDeliveryItems" [urlLink]="urlDelivery" [filter]="filter"></app-delivery-method>
+            <app-independence-consideration *ngIf="showGlobalIndependenceConsiderations" [independence]="serviceData.considerations" [filter]="filter" [restrictions]="serviceData.independece"></app-independence-consideration>
+            <app-country-considerations *ngIf="showCountryIndependenceConsiderations" [allCountries]="CountryData" [idService]="serviceId" [countryCodeSelected]="country" [filter]="filter"></app-country-considerations>
+        </section>
+        <section class="col-12 mb-3 p-0">
+            <div class="row">
+                <app-conflicts-consideration [conflicts]="serviceData.conflicts" [conflictsDelivery]="serviceData.conflictsDelivery" class="col-sm-12 col-md-12 col-lg-4"></app-conflicts-consideration>
+                <app-service-guidance [guidance]="serviceData.business" [listOfCountry]="CountryData" [idService]="serviceId" [country]="country" class="col-sm-12 col-md-12 col-lg-4"></app-service-guidance>
+                <app-ey-technology *ngIf="serviceData.technology && serviceData.technology.length > 0" [listOfWords]="listOfWords" [technology]="serviceData.technology" [guidance]="serviceData.business" class="col-sm-12 col-md-12 col-lg-4"></app-ey-technology>
+            </div>
+        </section>
+        <app-other-consideration [otherConsideration]="serviceData.isqm"></app-other-consideration>
+    </div>
+</div>
+<ng-template #modalFinance let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Finance Codes</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="row" *ngIf="!emptyFinance">
+            <div *ngIf="loadingFinance" class="loading row m-4 w-100">
+                <div class="col-12 d-flex align-items-center justify-content-center">
+                    <i class="material-icons material-spin material-2x">sync</i>
+                </div>
+            </div>
+            <div class="col" *ngIf="country === 'GLB' || mercuryModel ">
+                <span class="title_code">Mercury Service Code(s)</span>
+                <p class="mb-0" *ngFor="let item of serviceData.mercury">
+                    <small appHighlight [searchedWords]="listOfWords" classToApply="highlight-word" [text]="item.Join"></small>
+                </p>
+            </div>
+            <div class="col" *ngIf="globalGfis.length > 0 || localGfis.length > 0">
+                <div class="row">
+                    <section *ngIf="!loadingFinance">
+                        <div class="col-12" *ngIf="globalGfis.length > 0">
+                            <span class="title_code">Global GFIS Service Code(s)</span>
+                            <p class="mb-0" *ngFor="let item of globalGfis">
+                                <small *ngIf="item.IsGlobal" appHighlight [searchedWords]="listOfWords" classToApply="highlight-word" [text]="item.Join"></small>
+                            </p>
+                        </div>
+                        <div class="col-12 mt-1" *ngIf="localGfis.length > 0">
+                            <span class="title_code">Local GFIS Service Code(s)</span>
+                            <p class="mb-0" *ngFor="let item of localGfis">
+                                <small *ngIf="!item.IsGlobal" appHighlight [searchedWords]="listOfWords" classToApply="highlight-word" [text]="item.Join"></small>
+                            </p>
+                        </div>
+                    </section>
+                </div>
+            </div>
+            <div class="col-12 mt-2 pt-3 additional_text_finance">
+                <div *ngIf="serviceData.header.financeText !== ''" [innerHTML]="serviceData.header.financeText | safehtml"></div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Close click')">Close</button>
+    </div>
+</ng-template>

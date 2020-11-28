@@ -1,0 +1,73 @@
+    @import "../../../../../stylesheets/abstracts/variable";
+    @import "../../../../../stylesheets/abstracts/placeholder";
+    .conflict-section {
+        position: relative;
+        & .conflict-fix-flag {
+            position: absolute;
+            top: -100px;
+        }
+    }
+    
+    .section_independent__item {
+        @extend %marginsection;
+        padding: 0px;
+        font-family: $EYInterstate-Light;
+        & .section_independent__title {
+            @extend %film;
+        }
+        & .conflicts_box {
+            min-height: 230px;
+            padding: 15px 19px;
+            & .row {
+                margin-left: 0px;
+                margin-right: 0px;
+            }
+            & .conflict_box_title {
+                line-height: 24px;
+                margin-bottom: 15px;
+            }
+        }
+        & p {
+            font-size: .875rem;
+        }
+    }
+    
+    .section__conflict_accordion {
+        & .card {
+            border-radius: 0;
+            padding-bottom: 1px;
+            & .card-header {
+                background: $white-color;
+                margin-bottom: 0;
+                border-bottom: 0;
+                margin-left: -9px;
+                & button {
+                    font-family: $EYInterstate-Light;
+                    font-size: .875rem;
+                    color: $dark-color;
+                    font-weight: bold;
+                    padding-left: 0px;
+                    padding-top: 0px;
+                    padding-right: 17px;
+                    text-align: left;
+                    &::after {
+                        font-family: "Font Awesome 5 free";
+                        font-weight: 900;
+                        content: "\f077";
+                        position: absolute;
+                        top: 13px;
+                        right: 11px;
+                        color: $dark-color;
+                    }
+                    &.collapsed::after {
+                        content: "\f078";
+                    }
+                }
+            }
+            & .card-body {
+                font-family: $EYInterstate-Light;
+                font-size: .875rem;
+                padding: 0px;
+            }
+        }
+    }

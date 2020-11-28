@@ -1,0 +1,157 @@
+// -----------------------------------------------------------------------------
+// This file contains CSS helper classes.
+// -----------------------------------------------------------------------------
+
+/**
+ * Clear inner floats
+ */
+
+.clearfix::after {
+    clear: both;
+    content: '';
+    display: table;
+}
+
+.main-wrapper {
+    position: relative;
+    min-height: 100%;
+    padding-top: 90px; // To do
+    padding-left: 2rem;
+    padding-right: 2rem;
+    padding-bottom: 3rem;
+}
+
+// buttons & chips //
+.btn-yellow {
+    background: $yellow-color !important;
+    color: $dark-color;
+    font-family: $EYInterstate-Bold;
+    font-size: .875rem !important;
+}
+
+.btn__read {
+    font-family: $EYInterstate-Light;
+    font-size: .89em !important;
+    text-decoration: underline !important;
+    color: #007bff !important;
+}
+
+.mat-primary {
+    border: 1px solid $grey1-color !important;
+    background: $white-color !important;
+    color: $grey1-color;
+    font-family: $EYInterstate-Light;
+    font-size: .9rem;
+    & .mat-chip-remove {
+        color: $grey1-color !important;
+        opacity: 1 !important;
+    }
+}
+
+// text //
+.text-black {
+    color: $dark-color;
+}
+
+.text-green {
+    color: $green-color;
+}
+
+.text-orange {
+    color: $orange-color;
+}
+
+.text-red {
+    color: $red-color;
+}
+
+// responsive slider //
+
+/* Slider */
+
+.nav-btn {
+    position: absolute;
+    height: 48px;
+    width: 42px;
+    cursor: pointer;
+    top: 70px !important;
+    background-color: $dark-color;
+    z-index: 10;
+}
+
+.prev-slide.slick-disabled,
+.next-slide.slick-disabled {
+    pointer-events: none;
+    opacity: 0.4;
+}
+
+.prev-slide {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M8.122 24l-4.122-4 8-8-8-8 4.122-4 11.878 12z'/%3E%3C/svg%3E");
+    background-size: 2em;
+    background-position: 5px calc(100% - .5em);
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-repeat: no-repeat;
+    left: -25px;
+    @include rotate(180deg);
+}
+
+.next-slide {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M8.122 24l-4.122-4 8-8-8-8 4.122-4 11.878 12z'/%3E%3C/svg%3E");
+    background-size: 2em;
+    background-position: 5px calc(100% - .5em);
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-repeat: no-repeat;
+    right: -5px;
+    @include rotate(0deg);
+}
+
+.modal-content {
+    border-radius: 0px !important;
+}
+
+
+/* Animaciones */
+
+.animated {
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+
+.fast {
+    -webkit-animation-duration: 0.4s;
+    animation-duration: 0.4s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.fadeIn {
+    animation-name: fadeIn;
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+.fadeOut {
+    animation-name: fadeOut;
+}

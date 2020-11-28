@@ -1,0 +1,63 @@
+<app-loading [show]="loading"></app-loading>
+<main *ngIf="!loading" class="mt-4">
+    <section class="animated fast fadeIn" *ngIf="!showForm">
+        <div class="col-10 offset-1">
+            <h4 class="title__section">
+                <button class="btn" (click)="show()">
+                    <i class="material-icons"> arrow_back</i>
+                    <span class="pl-1">BACK</span>
+                </button><br>
+                <span *ngIf="!this.updateData">New Independence Considerations</span>
+                <span *ngIf="this.updateData">Update Independence Considerations</span>
+            </h4>
+            <form [formGroup]="independenceForm" (ngSubmit)="submit()">
+                <div class="form-row">
+                    <div class="col-12">
+                        <label>Independence Considerations</label>
+                        <input class="form-control" type="text" formControlName="independencename" [class.is-invalid]="!independenceForm.get('independencename').valid && independenceForm.get('independencename').touched">
+                        <span *ngIf="!independenceForm.get('independencename').valid && independenceForm.get('independencename').touched" class="help-block text-danger">
+                            <span *ngIf="independenceForm.get('independencename').errors?.independenceNameIsBusy">This Independence Considerations already exists.</span>
+                        <span *ngIf="independenceForm.get('independencename').errors?.required">This field is required!</span>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>General Principles</label>
+                    <ckeditor [config]="editorConfig" [editor]="Editor" id="deliveryDescription" (change)="changeEditor($event)" [(ngModel)]="editorData" [ngModelOptions]="{standalone: true}"></ckeditor>
+                </div>
+                <button class="btn btn-primary" type="submit" [disabled]="!independenceForm.valid">Save form</button>
+            </form>
+        </div>
+    </section>
+    <section class="animated fast fadeIn" *ngIf="showForm">
+        <div class="col-10 offset-1">
+            <h4 class="title__section">
+                <button class="btn" (click)="show()">
+                    <i class="material-icons">add_circle</i>
+                </button> Independence Considerations
+            </h4>
+            <table class="table table-sm border">
+                <thead>
+                    <tr>
+                        <th scope="col">Order</th>
+                        <th scope="col">Independence Considerations</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of independence;let i = index">
+                        <td scope="row">
+                            <ng-select [searchable]="false" [clearable]="false" [items]="ArrayOrder" [(ngModel)]="item.order" (click)="updatePosition(item.order)" (change)="onChange(item)">
+                            </ng-select>
+                        </td>
+                        <td>{{item.independenceName}}</td>
+                        <td>
+                            <button class="btn p-0 mr-2"><i class="material-icons" (click)="getIndependence(i)"> edit </i></button>
+                            <button class="btn p-0"><i class="material-icons" (click)="validateDelivery(item)">delete </i></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</main>

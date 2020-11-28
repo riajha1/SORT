@@ -1,0 +1,14 @@
+<ngx-slick-carousel #slickModal="slick-carousel" [config]="slideConfig">
+    <div ngxSlickItem *ngFor="let slide of carousel" class="slide">
+        <div class="mr-4">
+            <div class="slickcarousel__card pl-3 pr-3 pb-2" (click)="redirectPage(slide.id)">
+                <h5 class="slickcarousel__cardtitle font-weight-bold text-wrap">{{ slide.title}}</h5>
+                <p (window:resize)="onResize($event)" class="slickcarousel__cardbody">{{ (slide.description.length>stringLength )? (slide.description | slice:0:stringLength)+'...':(slide.description) }}</p>
+                <hr>
+                <span class="badge slickcarousel__cardtag pl-2 pr-2 font-weight-light">
+                    {{ slide.serviceLine[0] ? slide.serviceLine[0].prefix : ''}}
+                </span>
+            </div>
+        </div>
+    </div>
+</ngx-slick-carousel>

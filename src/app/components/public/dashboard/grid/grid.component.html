@@ -1,0 +1,62 @@
+<div class="col-12 mt-2 animated fadeIn pl-1 pr-2">
+    <div class="row">
+        <div *ngFor="let data of dataGrid  | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize;let i = index" class="column pr-0" [ngClass]="{ 'col-12': enableGrid, 'col-4': !enableGrid, 'd-none': data.disable }">
+            <div class="card animated" [ngClass]="{'faceIn':!data.disable, 'fadeOut':data.disable }">
+                <div *ngIf="enableGrid && i===0" class="col-12 pr-3 d-none">
+                    <div class="row border-bottom" style="font-size:.85rem">
+                        <div class="col-custom pl-2 text-left">Service Title</div>
+                        <div class="pl-0 text-left" [ngClass]="{ 'col-3': enableGrid && filterNav.client.GISId, 'col-6 text-center':  !filterNav.client.GISId}">Service Line</div>
+                        <div class="col-3 pl-2 text-left" *ngIf="enableGrid && filterNav.client.GISId">Independence Restriction</div>
+                    </div>
+                </div>
+                <div class="card-body row pt-0" [ngClass]="{ 'pb-0': !enableGrid }">
+                    <div class="col-12 box" [ngClass]="{ 'p-2': !enableGrid,'p-0': enableGrid }" [routerLink]="['/service/',data.IdService]">
+                        <div [ngClass]="{'col-12 px-2 pb-0': !enableGrid,'col pl-2': enableGrid }">
+                            <h5 class="card-title" [ngClass]="{'mb-2': !enableGrid,'d-flex align-items-center': enableGrid }">{{ data.Name }}
+                            </h5>
+                        </div>
+                        <div class="align-items-center" [ngClass]="{ 'd-flex col-12 p-2': !enableGrid,'d-none p-0': enableGrid }">
+                            <!-- competency {{ data.IdCompetencyDomain | json}}cliente {{ data.IdClientNeed | json}} solution {{ data.IdSolution | json}} sector {{ data.IdSector | json}} fop {{ data.IdFop | json}} -->
+                            <small class="card-text">{{ data.HeadLineDescription }}</small>
+                        </div>
+                        <hr>
+                        <div [ngClass]="{ 'col-12 pl-2 p-0': !enableGrid,'col-2 p-0 d-flex align-items-center': enableGrid }">
+                            <div class="row">
+                                <div [ngClass]="{'col-sm-12 col-md-5 col-lg-5 p-0 pl-1': true}">
+                                    <span *ngIf="!enableGrid" class="bubble-yellow">{{data.IsGlobal ? 'G' : 'L'}}</span>
+                                    <span class="badge badge-service badge-secondary rounded-pill mr-1" *ngFor="let sl of data.prefixsl">
+                                        <span>{{sl}}</span>
+                                    </span>
+                                </div>
+                                <div class="col p-0 text-right" *ngIf="data.prefixsl.includes('ASU') && !enableGrid">
+                                    <span class="badge badge-subservice badge-secondary rounded-pill mr-1" *ngIf="data.ssl && data.ssl.length > 0">
+                                        <span>{{data.ssl[0]}}</span>
+                                    </span>
+                                    <!-- <span (click)="openModal('ssl', data.ssl)" class="badge badge-subservice badge-secondary rounded-pill mr-1 button" *ngIf="data.ssl && data.ssl.length > 1">
+                                    <span class="open"></span>
+                                    </span> -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3 d-flex justify-content-center align-items-center" *ngIf="enableGrid && filterNav.client.GISId && filterNav.client.permissibility.length > 0 ">
+                            <app-permissibility-icon [enable]="enableGrid" [permissibility]="data.independenceRestrictions" [filter]="filterNav.client.permissibility" [IdService]="data.IdService" [iconArray]="iconArray"></app-permissibility-icon>
+                        </div>
+                    </div>
+                    <div class="col p-0 card-footer" *ngIf="!enableGrid">
+                        <span *ngIf="data.mercury && data.mercury.length > 0 && (data.pacemodel === '' || data.pacemodel === 'Mercury') ">MSC:<span class="pl-1">{{data.mercuryTxt}}</span></span>
+                        <span *ngIf="data.gfis && data.gfis.length > 0 && data.pacemodel !== '' && data.pacemodel !== 'Mercury'">GFIS:<span class="pl-1">{{data.gfisTxt}}</span></span>
+                        <span class="buttonCodes" *ngIf="data.mercury && data.mercury.length > 3 && (data.pacemodel === '' || data.pacemodel === 'Mercury')" (click)="openModal(data)"><span class="material-icons button-icon">
+                            more_horiz
+                        </span></span>
+                        <span class="buttonCodes" *ngIf="data.gfis && data.gfis.length > 3 && data.pacemodel !== '' && data.pacemodel !== 'Mercury'" (click)="openModal(data)"><span class="material-icons button-icon">
+                            more_horiz
+                        </span></span>
+                        <span class="icon-box" *ngIf="!enableGrid && filterNav.client.GISId && filterNav.client.permissibility.length > 0">
+                            <app-permissibility-icon [enable]="enableGrid" [permissibility]="data.independenceRestrictions" [filter]="filterNav.client.permissibility" [IdService]="data.IdService" [iconArray]="iconArray"></app-permissibility-icon>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

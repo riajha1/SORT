@@ -1,0 +1,102 @@
+@import "../../../../../../stylesheets/abstracts/variable";
+@import "../../../../../../stylesheets/base/base_form";
+.country-textarea {
+    width: 100%;
+}
+
+.pr-custom {
+    padding-right: 18px;
+}
+
+.pl-custom {
+    padding-left: 36px !important;
+}
+
+.width-global {
+    width: 135px;
+}
+
+.width-others {
+    width: 88px;
+}
+
+.ml-7 {
+    margin-left: 7px;
+}
+
+.ml-16 {
+    margin-left: 16px;
+}
+
+.pl-1_5 {
+    padding-left: 14px !important;
+}
+
+.published {
+    font-family: $EYInterstate-Bold;
+    & .material-icons {
+        font-size: 1.2rem !important;
+        padding-right: 5px;
+    }
+}
+
+.btn-green {
+    background: $green2-color;
+    color: $white-color;
+    font-size: .875rem;
+    font-family: $EYInterstate-Bold;
+    & .material-icons {
+        font-size: 1.2rem !important;
+        padding-right: 5px;
+    }
+    &:hover {
+        background-color: $green-color;
+    }
+    &.btn:disabled {
+        color: $grey5-color !important;
+        background: $grey4-color !important;
+    }
+}
+
+::ng-deep .mat-checkbox.checklist-leaf-node.custom-width {
+    min-width: 119px;
+}
+
+::ng-deep .mat-tree-node.parentNode .box_item {
+    width: 100%;
+    border-bottom: 1px solid $grey2-color;
+    padding-bottom: 6px;
+    margin-bottom: 6px;
+}
+
+::ng-deep .mat-tree-node .box_item .mat-checkbox-inner-container {
+    margin-top: 1px;
+}
+
+::ng-deep .mat-icon-button.btn-margin_top .mat-button-wrapper .mat-icon {
+    margin-top: 1px;
+}
+
+::ng-deep .mat-tree-node .box_item .mat-checkbox-disabled .mat-checkbox-label,
+::ng-deep .mat-tree-node .country-textarea .mat-checkbox-disabled .mat-checkbox-label {
+    color: $dark-color;
+    margin-top: -4px !important;
+}
+
+.area-label {
+    font-family: $EYInterstate-Light;
+    font-size: 12px;
+}
+
+.box-buttons {
+    position: relative;
+    & button {
+        color: $dark-color;
+        font-family: $EYInterstate-Light;
+        font-weight: bold;
+        font-size: 12px;
+        position: absolute;
+        right: 0;
+        z-index: 2;
+    }
+}

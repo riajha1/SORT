@@ -1,0 +1,93 @@
+<div class="independence__restrictions__grid">
+    <div class="row">
+        <div class="col my-3 pl-4 pr-4" *ngIf="restrictions">
+            <div class="row">
+                <div class="col independence__restrictions__grid__item">
+                    <h6 class="text-center" [ngClass]="{'opacity': !(highlight.includes(1) && highRestriction.includes(restrictions.secauditedValue) || highlight.includes(2) && highRestriction.includes(restrictions.secsubjectValue)), 'highlight': highlight.length === 0}">SEC Channel 1 PIE</h6>
+                    <div class="row grid__box">
+                        <div class="w-50 d-flex flex-column border" [ngClass]="{'opacity': !(highlight.includes(1) && highRestriction.includes(restrictions.secauditedValue)), 'highlight': highlight.length === 0}">
+                            <p class="text-center">{{ restrictions.secaudited }}</p>
+                            <app-permissibility-icons [iconArray]="iconArray" [overWrite]="overWrite" [restrictions]="restrictions.secauditedValue"></app-permissibility-icons>
+                        </div>
+                        <div class="w-50 d-flex flex-column border" [ngClass]="{'opacity':!(highlight.includes(2) && highRestriction.includes(restrictions.secsubjectValue)), 'highlight': highlight.length === 0}">
+                            <p class="text-center">{{ restrictions.secsubject }}</p>
+                            <app-permissibility-icons [iconArray]="iconArray" [overWrite]="overWrite" [restrictions]="restrictions.secsubjectValue"></app-permissibility-icons>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="independence__restrictions__grid__item" [ngClass]="{'col-4':  restrictions.euAuditedNoValuation != '' && derogation === 0 , 'col': restrictions.euAuditedNoValuation == '', 'col-3': restrictions.euAuditedNoValuation != '' && derogation !== 0}">
+                    <h6 class="text-center" [ngClass]="{'opacity':!(highlight.includes(3) && highRestriction.includes(restrictions.euauditedValue) || highlight.includes(4) && highRestriction.includes(restrictions.eusubjectValue)) || highlight.includes(5) && highRestriction.includes(restrictions.euAuditedNoValuationValue), 'highlight': highlight.length === 0 || highlight.includes(5) && highRestriction.includes(restrictions.euAuditedNoValuationValue)}">EU Channel 1 PIE</h6>
+                    <div class="row grid__box">
+                        <div *ngIf="derogation === 0 || derogation === 1" class="d-flex flex-column border" [ngClass]="{'w-3':  restrictions.euAuditedNoValuation != '' && derogation === 0, 'w-50': restrictions.euAuditedNoValuation == '' || restrictions.euAuditedNoValuation != '' && derogation !== 0, 'opacity': !(highlight.includes(3) && highRestriction.includes(restrictions.euauditedValue)), 'highlight': highlight.length === 0 }">
+                            <p class="text-center">{{ restrictions.euaudited }}</p>
+                            <app-permissibility-icons [iconArray]="iconArray" [overWrite]="overWrite" [restrictions]="restrictions.euauditedValue"></app-permissibility-icons>
+                        </div>
+
+                        <div *ngIf="derogation === 0 || derogation === 2" class="d-flex flex-column border" [ngClass]="{'w-3':  restrictions.euAuditedNoValuation != '' && derogation === 0, 'w-50': restrictions.euAuditedNoValuation == '' || restrictions.euAuditedNoValuation != '' && derogation !== 0, 'opacity': !(highlight.includes(4) && highRestriction.includes(restrictions.eusubjectValue)), 'highlight': highlight.length === 0 }">
+                            <p class="text-center">{{ restrictions.eusubject }}</p>
+                            <app-permissibility-icons [iconArray]="iconArray" [overWrite]="overWrite" [restrictions]="restrictions.eusubjectValue"></app-permissibility-icons>
+                        </div>
+                        <div *ngIf="restrictions.euAuditedNoValuation != ''" class="d-flex flex-column border" [ngClass]="{'w-3':  restrictions.euAuditedNoValuation != '' && derogation === 0, 'w-50':  derogation !== 0, 'opacity': !(highlight.includes(5) && highRestriction.includes(restrictions.euAuditedNoValuationValue)), 'highlight': highlight.length === 0 }">
+                            <p class="text-center">{{ restrictions.euAuditedNoValuation }}</p>
+                            <app-permissibility-icons [iconArray]="iconArray" [overWrite]="overWrite" [restrictions]="restrictions.euAuditedNoValuationValue"></app-permissibility-icons>
+                        </div>
+                    </div>
+                </div>
+                <div class="col independence__restrictions__grid__item">
+                    <div class="row">
+                        <div class="col px-1">
+                            <h6 class="text-center" [ngClass]="{'opacity': !(highlight.includes(7) && highRestriction.includes(restrictions.otSubjectValue) || highlight.includes(6) && highRestriction.includes(restrictions.otAuditedValue)), 'highlight': highlight.length === 0}">Other Channel 1 PIE</h6>
+                        </div>
+                    </div>
+                    <div class="row grid__box">
+                        <div class="w-50 d-flex flex-column border" [ngClass]="{'opacity': !(highlight.includes(6) && highRestriction.includes(restrictions.otAuditedValue)), 'highlight': highlight.length === 0}">
+                            <p class="text-center">{{ restrictions.otAudited }}</p>
+                            <app-permissibility-icons [iconArray]="iconArray" [overWrite]="overWrite" [restrictions]="restrictions.otAuditedValue"></app-permissibility-icons>
+                        </div>
+                        <div class="w-50 d-flex flex-column border" [ngClass]="{'opacity': !(highlight.includes(7) && highRestriction.includes(restrictions.otSubjectValue)), 'highlight': highlight.length === 0}">
+                            <p class="text-center">{{ restrictions.otSubject }}</p>
+                            <app-permissibility-icons [iconArray]="iconArray" [overWrite]="overWrite" [restrictions]="restrictions.otSubjectValue"></app-permissibility-icons>
+                        </div>
+                    </div>
+                </div>
+                <div class="col independence__restrictions__grid__item">
+                    <h6 class="text-center" [ngClass]="{'opacity': !(highlight.includes(8) && highRestriction.includes(restrictions.ch1Value) || highlight.includes(9) && highRestriction.includes(restrictions.ch1nsaValue)), 'highlight': highlight.length === 0}">Other Channel 1</h6>
+                    <div class="row grid__box">
+                        <div class="w-50 d-flex flex-column border" [ngClass]="{'opacity': !(highlight.includes(8) && highRestriction.includes(restrictions.ch1Value)), 'highlight': highlight.length === 0}">
+                            <p class="text-center">{{ restrictions.ch1 }}</p>
+                            <app-permissibility-icons [iconArray]="iconArray" [overWrite]="overWrite" [restrictions]="restrictions.ch1Value"></app-permissibility-icons>
+                        </div>
+                        <div class="w-50 d-flex flex-column border" [ngClass]="{'opacity': !(highlight.includes(9) && highRestriction.includes(restrictions.ch1nsaValue)), 'highlight': highlight.length === 0}">
+                            <p class="text-center">{{ restrictions.ch1nsa !== null ? restrictions.ch1nsa : '' }}</p>
+                            <app-permissibility-icons [iconArray]="iconArray" [overWrite]="overWrite" [restrictions]="restrictions.ch1nsaValue"></app-permissibility-icons>
+                        </div>
+                    </div>
+                </div>
+                <div class="independence__restrictions__grid__item col-modify">
+                    <h6 class="text-center" [ngClass]="{'opacity': !(highlight.includes(10) && highRestriction.includes(restrictions.ch2Value)), 'highlight': highlight.length === 0 || filter.client.GISId && filter.client.permissibility.length === 0}">Channel 2</h6>
+                    <div class="w-100 grid__box d-flex flex-column border" [ngClass]="{'opacity': !(highlight.includes(10) && highRestriction.includes(restrictions.ch2Value)) , 'highlight': highlight.length === 0 || filter.client.GISId && filter.client.permissibility.length === 0}">
+                        <p class="text-center">{{ restrictions.ch2 }}</p>
+                        <app-permissibility-icons [iconArray]="iconArray" [overWrite]="false" [restrictions]="restrictions.ch2Value"></app-permissibility-icons>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 text-center">
+            <p class="mb-2" *ngIf="filter.client.ClientName === 'Channel 2' && filter.client.permissibility.length === 1">Remove the Channel 2 selection on top if you believe this is inaccurate representation of your client's Independence restrictions.</p>
+            <p class="mb-2" *ngIf="(filter.client.GISId && filter.client.permissibility.length === 0 && filter.client.ClientName !== 'Channel 2') || (filter.client.GISId && filter.client.permissibility.length === 1 && filter.client.permissibility[0].ch2)">The client you have selected has no Independence restrictions in GIS. If you believe this is inaccurate you should contact the Global Client Service Partner to update GIS and clear the client selected from SORT to see restrictions for all
+                client type buckets.</p>
+            <p class="mb-2" *ngIf="!filter.client.GISId && filter.client.ClientName !== 'Channel 2'">You can refine this grid by choosing a client from the link on top of the screen or click <button type="button" class="btn btn-link p-0 mb-1" (click)="addClient()">here</button> if the client is Channel 2 only.</p>
+            <p class="mb-2 red-text" *ngIf="ConditionOne && !ConditionThree">The service is prohibited under one or more sets of Independence standards applicable to the entity you selected. We have highlighted all such instances in the matrix.</p>
+            <p class="mb-2 red-text" *ngIf="ConditionTwo && !ConditionThree">The entity you selected is subject to multiple Independence requirements – be sure you consider all of the Independence standards applicable to the entity along with the Independence considerations below.
+            </p>
+            <p class="mb-2" *ngIf="OverRideUK  && !ConditionThree">The client you selected that is subject to UK FRC Independence Standard regulations. The restrictions and guidance shown here have been overwritten by the UK edition. See the <a href="https://find.ey.net/discover/SitePages/Home.aspx#detailPath=ZYFCSFS674FF-4-402"
+                    target="_blank">EY UK and Ireland Independence Policy</a> for further guidance.</p>
+            <p *ngIf="ConditionThree">The client you selected has been identified as a UK PIE/OEPI that is subject to the UK FRC Independence Standard regulations. The regulations are more restrictive than global and have an extraterritorial impact. As the service is not offered
+                in the UK, the designations in the matrix reflect your local country designations and may not depict the designations relevant to your client. See the <a href="https://find.ey.net/discover/SitePages/Home.aspx#detailPath=ZYFCSFS674FF-4-402"
+                    target="_blank"> EY UK and Ireland Independence Policy</a> for further guidance</p>
+            <p class="mb-2"> <a [routerLink]="['/permissibility-tree', serviceId]">Show Independence Restrictions in all locations this service is offered</a></p>
+            <!-- <app-independence-restrictions-excel [serviceId]="serviceId"></app-independence-restrictions-excel> -->
+        </div>
+    </div>
+</div>

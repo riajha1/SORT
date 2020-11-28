@@ -1,0 +1,33 @@
+@font-face {
+    font-family: "Noto Sans";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: local("Noto Sans"), local("NotoSans"), url(https://fonts.gstatic.com/s/notosans/v9/o-0IIpQlx3QUlC5A4PNr5TRA.woff2) format("woff2");
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+    font-family: "EYFontLight";
+    src: local("EYFontLight");
+    font-display: swap;
+    src: url("/SORT/assets/fonts/EYFontLight.woff2") format("woff2"), url("/SORT/assets/fonts/EYFontLight.eot"), url("/SORT/assets/fonts/EYFontLight.eot?#iefix") format("embedded-opentype"), url("/SORT/assets/fonts/EYFontLight.ttf") format("truetype"), url("/SORT/assets/fonts/EYFontLight.woff") format("woff"), url("/SORT/assets/fonts/EYFontLight.svg") format("svg");
+    //src: url("/assets/fonts/EYFontLight.woff2") format("woff2"), url("/assets/fonts/EYFontLight.eot"), url("/assets/fonts/EYFontLight.eot?#iefix") format("embedded-opentype"), url("/assets/fonts/EYFontLight.ttf") format("truetype"), url("/assets/fonts/EYFontLight.woff") format("woff"), url("/assets/fonts/EYFontLight.svg") format("svg");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "EYFontRegular";
+    font-display: swap;
+    //src: local("EYFontRegular"), url("/assets/fonts/EYFontRegular.woff") format("woff"), url("/assets/fonts/EYFontRegular.ttf") format("truetype"), url("/assets/fonts/EYFontRegular.eot?#iefix") format("embedded-opentype"), url("/assets/fonts/EYFontRegular.woff2") format("woff2"), url("/assets/fonts/EYFontRegular.svg") format("svg");
+    src: local("EYFontRegular"), url("/SORT/assets/fonts/EYFontRegular.woff") format("woff"), url("/SORT/assets/fonts/EYFontRegular.ttf") format("truetype"), url("/SORT/assets/fonts/EYFontRegular.eot?#iefix") format("embedded-opentype"), url("/SORT/assets/fonts/EYFontRegular.woff2") format("woff2"), url("/SORT/assets/fonts/EYFontRegular.svg") format("svg");
+}
+
+@font-face {
+    font-family: "EYFontBold";
+    src: local("EYFontBold");
+    font-display: swap;
+    //src: url("/assets/fonts/EYFontBold.woff2") format("woff2"), url("/assets/fonts/EYFontBold.woff") format("woff"), url("/assets/fonts/EYFontBold.ttf") format("truetype"), url("/assets/fonts/EYFontBold.eot?#iefix") format("embedded-opentype"), url("/assets/fonts/EYFontBold.woff2") format("woff2"), url("/assets/fonts/EYFontBold.svg") format("svg");
+    src: url("/SORT/assets/fonts/EYFontBold.woff2") format("woff2"), url("/SORT/assets/fonts/EYFontBold.woff") format("woff"), url("/SORT/assets/fonts/EYFontBold.ttf") format("truetype"), url("/SORT/assets/fonts/EYFontBold.eot?#iefix") format("embedded-opentype"), url("/SORT/assets/fonts/EYFontBold.woff2") format("woff2"), url("/SORT/assets/fonts/EYFontBold.svg") format("svg");
+}

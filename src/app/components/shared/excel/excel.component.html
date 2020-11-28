@@ -1,0 +1,18 @@
+<div class="form-group">
+  <label class="required-label">IdService</label>
+  <input type="number" [(ngModel)]="idService" class="form-control">
+</div>
+
+<li *ngFor="let value of excelValues">
+  {{value.idService}}
+</li>
+<div class="col-12">
+  <div class="row">
+    <div class="col-6 form-button">
+      <button class="col-4 py-2 btn float-left btn-outline-dark" (click)="addList()">Add</button>
+    </div>
+    <div class="col-6 form-button">
+      <button class="col-4 py-2 btn float-right btn-warning" (click)="exportAsXLSX()">Export</button>
+    </div>
+  </div>
+</div>

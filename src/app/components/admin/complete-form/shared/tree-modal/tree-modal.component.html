@@ -1,0 +1,100 @@
+<div class="col-12 p-0">
+    <app-loading [show]="loading"></app-loading>
+    <p class="box-buttons mb-0 text-right" *ngIf="!loading">
+        <button class="btn btn-link" (click)="showAll('show')" type="button" *ngIf="showHideButton">Show all</button>
+        <button class="btn btn-link" (click)="showAll('hide')" type="button" *ngIf="!showHideButton">Hide all</button>
+    </p>
+    <mat-tree *ngIf="!loading" class="greyBackground" [dataSource]="dataSource" [treeControl]="treeControl">
+        <!-- children of main node -->
+        <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
+            <div class="row country-textarea">
+                <mat-checkbox class="checklist-leaf-node" [checked]="node.selected" [disabled]="true">{{node.name}}</mat-checkbox>
+                <div class="col-12 px-0" *ngIf="node.selected">
+                    <div class="form-group mb-0">
+                        <button class="btn btn-link float-right button-link-add button-location" type="button" (click)="showContactModal(node)">
+                            <span  *ngIf="node.contact.length > 0 && (node.contact[0].Name !== '' || node.contact[0].Url !== ''); else showAddLocation">Edit</span>
+                            <ng-template #showAddLocation>
+                                <span>Add</span>
+                            </ng-template>
+                        </button>
+                        <div class="row">
+                            <div class="col-12">
+                                <table class="table table-bordered table-sm tablespace my-2 table-hover" *ngIf="node.contact.length > 0 && (node.contact[0].Name !== '' || node.contact[0].Url !== '')">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col" width="50%">Name/Organization chart URL</th>
+                                            <th scope="col" width="50%">Title/Organization chart name</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let contact of node.contact">
+                                            <td class="dont-break-out">
+                                                <p class="mb-0" *ngIf="contact.Name !== ''">{{contact.Name}}</p>
+                                                <a *ngIf="contact.Url !== ''" [href]="contact.Url" target="_blanck">{{contact.Url}}</a>
+                                            </td>
+                                            <td>
+                                                <p class="mb-0" *ngIf="contact.Title !== ''">{{contact.Title}}</p>
+                                                <p class="mb-0" *ngIf="contact.Location !== ''">{{contact.Location}}</p>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </mat-tree-node>
+        <mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding class="parentNode">
+            <!-- icon button, main node -->
+            <div class="box_item">
+                <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'toggle ' + node.name" class="btn-tree btn-margin_top">
+                    <mat-icon class="mat-icon-rtl-mirror">
+                        {{treeControl.isExpanded(node) ? 'remove' : 'add'}}
+                    </mat-icon>
+                </button>
+                <mat-checkbox class="checklist-leaf-node" [indeterminate]="descendantsPartiallySelected(node)" [checked]="node.selected" [disabled]="true" *ngIf="node.level !== 1">
+                    {{node.name}}
+                </mat-checkbox>
+                <!-- Label Area level -->
+                <span *ngIf="node.level === 1" class="area-label">{{node.name}}</span>
+                <div class="col-12" *ngIf="(node.level === 2 && node.selected) || (descendantsPartiallySelected(node) === true && !node.selected && node.level === 2 )">
+                    <div class="form-group mb-0">
+                        <button class="btn btn-link float-right button-link-add button-region" type="button" (click)="showContactModal(node)">
+                            <span  *ngIf="node.contact.length > 0 && (node.contact[0].Name !== '' || node.contact[0].Url !== ''); else showAdd">Edit</span>
+                            <ng-template #showAdd>
+                                <span>Add</span>
+                            </ng-template>
+                        </button>
+                        <!-- table for region level starts from here -->
+                        <div class="row">
+                            <div class="col-12">
+                                <table class="table table-bordered table-sm tablespace my-2 table-hover" *ngIf="node.contact.length > 0 && (node.contact[0].Name !== '' || node.contact[0].Url !== '')">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col" width="50%">Name/Organization chart URL</th>
+                                            <th scope="col" width="50%">Title/Organization chart name</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let contact of node.contact">
+                                            <td class="dont-break-out">
+                                                <p class="mb-0" *ngIf="contact.Name !== ''">{{contact.Name}}</p>
+                                                <a *ngIf="contact.Url !== ''" [href]="contact.Url" target="_blanck">{{contact.Url}}</a>
+                                            </td>
+                                            <td>
+                                                <p class="mb-0" *ngIf="contact.Title !== ''">{{contact.Title}}</p>
+                                                <p class="mb-0" *ngIf="contact.Location !== ''">{{contact.Location}}</p>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- table for region level ends from here -->
+                    </div>
+                </div>
+            </div>
+        </mat-tree-node>
+    </mat-tree>
+</div>

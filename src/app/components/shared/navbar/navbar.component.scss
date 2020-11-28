@@ -1,0 +1,205 @@
+@import "../../../../stylesheets/abstracts/variable";
+.vertical-align-middle {
+    vertical-align: middle;
+}
+
+.separate-option {
+    border-bottom: 1px solid $grey9-color;
+    margin-left: -10px;
+    margin-right: -10px;
+    margin-top: -8px;
+    margin-bottom: -7px;
+    height: 34px;
+    position: relative;
+    & span {
+        position: absolute;
+        left: 11px;
+        top: 9px;
+    }
+}
+
+.navbar {
+    background: $dark-color;
+    -webkit-box-shadow: 0px 6px 14px -7px $dark-color;
+    -moz-box-shadow: 0px 6px 14px -7px $dark-color;
+    box-shadow: 0px 6px 14px -7px $dark-color;
+    z-index: 100;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    position: fixed;
+    top: 41px; // To do
+    left: 0;
+    width: 100%;
+    & .navbar-brand {
+        & img {
+            width: 25px;
+            height: auto;
+        }
+        & span {
+            font-family: $EYInterstate-Light;
+            font-size: .72rem;
+            color: $white-color;
+            margin-left: 7px;
+            margin-top: 11px;
+            &::before {
+                padding-right: .5rem;
+                color: $white-color;
+                content: "|";
+            }
+        }
+    }
+    & .navbar-toggler-icon {
+        background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,255, 1)' stroke-width='4' stroke-linecap='square' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+    }
+    & a.navbar-brand,
+    & .navbar-collapse {
+        & .country-select {
+            font-family: $EYInterstate-Light;
+            max-width: 200px;
+        }
+        & .admin__dropdown {
+            font-family: $EYInterstate-Light;
+            & .navbar__dropdown__button {
+                margin-top: 1px;
+                padding-top: 6px;
+                @media (max-width: $break-medium) {
+                    margin-left: 0px !important;
+                }
+                &:after {
+                    display: none;
+                }
+                & i {
+                    font-size: 1.8rem;
+                    color: $white-color;
+                }
+            }
+        }
+    }
+}
+
+::ng-deep .myPanelClass {
+    margin-top: 30px !important;
+}
+
+::ng-deep .mat-primary {
+    font-size: .75rem;
+    & a {
+        color: $dark-color;
+    }
+}
+
+::ng-deep .ng-select.ng-select-single.location-dropdown .ng-select-container {
+    font-family: $EYInterstate-Light;
+    font-size: .75rem;
+    height: 40.5px;
+    border-radius: 0px;
+    width: 150px !important;
+    border: none;
+    background-color: $greyLight-color;
+}
+
+::ng-deep .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected,
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected.ng-option-marked,
+::ng-deep .ng-option {
+    font-family: $EYInterstate-Light;
+    font-size: .75rem;
+}
+
+:host::ng-deep .ng-select.ng-select-single .ng-select-container .ng-value-container .ng-input {
+    top: 10px !important;
+    padding-left: 30px!important;
+} 
+
+.label-icon-country {
+    display: flex;
+    align-items: center;
+}
+
+//  home menu styles start here
+.dropdown_pos {
+    top: -4px !important;
+    left: -205px !important;
+    float: left;
+    min-width: 18rem;
+    color: #000;
+    background-color: $grey10-color;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, .15);
+    border-radius: 0rem;
+    min-height: 100vh;
+    font-family: $EYInterstate-Light;
+    font-size: 1rem !important;
+}
+
+.drop-cust {
+    color: #fff !important;
+    cursor: pointer;
+    min-height: 50px;
+    padding-top: 1rem;
+    &:active {
+        background-color: transparent !important;
+    }
+    &:hover {
+        background-color: transparent;
+    }
+}
+
+.cross {
+    color: #fff !important;
+    cursor: pointer;
+}
+
+.cross-size {
+    font-size: 2.2rem;
+}
+
+.activeitem {
+    background-color: #2E2E38;
+    border-left: 3px solid #FFE600;
+    font-weight: bold;
+}
+
+.dropdown-item-cust {
+    display: block;
+    width: 100%;
+    padding: .25rem 1.5rem;
+    clear: both;
+    font-weight: 400;
+    color: #212529;
+    text-align: inherit;
+    white-space: nowrap;
+    background-color: transparent;
+    border: 0;
+}
+
+@keyframes slidein {
+    0% {
+        margin-left: 1500px;
+    }
+    100% {
+        margin-left: 0px;
+    }
+}
+
+.note {
+    animation-name: slidein;
+    animation-duration: .9s;
+}
+
+.globe-icon {
+    border: hidden;
+    background-color: #FFE600;
+    border-radius: 50%;
+    font-size: 1.3rem;
+    margin-right: 3px;
+}
+
+ ::ng-deep .ng-select.ng-select-single.location-dropdown .ng-select-container {
+    @media (max-width: $break-medium) {
+        width: 100% !important;
+    }
+}
+
+// home menu styles ends here

@@ -1,0 +1,11 @@
+<section class="col-12 p-0 section_other" *ngIf="otherConsideration && otherConsideration.ProcessorData">
+    <h1 class="section_other__title">Other Considerations</h1>
+    <div class="col-12 py-2" *ngIf="otherConsideration.ProcessorData">
+        <strong>Data Processor</strong>
+        <p class="pt-2 mb-0">{{otherConsideration.ProcessorConsiderations}}</p>
+    </div>
+    <div class="col-12 py-2" *ngIf="otherConsideration.Isqmcheck">
+        <strong>Subject to ISQM</strong>
+        <p class="pt-2">{{otherConsideration.Considerations}}</p>
+    </div>
+</section>

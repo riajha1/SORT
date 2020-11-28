@@ -1,0 +1,26 @@
+@import "../../../../../stylesheets/abstracts/variable";
+@import "../../../../../stylesheets/abstracts/placeholder";
+.service-section {
+    position: relative;
+    & .service-fix-flag {
+        position: absolute;
+        top: -100px;
+    }
+}
+
+.section_independent__item {
+    font-family: $EYInterstate-Light;
+    & .independent_description {
+        min-height: 230px;
+        padding: 15px 11px;
+    }
+    & div {
+        @extend %marginsection;
+        & p {
+            font-size: .875rem;
+        }
+    }
+    & .section_independent__title {
+        @extend %film;
+    }
+}

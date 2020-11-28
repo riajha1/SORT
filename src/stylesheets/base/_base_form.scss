@@ -1,0 +1,139 @@
+// general intake forms
+main.main {
+    font-family: $EYInterstate-Light;
+    font-size: 12px;
+    margin-left: 257px;
+    width: calc(100% - 257px);
+    @media (max-width: $break-medium) {
+        margin-left: 0px;
+        width: 100%;
+    }
+}
+
+hr {
+    height: 1px;
+    width: 100%;
+}
+
+label:not(.richtext-label) {
+    display: block;
+    background-color: $greyLight-color;
+    margin-bottom: 0;
+    padding-left: 10px;
+    padding-top: 3px;
+    min-height: 15px;
+    font-size: 11px;
+}
+
+.required-label:after {
+    content: '*';
+    color: $red-color;
+}
+
+// icons
+.small-icon {
+    font-size: 1.1rem !important;
+}
+
+.form-group {
+    margin-bottom: .7rem;
+    &.info-icon {
+        position: relative;
+        & .info-icon__icon {
+            position: absolute;
+            top: 20px;
+            left: -18px;
+            cursor: pointer;
+            & i {
+                font-size: 1rem;
+            }
+        }
+    }
+}
+
+.form-control,
+ ::ng-deep .ng-select .ng-select-container,
+ ::ng-deep .ng-select.ng-select-opened>.ng-select-container {
+    background-color: $greyLight-color;
+    border-color: $greyLight-color !important;
+    border-radius: 0px;
+    padding-top: 0px;
+    border-top: 0px;
+    padding-left: 10px;
+    font-size: 12px;
+}
+
+.form-control:focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem transparent;
+}
+
+// buttons
+.form-button button {
+    font-weight: bold;
+    font-family: $EYInterstate-Bold;
+    font-size: .8rem;
+}
+
+.btn-warning {
+    background-color: $yellow-color;
+    border-color: $yellow-color;
+}
+
+// pre-made elements Angular Material and Ng-Select
+::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background,
+.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+    background-color: $dark-color;
+}
+
+::ng-deep .mat-checkbox-checked:not(.mat-checkbox-disabled).mat-accent .mat-ripple-element,
+::ng-deep .mat-checkbox:active:not(.mat-checkbox-disabled).mat-accent .mat-ripple-element {
+    background: $dark-color !important;
+}
+
+::ng-deep.mat-checkbox-layout {
+    margin-bottom: 0px !important;
+}
+
+::ng-deep .ng-select-container,
+::ng-deep .ng-select,
+::ng-deep .ng-select.heightSelect {
+    min-height: 40px !important;
+    margin: 0px !important;
+}
+
+::ng-deep .ng-select.heightSelect .ng-select-container {
+    width: 100% !important;
+}
+
+::ng-deep .ng-select.ng-select-focused:not(.ng-select-opened)>.ng-select-container {
+    box-shadow: none !important;
+}
+
+::ng-deep .ng-select.ng-select-multiple .ng-select-container .ng-value-container .ng-value,
+::ng-deep .ng-select.ng-select-multiple .ng-select-container .ng-value-container .ng-value .ng-value-icon:hover {
+    background-color: $grey2-color !important;
+}
+
+::ng-deep .ng-select.ng-select-multiple .ng-select-container .ng-value-container .ng-value .ng-value-icon.left {
+    border-color: $grey2-color !important;
+}
+
+::ng-deep .ng-select.ng-select-multiple .ng-select-container .ng-value-container,
+::ng-deep .ng-select .ng-select-container .ng-value-container {
+    padding-left: 0px !important;
+}
+
+::ng-deep .ng-select.ng-select-multiple .ng-select-container .ng-value-container .ng-value .ng-value-label {
+    padding: 1px 5px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    // max-width: 267px;
+    margin-right: 4px;
+    display: inline-flex;
+}
+
+.spacing-around {
+    padding: 1rem 1rem 0.8rem 1rem
+}

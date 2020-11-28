@@ -1,0 +1,112 @@
+<div class="container-fluid pr-0 animated fadeIn mb-3 mt-5" *ngIf="active">
+    <div>
+        <div class="animated fadeIn" *ngIf="IdService !== 0">
+            <main class="animated fadeIn">
+                <div class="col-12 px-0">
+                    <h3>EY Technology</h3>
+                    <p class="mt-3">Include name of EY tool/asset(s) to be associated with this service (if applicable) for any tools that:
+                    </p>
+                    <ul class="pl-3">
+                        <li> will be accessed or used by EY’s client in conjunction with EY’s services. This should include access or use under a platform as a service, software as a service or an on-premise license OR</li>
+                        <li> will be licensed by EY to clients for installation on their server or on EY servers under a SaaS arrangement.
+                        </li>
+                    </ul>
+                </div>
+                <div *ngIf="eytech">
+                    <div class="row mx-0 mt-3" *ngIf="tooldetail.length > 0 ">
+                        <div class="row col-12" *ngFor='let tooldetails of tooldetail'>
+                            <div class="col-4" *ngIf="tooldetails.TechnologyName != ''">
+                                <div class="row">
+                                    <div class="col-12 pr-0">
+                                        <div class="input-text">
+                                            <label>Tool name</label>
+                                            <div class="p-rc"> {{tooldetails.TechnologyName}}</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 mt-3 pr-0">
+                                        <div class="input-text">
+                                            <label>Deep link</label>
+                                            <div class="p-rc">
+                                                <a [href]="tooldetails.DeepLink" target="_blanck">{{tooldetails.DeepLink}}</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6 pr-0" *ngIf="tooldetails.TechnologyName != ''">
+                                <div class="textarea-text">
+                                    <label>Tool Guidance</label>
+                                    <div class="p-rc"> {{tooldetails.TechnologyDescription}}</div>
+                                </div>
+                            </div>
+                            <div class="col-2 mtop5 pl-4" *ngIf="tooldetails.TechnologyName != ''">
+                                <button type="button" class="btn btn-outline-dark btn-delete nowrap" [disabled]="this.readonly" (click)="deteleToolData(tooldetails.TechnologyName)">
+                  <i class="mr-2 material-icons text-white small-icon">cancel</i> <span class="pt-2">Delete</span>
+                </button>
+                            </div>
+                            <div class="col-12 mt-3 pr-0 mb-3" *ngIf="tooldetails.TechnologyName != ''">
+                                <div class="col-10 bdr-btm"></div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mx-0 mt-3" *ngIf="eytech">
+                    <div class="col-sm-12 col-md-4 pr-2 pl-0">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="titleurl">Tool name</label>
+                                    <input type="text" class="form-control"  [readonly]="this.readonly"#TechnologyName>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="titleurl">Deep link</label>
+                                    <input type="text" class="form-control" [readonly]="this.readonly" #DeepLink>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6 pr-4 pl-1">
+                        <div class="form-group">
+                            <label for="finance-text">Tool Guidance</label>
+                            <textarea class="form-control tool-guidance" rows="2" [readonly]="this.readonly" #TechnologyDescription></textarea>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-2 form-button mtop-5 pl-0">
+                        <button type="button" class="btn btn-outline-dark nowrap" [disabled]="this.readonly" (click)="addNewTool()">
+              <i class="material-icons mr-2 small-icon">add_circle</i> <span class="pt-2">Add New Tool</span>
+            </button>
+                    </div>
+                </div>
+                <div class="col-12 pl-0">
+                    <mat-checkbox [checked]="false" [(ngModel)]="isChecked" (change)="showHidetool($event)" [disabled]="this.readonly">No tool/asset(s) associated with this service
+                    </mat-checkbox>
+                </div>
+
+                <div class="col-sm-12 col-md-12 mt-5 px-0">
+                    <div class="form-group">
+                        <p>Overall guidance for use of technology in this service.</p>
+                        <ckeditor class="tool-guidance" [editor]="Editor" [(ngModel)]="guidancetextarea" [disabled]="this.readonly"></ckeditor>
+                    </div>
+                </div>
+                <hr />
+                <div class="col-12 mt-3">
+                    <div class="row">
+                        <div class="col-6 form-button">
+                            <button type="button" class="col-4 py-2 btn float-left btn-outline-dark" (click)="cancel()" [disabled]="this.readonly">Cancel</button>
+                        </div>
+                        <div class="col-6 form-button">
+                            <button class="col-4 py-2 btn float-right btn-warning" type="button" (click)="submit()" [disabled]="this.readonly">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+    <div class="col-12 d-flex align-items-center justify-content-center min-height" *ngIf="IdService === 0">
+        <h5>You need to create a record in Service Details.</h5>
+    </div>
+</div>

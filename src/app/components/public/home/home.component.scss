@@ -1,0 +1,123 @@
+@import "../../../../stylesheets/abstracts/variable";
+.mat-form-field {
+    width: 100%;
+}
+
+::ng-deep .mat-form-field-appearance-legacy .mat-form-field-underline {
+    background-color: transparent !important;
+}
+
+::ng-deep .mat-form-field.mat-focused .mat-form-field-ripple {
+    display: none;
+}
+
+.mat-primary:not(.mat-chip) {
+    border: 1px solid transparent !important;
+    background: transparent !important;
+    color: #747480;
+    font-family: "EYFontLight", "Noto Sans", Arial, sans-serif;
+    font-size: 0.9rem;
+}
+
+::ng-deep .mat-form-field-wrapper {
+    padding-bottom: 0px !important;
+}
+
+::ng-deep .mat-form-field-flex {
+    border: 1px solid $grey5-color !important;
+    background: $white-color;
+}
+
+::ng-deep .mat-form-field-infix {
+    border-top: 1.5em solid transparent;
+}
+
+::ng-deep .mat-form-field-label {
+    font-family: $noto-sans !important;
+    font-size: 1.2rem !important;
+    padding-left: 13px !important;
+}
+
+::ng-deep .mat-select-value {
+    color: $dark-color;
+    padding-left: 12px;
+}
+
+::ng-deep .mat-select-arrow {
+    width: 20px !important;
+    height: 20px !important;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2212%22%20height%3D%2212%22%20viewBox%3D%220%200%2012%2012%22%3E%3Ctitle%3Edown-arrow%3C%2Ftitle%3E%3Cg%20fill%3D%22%23000000%22%3E%3Cpath%20d%3D%22M10.293%2C3.293%2C6%2C7.586%2C1.707%2C3.293A1%2C1%2C0%2C0%2C0%2C.293%2C4.707l5%2C5a1%2C1%2C0%2C0%2C0%2C1.414%2C0l5-5a1%2C1%2C0%2C1%2C0-1.414-1.414Z%22%20fill%3D%22%23000000%22%3E%3C%2Fpath%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+    border: none !important;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-repeat: no-repeat;
+}
+
+::ng-deep .mat-primary .mat-option.mat-selected:not(.mat-option-disabled),
+::ng-deep .mat-form-field.mat-focused .mat-form-field-label {
+    color: $dark-color !important;
+}
+
+::ng-deep .mat-primary .mat-pseudo-checkbox-checked,
+.mat-primary .mat-pseudo-checkbox-indeterminate {
+    background: $dark-color;
+}
+
+.customselect {
+    font-family: $noto-sans;
+    & select {
+        height: calc(2.5em + .75rem + 6px);
+        padding-top: 22px;
+        background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2212%22%20height%3D%2212%22%20viewBox%3D%220%200%2012%2012%22%3E%3Ctitle%3Edown-arrow%3C%2Ftitle%3E%3Cg%20fill%3D%22%23000000%22%3E%3Cpath%20d%3D%22M10.293%2C3.293%2C6%2C7.586%2C1.707%2C3.293A1%2C1%2C0%2C0%2C0%2C.293%2C4.707l5%2C5a1%2C1%2C0%2C0%2C0%2C1.414%2C0l5-5a1%2C1%2C0%2C1%2C0-1.414-1.414Z%22%20fill%3D%22%23000000%22%3E%3C%2Fpath%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+        background-size: 1.1em;
+        background-position: calc(100% - 1.3em);
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        background-repeat: no-repeat;
+        font-size: 1em;
+    }
+    & .customselect-title {
+        position: absolute;
+        top: 6px;
+        left: 26px;
+        font-size: .9em;
+    }
+}
+
+.jumbotron {
+    margin-left: -2rem;
+    margin-right: -2rem;
+    padding: 2rem 2rem 2.5rem 2rem;
+    & .jumbotron__title {
+        font-family: $EYInterstate-Light;
+        font-weight: bold;
+        font-size: 1.125em;
+    }
+    & .jumbotron__link {
+        font-family: $EYInterstate-Light;
+        font-weight: bold;
+        margin-top: .8rem;
+        font-size: .9rem;
+        text-decoration: underline;
+        & button {
+            color: $dark-color;
+        }
+    }
+}
+
+.updatesbox {
+    padding-left: 43px;
+    padding-right: 43px;
+    margin-top: 2rem;
+    @media (max-width: $break-medium) {
+        margin-bottom: 3rem !important;
+    }
+    & h4 {
+        font-family: $EYInterstate-Light;
+        font-weight: bold;
+        font-size: 1.4rem;
+        margin-left: -2rem;
+    }
+}

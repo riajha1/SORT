@@ -1,0 +1,56 @@
+@import "../../../../../stylesheets/abstracts/variable";
+@import "../../../../../stylesheets/abstracts/mixins";
+.slick-slider {
+    width: 100%;
+    margin: auto;
+    background-color: $white-color;
+    padding: 10px;
+}
+
+::ng-deep .slick-track {
+    margin-left: 0;
+}
+
+.slickcarousel__card {
+    border-radius: 0px;
+    border: 1px solid $grey4-color;
+    padding: 19px 16px 12px 26px;
+    cursor: pointer;
+    @media (min-width: $break-medium) {
+        max-height: 225px
+    }
+    @media (min-width: $break-large) {
+        max-height: 233px
+    }
+    & .slickcarousel__cardtitle {
+        font-family: $EYInterstate-Bold;
+        font-size: .875rem !important;
+        @media (max-width: $break-medium) {
+            min-height: 2.2rem;
+        }
+        @media (min-width: $break-medium) {
+            height: 2.2rem;
+        }
+        @include truncate(2);
+    }
+    & .slickcarousel__cardbody {
+        font-family: $EYInterstate-Light;
+        font-size: .8em;
+        margin-bottom: .6em;
+        min-height: 56px;
+    }
+    & .slickcarousel__cardtag {
+        font-family: $EYInterstate-Light;
+        font-weight: bold;
+        font-size: .625rem;
+        border-radius: 40px;
+        background: $dark-color;
+        color: $white-color;
+        padding: 4px 7px;
+    }
+}
+
+hr {
+    margin-top: .2rem;
+    margin-bottom: .2rem;
+}

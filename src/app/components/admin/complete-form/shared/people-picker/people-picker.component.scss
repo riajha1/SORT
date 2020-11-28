@@ -1,0 +1,85 @@
+@import "../../../../../../stylesheets/abstracts/variable";
+::ng-deep .mat-form-field.autocomplete-people,
+ ::ng-deep .mat-form-field.autocomplete-people .mat-form-field-flex {
+    background-color: $greyLight-color !important;
+    border-color: $greyLight-color !important;
+    width: 100%;
+}
+
+::ng-deep .mat-form-field.autocomplete-people .mat-form-field-wrapper {
+    padding-bottom: 0px !important;
+}
+
+::ng-deep .mat-form-field.autocomplete-people .mat-form-field-infix {
+    border-top: 0px !important;
+    padding-top: 3px;
+    padding-left: 10px;
+    padding-bottom: 0px;
+    & label {
+        font-size: 11px;
+        color: $dark-color;
+        min-height: 15px;
+        font-family: $EYInterstate-Light;
+        width: 100%;
+        margin-bottom: 0px;
+    }
+}
+
+::ng-deep .mat-form-field.autocomplete-people .mat-form-field-underline {
+    background-color: transparent !important;
+}
+
+::ng-deep .mat-form-field-appearance-legacy.mat-form-field-disabled .mat-form-field-underline {
+  background-image: none !important;
+}
+
+::ng-deep .mat-form-field.autocomplete-people .mat-input-element {
+    caret-color: $dark-color !important;
+    height: calc(1.5em + .75rem + 2px);
+}
+
+::ng-deep .mat-form-field.autocomplete-people .mat-form-field-ripple {
+    background-color: transparent !important;
+    height: 0px !important;
+}
+
+::ng-deep .mat-option span.custom {
+    font-size: 21px;
+}
+
+::ng-deep .mat-option.people-option {
+    padding: 0px 4px;
+    font-size: 12px;
+    font-family: $EYInterstate-Light;
+    height: 40px;
+    line-height: 40px;
+    & img {
+        width: auto;
+        height: 30px;
+    }
+}
+
+::ng-deep .mat-option-text {
+    font-size: 12px;
+    font-family: $EYInterstate-Light;
+    height: 40px;
+    line-height: 40px;
+}
+
+::ng-deep .mat-form-field-suffix {
+    top: 24px;
+    right: 3px;
+}
+
+.custom-icon-material {
+    font-size: 1.2rem;
+    margin-top: .7rem !important;
+    padding-right: .25rem;
+}
+
+
+/*
+Copyright 2017 Google Inc. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that
+can be found in the LICENSE file at http://angular.io/license
+*/

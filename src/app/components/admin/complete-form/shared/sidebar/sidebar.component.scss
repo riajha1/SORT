@@ -1,0 +1,59 @@
+@import "../../../../../../stylesheets/abstracts/variable";
+.sidebar {
+    width: 273px;
+    background-color: $dark-color;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    top: 97px; // to do 47
+    color: white;
+    overflow-y: auto;
+    z-index: 100;
+    @media (max-width: $break-medium) {
+        display: none;
+    }
+    & .header {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        font-size: 1.1rem;
+        padding-left: 27px;
+        height: 112px;
+        position: relative;
+        & small {
+            position: absolute;
+            bottom: 9px;
+            font-family: $EYInterstate-Light;
+            font-size: 1.125rem;
+        }
+    }
+    .option_item {
+        height: 66px;
+        padding: 12px 12px 12px 26px;
+        background-color: $dark2-color;
+    }
+    & .options_box {
+        width: 100%;
+    }
+    & .option:last-child {
+        background-color: red;
+    }
+}
+
+.option_item_fixed {
+    font-size: .940rem;
+    font-family: $EYInterstate-Bold;
+    cursor: pointer;
+    &.active {
+        background-color: $dark-color;
+        border-left-style: inset;
+        border-left: 3px solid $yellow-color;
+    }
+}
+
+::ng-deep .mCSB_inside>.mCSB_container {
+    margin-right: 0px;
+}
+
+.margin-sidebar {
+    margin-left: 260px;
+}

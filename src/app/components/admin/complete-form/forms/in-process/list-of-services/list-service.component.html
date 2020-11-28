@@ -1,0 +1,47 @@
+<div class="container-fluid pr-0 animated fadeIn mb-3 mt-5">
+    <main class="_main">
+        <div class="col-12 px-0">
+            <h3>In-Process Services</h3>
+        </div>
+        <div class="col-12 px-0">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                irure dolor in reprehenderit in voluptate velit esse cillum dolore:</p>
+        </div>
+        <app-loading [show]="loading"></app-loading>
+        <div class="col-12 px-0 _center animated fadeIn" *ngIf="!loading">
+            <div class="container-fluid col-11 mt-3 table-default px-0 table-responsive">
+                <div class="col-sm-12 col-md-3 col-lg-2 form-button float-right p-0 mb-2">
+                    <button class="btn btn-block btn-warning py-2" (click)="redirectSAM()">
+                        <i class="material-icons mr-2 small-icon">add_circle</i> <span class="pt-2">Add New Service</span>
+                    </button>
+                </div>
+                <table class="table table-sm table-hover">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th scope="col">Service Title</th>
+                            <th scope="col">Service Line / Sub Service Line</th>
+                            <th scope="col">Stage</th>
+                            <th scope="col">Global Publish Progress</th>
+                            <th scope="col">Regional Publish Progress</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let service of listOfServices">
+                            <td><span class="circle-yellow">{{service.isGlobal ? 'G' : 'L'}}</span></td>
+                            <td>
+                                <p class="mb-0 btn-link" (click)="redirectPage(service.idService)">{{service.name}}</p>
+                            </td>
+                            <td></td>
+                            <td><span class="badge badge-pill badge-light">{{service.status}}</span></td>
+                            <td></td>
+                            <td></td>
+                            <td><span class="material-icons comment-icon">comment</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+</div>

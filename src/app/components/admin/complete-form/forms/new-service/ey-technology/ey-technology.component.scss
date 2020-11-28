@@ -1,0 +1,53 @@
+@import "../../../../../../../stylesheets/abstracts/variable";
+@import "../../../../../../../stylesheets/base/base_form";
+.tool-guidance {
+    min-height: 6rem;
+    ;
+}
+
+.mtop-5 {
+    margin-top: 5rem;
+}
+
+.mtop5 {
+    margin-top: 5.5rem;
+}
+
+.btn-delete {
+    background-color: #B9251C !important;
+    color: #fff !important;
+    border: transparent !important;
+    padding: 8px 35px 8px 35px;
+    font-size: 13px;
+}
+
+.text-white {
+    color: #fff;
+}
+
+.input-text {
+    background-color: #F6F6FA;
+    min-height: 3.5rem;
+}
+
+.textarea-text {
+    background-color: #F6F6FA;
+    min-height: 7.8rem;
+}
+
+.nowrap {
+    white-space: nowrap;
+}
+
+.bdr-btm {
+    border-bottom: 1px solid #ddd;
+}
+
+.p-rc {
+    padding-left: 0.6rem;
+    padding-right: 0.6rem;
+}
+
+.min-height {
+    min-height: 400px;
+}

@@ -1,0 +1,113 @@
+<div class="modal-header">
+    <h4 class="modal-title">{{node.name}} contacts</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        &times;
+  </button>
+</div>
+<div class="modal-body">
+    <div class="col-12 mb-2 px-0 bussiness-global">
+        <div class="row">
+            <div class="col-sm-12 col-md-6">
+                <div class="row">
+                    <div class="col-sm-12 col-md-6 pr-0">
+                        <app-people-picker [ClearAfterSave]="clearEmployee" (SetSelectedEmployee)="SetSelectedEmployee($event)" [readonly]="false" (RemoveEmployee)="RemoveEmployee($event)"></app-people-picker>
+                    </div>
+                    <div class="col-sm-12 col-md-6 padding-top-form">
+                        <div class="form-group">
+                            <label for="title" class="modal-label">Add Title</label>
+                            <input type="text" class="form-control" #contactTitle>
+                        </div>
+                    </div>
+                    <div class="col-12 form-button">
+                        <button type="button" class="col-sm-12 col-md-6 col-lg-4 py-2 btn float-left btn-outline-dark" (click)="addContact(node)">
+                            <span class="pt-2">Save Contact</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6 padding-top-form">
+                <div class="row">
+                    <div class="col-sm-12 col-md-6 pr-0">
+                        <div class="form-group">
+                            <label for="url" class="modal-label">Organization chart URL</label>
+                            <input type="text" class="form-control" #url>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6 padding-top-form">
+                        <div class="form-group">
+                            <label for="titleurl" class="modal-label">Organization chart name</label>
+                            <input type="text" class="form-control" #urlname>
+                        </div>
+                    </div>
+                    <div class="col-12 form-button">
+                        <button type="button" class="col-sm-12 col-md-6 col-lg-4 py-2 btn float-left btn-outline-dark" (click)="addURL(node)">
+                            <span class="pt-2">Save Org. Chart</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6 mt-3">
+            <table class="table table-bordered table-sm table-hover" *ngIf="businessContact.length > 0">
+                <thead>
+                    <tr>
+                        <!-- <th scope="col">Order</th> -->
+                        <th scope="col">Name</th>
+                        <th scope="col">Title</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let contact of businessContact">
+                        <!-- <td>
+                            <ng-select [searchable]="false" [clearable]="false" [items]="ArrayOrder" class="dropdown__order" [(ngModel)]="contact.Order" (click)="updatePosition(contact.Order)" (change)="onChangeOrder(contact, node)">
+                            </ng-select>
+                        </td> -->
+                        <td>
+                            <p class="mb-0">{{contact.Name}}</p>
+                        </td>
+                        <td>
+                            <p class="mb-0">{{contact.Title}}</p>
+                        </td>
+                        <td>
+                            <button class="btn p-1" (click)="removeContact(contact.Name, node)">
+                                <span class="material-icons text-red">cancel</span>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-6 mt-3">
+            <table class="table table-bordered table-sm table-hover" *ngIf="orgContact.length > 0">
+                <thead>
+                    <tr>
+                        <th scope="col">Organization chart URL</th>
+                        <th scope="col">Organization chart name</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let contact of orgContact">
+                        <td class="url-box dont-break-out">
+                            <a [href]="contact.Url" target="_blanck">{{contact.Url}}</a>
+                        </td>
+                        <td>
+                            <p class="mb-0">{{contact.Location}}</p>
+                        </td>
+                        <td>
+                            <button class="btn" (click)="removeURL(contact.Url, node)">
+                                <span class="material-icons text-red">cancel</span>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="py-2 btn float-right btn-outline-dark" (click)="activeModal.dismiss('Cross click')">Close</button>
+</div>

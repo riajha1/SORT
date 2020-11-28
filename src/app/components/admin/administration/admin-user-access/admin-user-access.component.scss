@@ -1,0 +1,87 @@
+@import "../../../../../stylesheets/abstracts/variable";
+@import "../../../../../stylesheets/base/base_form";
+ 
+._main {
+    font-family: $EYInterstate-Light;
+  font-size: 0.88rem ;
+}
+
+.font-family
+{
+    font-family: $EYInterstate-Light !important;
+   font-size: 11px;
+}
+::ng-deep .useraccess .ng-select.ng-select-single .ng-select-container {
+    min-height: 33px !important;
+    height: 33px !important;
+}
+::ng-deep .modal-body .ng-select.ng-select-single .ng-select-container {
+    min-height: 33px !important;
+    height: 33px !important;
+}
+
+// table css starts from here
+.container-fluid.report table {
+border: 1px solid $grey4-color;
+& p , a, th{
+    font-size: 0.8581em;
+}
+
+& a {
+    color: $dark-color
+}
+& tr th {
+    border: none !important;
+    color:$white-color !important;
+    background-color: $dark-color !important;
+}
+
+& td, th {
+    padding: 12px 10px 12px 10px;
+}
+
+& td {
+    vertical-align: middle;
+}
+}
+
+// table styles ends here
+._center {
+    display: flex;
+    justify-content: center;
+}
+
+.mat_red{
+    color:$red-color;
+}
+
+.btn-access{
+    padding:0.9rem 2rem 0.9rem 2rem;
+}
+
+.left-spacing{
+    margin-left: 1.8rem;
+}
+
+.icon-pos {
+    &.cross {
+        position: absolute;
+    right: 0.5rem;
+    bottom: 1rem;
+    } 
+   &.pencil{
+    position: absolute;
+    right: 2.5rem;
+    bottom: 1rem;
+   }
+}
+
+.required-star{
+    position: absolute;
+    z-index: 1;
+    left: 6.5rem;
+}
+
+.margin-top {
+    margin-top: 3px;
+}

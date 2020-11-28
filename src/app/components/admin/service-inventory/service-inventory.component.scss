@@ -1,0 +1,29 @@
+@import "../../../../stylesheets/abstracts/variable";
+@import '../../../../stylesheets/base/base_form';
+
+.parent-set-relative {
+  position: relative;
+}
+
+.child-set-absolute {
+  position: absolute;
+  bottom: 0rem;
+  right: -25px;
+  z-index: 10;
+}
+
+
+.vertical-bar {
+  border-right: 1px solid #ccc;
+  margin-left: -3.6rem;
+}
+
+._main {
+  font-family: $EYInterstate-Light;
+  font-size: 0.875em;
+}
+
+.btn-run {
+  font-family: $EYInterstate-Light;
+  font-weight: bold;
+}

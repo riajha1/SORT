@@ -1,0 +1,139 @@
+<div class="modal-header">
+    <h4 class="modal-title">Service Contacts</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#sl" role="tab" aria-controls="sl"
+                aria-selected="true">Business Contacts</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="quality-tab" data-toggle="tab" href="#quality" role="tab" aria-controls="quality"
+                aria-selected="false">Quality & Independence</a>
+        </li>
+        <!-- <li class="nav-item">
+            <a class="nav-link" id="independence-tab" data-toggle="tab" href="#independence" role="tab" aria-controls="independence" aria-selected="false">Independence</a>
+        </li> -->
+    </ul>
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="sl" role="tabpanel" aria-labelledby="sl-tab">
+            <div class="col-12 pt-4" *ngIf="contactsl">
+                <div class="row col-12">
+                    <div class="col-sm-12 col-md-4 mb-3" *ngFor="let item of globalContactsl">
+                        <div class="row">
+                            <div class="col-sm-10 col-md-10 pl-0 row">
+                                <div class="col-2">
+                                    <img class="image-size"
+                                        [src]="item && item.profileUrl ? item.profileUrl : defaultAvatarSrc"
+                                        (error)="setDefaultImagesrc($event)">
+                                </div>
+                                <div class="col-10">
+                                    <p *ngIf="item.name != ''" class="mb-0"> {{item.name}}</p>
+                                    <p *ngIf="item.title != ''" class="second-text mb-0">{{item.title}}</p>
+                                    <p class="mb-0"><a *ngIf="item.url != ''"  href="{{item.url}}"
+                                            target="_blank"> <b>{{item.url}}</b></a></p>
+                                            <p *ngIf="item.location != ''" class="second-text mb-0">{{item.location}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row col-12  top-border" *ngIf="localContactsl.length > 0 ">
+                    <div class="col-sm-12 col-md-4 mb-3 mt-2" *ngFor="let item of localContactsl">
+                        <div class="row mt-2">
+                            <div class="col-sm-10 col-md-10 pl-0 row">
+                                <div class="col-2"><img class="image-size"
+                                        [src]="item && item.profileUrl ? item.profileUrl : defaultAvatarSrc"
+                                        (error)="setDefaultImagesrc($event)"></div>
+                                <div class="col-10">
+                                    <p *ngIf="item.name != ''" class="mb-0">
+                                        {{item.name}}</p>
+                                    <p *ngIf="item.title != ''" class="second-text mb-0">{{item.title}}</p>
+                                    <p class="mb-0"><a *ngIf="item.url != ''" class="text-truncate mb-0" href="{{item.url}}"
+                                        target="_blank"> <b>{{item.url}}</b></a></p>
+                                        <p *ngIf="item.location != ''" class="second-text mb-0">{{item.location}}</p>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="quality" role="tabpanel" aria-labelledby="quality-tab">
+            <div class="col-12 pt-4" *ngIf="contactQuality">
+                <div class="row col-12">
+                    <div class="col-sm-12 col-md-4 mb-3" *ngFor="let item of globalContactQuality">
+                        <div class="row">
+                            <div class="col-sm-10 col-md-10 pl-0 row">
+                                <div class="col-2">
+                                    <img class="image-size"
+                                        [src]="item && item.profileUrl ? item.profileUrl : defaultAvatarSrc"
+                                        (error)="setDefaultImagesrc($event)">
+                                </div>
+                                <div class="col-10">
+                                    <p *ngIf="item.name != ''" class="mb-0">
+                                        {{item.name}}</p>
+                                    <p *ngIf="item.title != ''" class="second-text mb-0">{{item.title}}</p>
+                                    <p class="mb-0"><a *ngIf="item.url != ''" class="text-truncate  mb-0" href="{{item.url}}"
+                                        target="_blank"> <b>{{item.url}}</b></a></p>
+                                        <p *ngIf="item.location != ''" class="second-text mb-0">{{item.location}}</p>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row col-12 top-border" *ngIf="localContactQuality.length > 0">
+                    <div class="col-sm-12 col-md-4 mb-3 mt-2" *ngFor="let item of localContactQuality">
+                        <div class="row">
+                            <div class="col-sm-10 col-md-10 pl-0 row">
+                                <div class="col-2">
+                                    <img class="image-size"
+                                        [src]="item && item.profileUrl ? item.profileUrl : defaultAvatarSrc"
+                                        (error)="setDefaultImagesrc($event)">
+                                </div>
+                                <div class="col-10">
+                                    <p *ngIf="item.name != ''" class="mb-0">
+                                        {{item.name}}</p>
+                                    <p *ngIf="item.title != ''" class="second-text mb-0">{{item.title}}</p>
+                                    <p class="mb-0"><a *ngIf="item.url != ''" class="text-truncate  mb-0" href="{{item.url}}"
+                                        target="_blank"> <b>{{item.url}}</b></a></p>
+                                        <p *ngIf="item.location != ''" class="second-text mb-0">{{item.location}}</p>
+                                </div>
+
+                                <!-- <p *ngIf="item.region != ''" class="second-text mb-0">{{item.region}}</p> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="tab-pane fade" id="independence" role="tabpanel" aria-labelledby="independence-tab">
+            <div class="col-12 pt-4" *ngIf="contacts">
+                <div class="row">
+                    <div class="col-sm-12 col-md-4 mb-3" *ngFor="let item of contacts">
+                        <div class="row">
+                            <div class="col-sm-2 col-md-2">
+                                <i class="material-icons">account_circle</i>
+                            </div>
+                            <div class="col-sm-10 col-md-10 pl-0">
+                                <p *ngIf="item.name != ''" class="mb-0">{{item.name}}</p>
+                                <p *ngIf="item.title != ''" class="second-text mb-0">{{item.title}}</p>
+                                <a *ngIf="item.url != '' && item.location" class="second-text text-truncate" href="{{item.url}}" target="_blank">{{item.location}}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+</div>

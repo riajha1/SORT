@@ -1,0 +1,46 @@
+@import "../../../../../../stylesheets/abstracts/variable";
+@import "../../../../../../stylesheets/base/base_form";
+
+::ng-deep .ng-select.ng-select-single.dropdown__order .ng-select-container {
+  width: 100% !important;
+}
+
+._main {
+  font-family: $EYInterstate-Light;
+  font-size: 0.88rem;
+}
+
+// table style starts here
+.container-fluid.delivery table {
+  border: 1px solid $grey4-color;
+
+  & tr th {
+    border: none !important;
+    color: $white-color !important;
+    background-color: $dark-color !important;
+  }
+  & p,
+  a,
+  th {
+    font-size: 0.75rem;
+  }
+
+  & td,
+  th {
+    padding: 8px 10px 8px 10px;
+  }
+
+  & td {
+    vertical-align: middle !important;
+  }
+}
+
+// table styles end here
+
+.btn-19 {
+  font-size: 19px;
+}
+
+.nowrap {
+  white-space: nowrap;
+}

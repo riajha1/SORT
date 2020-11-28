@@ -1,0 +1,68 @@
+<div class="mr-2">
+    <!-- Client link / badge of the client selected -->
+    <button class="btn btn-yellow font-weight-bold btn-block p-2 w-50" *ngIf="!filterNav.client.GISId && filterNav.client.ClientName !== 'Channel 2'" ngbAutofocus (click)="openModal(favoritesmodal)" name="choose-client">Select your client</button>
+    <mat-chip-list #chipList aria-label="client selection" *ngIf="filterNav.client.GISId && filterNav.client.GISId !== '000'">
+        <!-- Display when the user selected a client -->
+        <mat-chip *ngIf="filterNav.client.GISId" removable="true" (removed)="removeClient() ">
+            <a [href]="filterNav.client.url" target="_blank">
+                {{(filterNav.client.ClientName.length>21)? (filterNav.client.ClientName | slice:0:21)+'...':(filterNav.client.ClientName)}}
+                <span *ngIf="filterNav.client.MDMId">({{filterNav.client.MDMId}})</span>
+                <span *ngIf="!filterNav.client.MDMId && filterNav.client.gfisid">({{filterNav.client.gfisid}})</span>
+            </a>
+            <button class="btn btn-heart" (click)="heartFunction()">
+                <i *ngIf="filterNav.client.favorite" class="material-icons vertical-align-middle">favorite</i>
+                <i *ngIf="!filterNav.client.favorite" class="material-icons vertical-align-middle"> favorite_border</i>
+            </button>
+            <mat-icon matChipRemove *ngIf="true">cancel</mat-icon>
+        </mat-chip>
+    </mat-chip-list>
+    <!-- Fake client Channel 2 -->
+    <mat-chip-list #chipList aria-label="client selection" *ngIf="filterNav.client.ClientName === 'Channel 2'">
+        <!-- Display when the user selected Client Channel 2 -->
+        <mat-chip *ngIf="filterNav.client.ClientName === 'Channel 2'" removable="true" (removed)="removeClient() ">
+            {{(filterNav.client.ClientName.length>21)? (filterNav.client.ClientName | slice:0:21)+'...':(filterNav.client.ClientName)}}
+            <mat-icon matChipRemove *ngIf="true">cancel</mat-icon>
+        </mat-chip>
+    </mat-chip-list>
+
+</div>
+<!--Favorites modal-->
+<ng-template #favoritesmodal let-modal>
+    <app-loading [show]="loadingFavorites"></app-loading>
+    <div *ngIf="!loadingFavorites" class="animated fadeIn">
+        <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">Select Client</h4>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-12 p-0" *ngIf="Allfavorites.length > 0">
+                    <div class="col-12 pb-2">
+                        <p class="mb-1">Choose a client from your favorites or search in GIS</p>
+                    </div>
+                    <div class="col-12 favorites-div pt-0 pb-4" malihu-scrollbar [scrollbarOptions]="scrollbarOptions">
+                        <div class="row mx-0">
+                            <div class="col-sm-12 col-md-12 col-lg-6 col-xl-4 favorites-item pr-3" *ngFor="let favorite of Allfavorites">
+                                <div class="btn-group" role="group" aria-label="Basic example">
+                                    <button class="btn btn-link pl-0 pr-1" (click)="validation(favorite)"><span>{{(favorite.clientName.length>34)?  (favorite.clientName | slice:0:34)+'...':(favorite.clientName)}}</span>
+                                        <span *ngIf="favorite.mdmid" class="ml-2">({{favorite.mdmid}})</span>
+                                        <span *ngIf="!favorite.mdmid && favorite.gfisid" class="ml-2">({{favorite.gfisid}})</span>
+                                    </button>
+                                    <button class="btn p-0" (click)="removeFavorite(favorite.gisid)"><i class="material-icons">cancel</i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 iframe-div">
+                    <iframe class="col-12 p-0 iframe-height" id="the_iframe" [src]="gisSearchUrl | domseguro:'https://gis7.eyua.net/'" frameborder="0"></iframe>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer d-none">
+            <button type="button" id="closeModal" class="btn btn-outline-dark" (click)="modal.close('Save click')">Ok</button>
+        </div>
+    </div>
+</ng-template>

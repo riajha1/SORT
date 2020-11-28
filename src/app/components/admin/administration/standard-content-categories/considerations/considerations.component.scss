@@ -1,0 +1,43 @@
+@import "../../../../../../stylesheets/abstracts/variable";
+main {
+    min-height: 450px;
+}
+
+section {
+    font-family: $EYInterstate-Light;
+    font-size: 1rem;
+}
+
+table {
+    font-size: .875rem;
+    & thead {
+        & th:first-child {
+            text-align: center;
+        }
+    }
+    & tbody {
+        & tr {
+            & td {
+                text-align: center;
+                &:first-child {
+                    padding: 0px 0px 0px 3px;
+                }
+                &:nth-child(2) {
+                    text-align: left;
+                }
+            }
+        }
+    }
+}
+
+.title__section {
+    font-weight: bold;
+}
+
+::ng-deep table .ng-select.ng-select-single .ng-select-container {
+    height: 30px !important;
+    border-radius: 0px;
+    border: none;
+    background-color: #F6F6FA;
+    width: 60px;
+}

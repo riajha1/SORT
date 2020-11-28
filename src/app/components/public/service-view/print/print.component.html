@@ -1,0 +1,64 @@
+<a class="nav-link print" (click)="downloadAsPDF()">
+    <i class="material-icons">
+    print
+    </i><span class="pl-2">Print</span>
+</a>
+<!-- " -->
+<div style="display:none">
+    <main id="pdfService">
+        <div class="col-12 print-view p-0">
+            <p class="mb-0 mr-2 small-text text-right">Created: {{create}}</p>
+            <div class="row">
+                <div class="col-12">
+                    <div class="row header-bar px-2 py-1">
+                        <div class="col-4 header d-flex align-items-end align-items-center">
+                            <img src="{{environmentURL}}images/ey-logo.svg" alt="logo sort">
+                            <span class="text-sort">Service Offering Reference Tool</span>
+                        </div>
+                        <div class="col-8 text-right pt-2">
+                            <span class="mb-0 mr-2 small-text location">Location Selected: {{country}}</span>
+                            <span class="mb-0 mr-2 small-text" *ngIf="filter.client.GISId">
+                                {{filter.client.ClientName}}
+                                <span class="small-text" *ngIf="filter.client.MDMId">({{filter.client.MDMId}})</span>
+                            <span class="small-text" *ngIf="!filter.client.MDMId && filter.client.gfisid">({{filter.client.gfisid}})</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <nav aria-label="breadcrumb" *ngIf="breadcrumb" class="breadcrumb pt-3 pb-0 mb-0 col-12">
+                    <div class="row" style="width: 100%;">
+                        <div class="col" style="margin: 0;">
+                            <span *ngFor="let b of breadcrumb.sl; let i = index" matTooltip="Service Line" #ref matTooltipPosition="above">{{b}}
+                        <span *ngIf="breadcrumb.sl.length !== i + 1" class="comma">,</span>
+                            <span *ngIf="breadcrumb.sl.length === i + 1" class="mx-1">|</span>
+                            </span>
+                            <span *ngFor="let b of breadcrumb.ssl; let i = index" matTooltip="Sub Service Line" #ref matTooltipPosition="above">{{b}}
+                        <span *ngIf="breadcrumb.ssl.length !== i + 1" class="comma">,</span>
+                            <span *ngIf="breadcrumb.ssl.length === i + 1" class="mx-1">|</span></span>
+                            <span *ngFor="let b of breadcrumb.competency; let i = index" matTooltip="Competency/Domain" #ref matTooltipPosition="above">{{b}}
+                        <span *ngIf="breadcrumb.competency.length !== i + 1" class="comma">,</span>
+                            <span *ngIf="breadcrumb.competency.length === i + 1" class="mx-1">|</span></span>
+                            <span *ngFor="let b of breadcrumb.solution; let i = index" matTooltip="Solution" #ref matTooltipPosition="above">{{b}}
+                        <span *ngIf="breadcrumb.solution.length !== i + 1" class="comma">,</span>
+                            <span *ngIf="breadcrumb.solution.length === i + 1" class="mx-1">|</span></span>
+                            <span *ngFor="let b of breadcrumb.sector; let i = index" matTooltip="Sector" #ref matTooltipPosition="above">{{b}}
+                        <span *ngIf="breadcrumb.sector.length !== i + 1" class="comma">,</span>
+                            <span *ngIf="breadcrumb.sector.length === i + 1" class="mx-1">|</span></span>
+                            <span *ngFor="let b of breadcrumb.client; let i = index" matTooltip="Client Need" #ref matTooltipPosition="above">{{b}}
+                        <span *ngIf="breadcrumb.client.length !== i + 1" class="comma">,</span>
+                            <span *ngIf="breadcrumb.client.length === i + 1" class="mx-1">|</span></span>
+                        </div>
+                        <div style="margin: 0; width: 190px !important;" *ngIf="dateUpdated !== ''">
+                            <p class="dateUpdate mb-0">Last Updated: {{dateUpdated}}</p>
+                        </div>
+                    </div>
+                </nav>
+                <div class="col-11 first-section pr-0 pt-2">
+                    <p class="title mb-0 pr-3">{{serviceData.header.title}}</p>
+                    <p class="headline mb-0 pr-3">{{serviceData.header.headline}}</p>
+                    <div class="description pr-3" [innerHTML]="serviceData.header.description | safehtml"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>

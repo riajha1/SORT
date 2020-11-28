@@ -1,0 +1,28 @@
+@import "../../../../../stylesheets/abstracts/variable";
+@import "../../../../../stylesheets/abstracts/placeholder";
+.section__considerations__subsection {
+    border: 1px solid $grey3-color;
+    & .section__considerations__subtitle {
+        @extend %film;
+        background: $grey3-color;
+        color: $dark-color;
+        border-top: 1px solid $grey3-color;
+        padding-left: .7rem;
+        margin-bottom: .8rem;
+        font-size: 1rem;
+    }
+    & .section__considerations__country {
+        padding: 0 1.5rem;
+        padding-bottom: 1rem;
+        & .section__considerations__country__data {
+            font-family: $EYInterstate-Light;
+            font-size: .875rem;
+        }
+        & h6 {
+            font-family: $EYInterstate-Light;
+            font-weight: bold;
+            margin-bottom: .8rem;
+            line-height: 24px;
+        }
+    }
+}

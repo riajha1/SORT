@@ -1,0 +1,56 @@
+@import "../../../../../../../stylesheets/abstracts/variable";
+@import "../../../../../../../stylesheets/base/base_form";
+::ng-deep.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+    border-color: $black-color;
+}
+
+ ::ng-deep.mat-radio-button.mat-accent .mat-radio-inner-circle {
+    color: $black-color;
+    background-color: $black-color;
+}
+
+ ::ng-deep.mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element {
+    background-color: $black-color;
+}
+
+.min-height {
+    min-height: 400px;
+}
+
+button.link-conflict {
+    background-color: transparent;
+    border: none;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+button.link-conflict:not(.collapsed)>.show,
+button.link-conflict.collapsed>.hide {
+    display: none;
+}
+
+button.link-conflict.collapsed>.show {
+    display: block;
+}
+
+.hyphenList {
+    padding-left: 1.5rem;
+    & li {
+        list-style-type: none;
+        text-indent: -5px;
+        &:before {
+            content: "- ";
+            position: relative;
+            left: -5px;
+        }
+    }
+}
+
+// ::ng-deep.ng-select.ng-select-single .ng-select-container .ng-value-container .ng-value{
+//     white-space: break-spaces !important;
+//     overflow: visible !important;
+//     text-overflow: ellipsis !important;
+// }
+::ng-deep.pro .mat-checkbox-layout .mat-checkbox-label {
+    white-space: break-spaces;
+}

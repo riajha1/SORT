@@ -1,0 +1,17 @@
+<mat-form-field class="autocomplete-people">
+    <label for="autocomplete">Search name...</label>
+    <input matInput [matAutocomplete]="auto" [formControl]="searchPeople" #typehead>
+    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn"  >
+        <mat-option *ngIf="isLoading && !noFound" class="is-loading"><i class="material-icons material-spin custom-icon-material">sync</i>Search in progress...</mat-option>
+        <mat-option *ngIf="!isLoading && noFound" class="is-loading"><span class="material-icons pr-2 pt-2 custom">person_outline</span>No record is found</mat-option>
+        <ng-container *ngIf="!isLoading">
+            <mat-option *ngFor="let employee of filteredPeople" [value]="employee" class="people-option" (click)="selectedEmployee()">
+                <img class="example-option-img" [src]="employee && employee.ProfilePictureUrl ? employee.ProfilePictureUrl : defaultAvatarSrc" (error)="setDefaultImagesrc($event)">
+                <span class="pl-2">{{employee && employee.FullName ? employee.FullName : ''}}</span>
+            </mat-option>
+        </ng-container>
+    </mat-autocomplete>
+    <button type="button" mat-button *ngIf="searchPeople.value" matSuffix mat-icon-button aria-label="Clear" (click)="removeEmployee()">
+        <mat-icon>close</mat-icon>
+      </button>
+</mat-form-field>

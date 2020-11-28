@@ -1,0 +1,23 @@
+<div class="container-fluid p-0 animated fadeIn mb-3 mt-5" *ngIf="active">
+    <app-loading [show]="loading"></app-loading>
+    <div class="col-12 pr-0" *ngIf="!loading">
+        <h3 class="service-title mb-4" *ngIf="basicData !== null && basicData.serviceTitle !== ''">{{basicData.serviceTitle}}</h3>
+        <div class="row">
+            <div class="col-sm-12 col-md-7 col-lg-7 pr-0">
+                <p class="subtitle-publish">Locations Published</p>
+                <div class="location-box" malihu-scrollbar [scrollbarOptions]="scrollbarOptions">
+                    <app-tree-publish [dataStore]="nodesPublish" [published]="published" [IdService]="IdService" [progress]="progress" [dataSourceTree]="tree" [locationsSaved]="locationsSaved" [countryList]="countryList" (sendNode)="getPublishByNode($event)"></app-tree-publish>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-5 col-lg-5"></div>
+            <hr>
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-6 offset-6 form-button">
+                        <button class="col-4 py-2 btn float-right btn-warning" type="button">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

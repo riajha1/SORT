@@ -1,0 +1,28 @@
+<ng-container *ngIf="!(filter.client.GISId && filter.client.permissibility.length === 0)">
+    <section #countryDiv *ngIf="!isGlobal">
+        <div *ngIf="loading" class="loading row m-5">
+            <div class="col-12 d-flex align-items-center justify-content-center">
+                <i class="material-icons material-spin material-2x">sync</i>
+            </div>
+        </div>
+        <section *ngIf="!loading" class="col-12 pb-3 animated fadeIn">
+            <div class="section__considerations__subsection">
+                <h1 class="section__considerations__subtitle">Read additional location considerations </h1>
+                <div class="section__considerations__country" *ngIf="considerations && considerations.region !== ''">
+                    <h6>{{ region }} Independence Considerations</h6>
+                    <app-read-more [height]="42" [enable]="considerations.readmoreRegion" [targetdiv]="countryDiv">
+                        <div class="section__considerations__country__data" [innerHTML]="considerations.region | safehtml">
+                        </div>
+                    </app-read-more>
+                </div>
+                <div class="section__considerations__country" *ngIf="considerations && considerations.location !== ''">
+                    <h6>{{ country }} Independence Considerations</h6>
+                    <app-read-more [height]="42" [enable]="considerations.readmoreLocation" [targetdiv]="countryDiv">
+                        <div class="section__considerations__country__data" [innerHTML]="considerations.location | safehtml">
+                        </div>
+                    </app-read-more>
+                </div>
+            </div>
+        </section>
+    </section>
+</ng-container>

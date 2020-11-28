@@ -1,0 +1,43 @@
+<app-loading [show]="loading"></app-loading>
+<main *ngIf="!loading">
+    <section class="jumbotron mb-2  animated fast fadeIn">
+        <form [formGroup]="formServiceLine" (ngSubmit)="redirectPage()">
+            <div class="form-group col-12 text-left ">
+                <h5 class="font-weight-bold jumbotron__title">Select your service line</h5>
+            </div>
+            <div class="row mr-0 ml-0">
+                <div class="col-sm-12 col-md-5 col-lg-4 col-xl-3 customselect">
+                    <mat-form-field>
+                        <mat-label>Service Line</mat-label>
+                        <mat-select [formControl]="formServiceLine.controls.serviceLine" multiple (selectionChange)="selectedServiceLine()">
+                            <mat-select-trigger>
+                                <span *ngIf="formServiceLine.controls.serviceLine.value?.length === 4" class="example-additional-selection">
+                                       All
+                                </span>
+                                <span *ngIf="formServiceLine.controls.serviceLine.value?.length && formServiceLine.controls.serviceLine.value?.length !== 4" class="example-additional-selection">
+                                {{ label }}
+                                </span>
+                            </mat-select-trigger>
+                            <mat-option *ngFor="let serviceLine of serviceLineList" [value]="serviceLine">{{serviceLine.name === 'Strategy and Transactions' ? serviceLine.prefix : serviceLine.name}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class=" form-group col-sm-12 col-md-5 col-lg-auto col-xl-3 mb-1 ">
+                    <button type="submit " class="btn btn-yellow font-weight-bold btn-block p-3 "> Browse Service Offerings </button>
+                </div>
+            </div>
+        </form>
+    </section>
+
+    <section class="col-12 updatesbox mb-4 animated fast fadeIn">
+        <div class="col-12">
+            <h4>Frequently viewed services</h4>
+        </div>
+        <div *ngIf="loadingCarousel" class="row m-5 animated fadeIn">
+            <div class="col-12 mt-3 d-flex align-items-center justify-content-center">
+                <i class="material-icons material-spin material-2x">sync</i>
+            </div>
+        </div>
+        <app-carousel *ngIf="!loadingCarousel" [carousel]="carouselServices" [filter]="filter" [serviceLine]="serviceLineList"></app-carousel>
+    </section>
+</main>

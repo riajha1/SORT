@@ -1,0 +1,25 @@
+@import "../../../../../../../stylesheets/abstracts/variable";
+@import "../../../../../../../stylesheets/base/base_form";
+button.link-independence {
+    background-color: transparent;
+    border: none;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+button.link-independence:not(.collapsed)>.show,
+button.link-independence.collapsed>.hide {
+    display: none;
+}
+
+button.link-independence.collapsed>.show {
+    display: block;
+}
+
+::ng-deep.wrap .mat-checkbox-label {
+    white-space: normal;
+}
+
+.min-height {
+    min-height: 400px;
+}

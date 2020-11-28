@@ -1,0 +1,32 @@
+@import "../../../../stylesheets/abstracts/variable";
+footer {
+    //position: absolute;
+    position: fixed;
+    width: 100%;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    font-family: $EYInterstate-Light;
+    background: $dark-color;
+    color: $white-color;
+    font-size: .75rem;
+    padding: .8rem 2rem;
+    z-index: 1000;
+    & a {
+        color: $white-color;
+    }
+}
+
+.footer-box-right {
+    text-align: right;
+    @media screen and (max-width: $break-medium) {
+        text-align: center;
+    }
+}
+
+.footer-box-left {
+    text-align: left;
+    @media screen and (max-width: $break-medium) {
+        text-align: center;
+    }
+}

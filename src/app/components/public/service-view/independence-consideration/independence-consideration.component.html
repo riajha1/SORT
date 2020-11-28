@@ -1,0 +1,36 @@
+<section class="col-12 pb-3" *ngIf="!(filter.client.GISId && filter.client.permissibility.length === 0 || filter.client.GISId && filter.client.permissibility.length === 1 && this.filter.client.permissibility[0].ch2) || filter.client.GISId && filter.client.permissibility.length === 0 && existIndependence || filter.client.GISId && filter.client.permissibility.length === 1 && this.filter.client.permissibility[0].ch2 && existIndependence">
+    <div class="section__considerations__subsection">
+        <h1 class="section__considerations__subtitle">Review Independence considerations which generally apply to this service
+        </h1>
+        <div class="col-12 section__considerations_accordion" *ngIf="independence">
+            <ng-container *ngFor="let item of independence; let i= index;">
+                <div class="consideration-section">
+                    <div class="consideration-fix-flag" #ref></div>
+                    <div class="col-12 card" *ngIf="!(filter.client.GISId && filter.client.permissibility.length === 0 || filter.client.GISId && filter.client.permissibility.length === 1 && this.filter.client.permissibility[0].ch2 ) || filter.client.GISId && (filter.client.permissibility.length === 0 || this.filter.client.permissibility.length === 1 && this.filter.client.permissibility[0].ch2 ) && options.includes(item.IndependenceName)">
+                        <div class="card-header py-0" [id]="'heading'+ item.order">
+                            <h2 class="mb-0">
+                                <button [ngClass]="{collapsed: true}" class="btn btn-link" type="button" data-toggle="collapse" attr.data-target="{{'#considerations'+i}}" aria-expanded="true" attr.aria-controls="{{'collapse'+ i}}">
+                                    {{item.IndependenceName}}
+                                    <i class="material-icons down">keyboard_arrow_down</i>
+                                    <i class="material-icons up">keyboard_arrow_up</i>
+                                </button>
+                            </h2>
+                        </div>
+                        <div class="collapse" id="{{'considerations'+i}}" attr.aria-labelledby="heading{{item.order}}">
+                            <div class="card-body border-0">
+                                <app-read-more [height]="43.2" [enable]="item.readmore1" *ngIf="item.GeneralPrinciples != ''" [targetdiv]="ref">
+                                    <div class="considerations_data" [innerHTML]="'<strong>General Principles:&nbsp;</strong>' + item.GeneralPrinciples | safehtml"></div>
+                                </app-read-more>
+                                <hr *ngIf="item.SpecificConsiderations != ''">
+                                <app-read-more [height]="43.2" *ngIf="item.SpecificConsiderations != ''" [enable]="item.readmore2" [targetdiv]="ref">
+                                    <div class="considerations_data" [innerHTML]="'<strong>Service Specific Considerations:&nbsp;</strong>' +item.SpecificConsiderations | safehtml"></div>
+                                </app-read-more>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+
+        </div>
+    </div>
+</section>

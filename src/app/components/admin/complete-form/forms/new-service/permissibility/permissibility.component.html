@@ -1,0 +1,462 @@
+<div class="container-fluid pr-0 animated fadeIn mt-5" *ngIf="active">
+    <div class="row mx-0">
+        <div class="animated fadeIn" *ngIf="IdService !== 0 && serviceline.SLcode !== 0">
+            <main class="animated fadeIn min-height-main" *ngIf="!loadingResult">
+                <div class="row mx-0">
+                    <div class="col-5 mb-3 px-0">
+                        <h3>Independence Permissibility</h3>
+                    </div>
+                    <div class="col-7 mb-3">
+                        <div class="_d-flex top-bg">
+                            <span class="d-flex nowrap"><i class="material-icons text-green mat-icon_cust">done</i>Allowed</span>
+                            <span class="d-flex nowrap"><i class="material-icons text-orange mat-icon_cust">warning</i>Allowed Subject to Certain Considerations</span>
+                            <span class="d-flex nowrap"><i class="material-icons text-red mat-icon_cust">error</i>Advanced Approval</span>
+                            <span class="d-flex nowrap"><i class="material-icons mat-icon_cust">not_interested</i>Prohibited</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mx-0">
+                    <!-- Activity grid Modal -->
+                    <div class="col-12 px-0">
+                        <h5 class="float-left">{{serviceline.SL}} Grid</h5>
+                        <button class="btn btn-link p-0 color-black float-right" (click)="activityGridModal(gridcontent);" [disabled]="this.readonly">
+                          {{ activitityBtnName == '' ?   'Add Activity Grid' : 'Edit Activity Grid'}}
+                        </button>
+                        <ng-template #gridcontent let-modal>
+                            <div class="modal-header">
+                                <h4 class="modal-title">Activity Grid Maintenance</h4>
+                                <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                                <span aria-hidden="true" (click)=" cancelActivityGrid()">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <p>Enter the Activity Grid in the text field below if applicable</p>
+                                <ckeditor class="tool-guidance" [editor]="Editor" [(ngModel)]="activityGetDataStore"></ckeditor>
+                            </div>
+                            <div class="modal-footer">
+                                <div class="col-12">
+                                    <button class="col-2 btn float-right btn-warning" type="button" (click)="modal.close('save');saveActivityGrid()">Save</button>
+                                    <button type="button" class="col-2 btn float-left btn-outline-dark" (click)="modal.close('Close click'); cancelActivityGrid()">Cancel</button>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </div>
+                    <!-- End Activity grid Modal -->
+                    <!-- Independence Restriction grid - Global -->
+                    <div class="independence__restrictions__grid">
+                        <div class="row mx-0">
+                            <div class="col my-2 pr-0" [ngStyle]="{'padding-left': '125px' }">
+                                <div class="row mx-0" *ngIf="permsibilityget">
+                                    <div class="col independence__restrictions__grid__item">
+                                        <h6 class="text-center">SEC Channel 1 PIE</h6>
+                                        <div class="row grid__box">
+                                            <div class="w-50 d-flex flex-column border">
+                                                <p class="text-center">{{ permsibilityget.Secchannel1Pieone }}</p>
+                                            </div>
+                                            <div class="w-50 d-flex flex-column border">
+                                                <p class="text-center">{{permsibilityget.Secchannel1Pietwo}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="independence__restrictions__grid__item" [ngClass]="{'col-4':  permsibilityget.Euchannel1Piethree !== null, 'col': permsibilityget.Euchannel1Piethree === null}">
+                                        <h6 class="text-center">EU Channel 1 PIE</h6>
+                                        <div class="row grid__box">
+                                            <div class="d-flex flex-column border" [ngClass]="{'w-3':  permsibilityget.Euchannel1Piethree !== null, 'w-50': permsibilityget.Euchannel1Piethree === null  }">
+                                                <p class="text-center">
+                                                    {{ permsibilityget.Euchannel1Pieone }}</p>
+                                            </div>
+                                            <div class="d-flex flex-column border" [ngClass]="{'w-3':  permsibilityget.Euchannel1Piethree !== null, 'w-50': permsibilityget.Euchannel1Piethree === null  }">
+                                                <p class="text-center">
+                                                    {{ permsibilityget.Euchannel1Pietwo}}</p>
+                                            </div>
+                                            <div *ngIf="permsibilityget.Euchannel1Piethree !== null" class="d-flex flex-column border" [ngClass]="{'w-3':  permsibilityget.Euchannel1Piethree !== null, 'w-50': permsibilityget.Euchannel1Piethree === null  }">
+                                                <p class="text-center">
+                                                    {{ permsibilityget.Euchannel1Piethree }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col independence__restrictions__grid__item">
+                                        <div class="row">
+                                            <div class="col px-1">
+                                                <h6 class="text-center" [ngClass]="{'small-title':permsibilityget.Euchannel1Piethree !== null}">Other Channel 1 PIE</h6>
+                                            </div>
+                                        </div>
+                                        <div class="row grid__box">
+                                            <div class="w-50 d-flex flex-column border">
+                                                <p class="text-center"> {{permsibilityget.OtherChannel1Pieone}}</p>
+                                            </div>
+                                            <div class="w-50 d-flex flex-column border">
+                                                <p class="text-center"> {{permsibilityget.OtherChannel1Pietwo}} </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col independence__restrictions__grid__item">
+                                        <h6 class="text-center">Other Channel 1</h6>
+                                        <div class="row grid__box">
+                                            <div class="w-50 d-flex flex-column border">
+                                                <p class="text-center">{{permsibilityget.OtherChannel1}}</p>
+                                            </div>
+                                            <div class="w-50 d-flex flex-column border">
+                                                <p class="text-center"> {{permsibilityget.OtherChannel1Nsa}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="independence__restrictions__grid__item col-modify">
+                                        <h6 class="text-center">Channel 2</h6>
+                                        <div class="w-100 grid__box d-flex flex-column border">
+                                            <p class="text-center"> {{permsibilityget.Channel2}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="col-12 pb-3 box-buttons mb-0 text-right" *ngIf="enableLocal">
+                        <button class="btn btn-link" (click)="showAll('show')" type="button" *ngIf="showHideButton">Show all</button>
+                        <button class="btn btn-link" (click)="showAll('hide')" type="button" *ngIf="!showHideButton">Hide all</button>
+                    </p>
+                    <!-- Independence Restriction Dropdown - Global -->
+                    <div class="independence__restrictions__grid">
+                        <div class="row mx-0" [ngStyle]="{'height': '40px' }">
+                            <div class="required-label pt-4" [ngStyle]="{'width': '125px', 'padding-left': '15px' }">Global</div>
+                            <div class="col my-3 px-0">
+                                <form [formGroup]="selectrestriction">
+                                    <div class="row  mx-0">
+                                        <div class="col independence__restrictions__grid__item">
+                                            <div class="row grid__box">
+                                                <div class="w-50 d-flex flex-column">
+                                                    <div class="form-row">
+                                                        <div class="form-group col-md-12">
+                                                            <ng-select (change)="enableColumn('SecauditedValue',$event)" [searchable]="false" [clearable]="false" formControlName="SecauditedValue" placeholder="Select" class="permissibility-select p-r" [readonly]="this.readonly">
+                                                                <ng-option value="">Select</ng-option>
+                                                                <ng-option *ngFor="let iconArrays of iconArray" [value]="iconArrays.value">
+                                                                    <i *ngIf="iconArrays.icon !== null" [ngClass]="iconArrays.class" [ngStyle]="{'color': iconArrays.color === '' ? defaultColor : iconArrays.color}">{{iconArrays.icon}}</i>
+                                                                    <span *ngIf="iconArrays.icon === null" class="transparent-bg">{{iconArrays.value}}</span>
+                                                                </ng-option>
+                                                            </ng-select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="w-50 d-flex flex-column">
+                                                    <div class="form-row">
+                                                        <div class="form-group col-md-12">
+                                                            <ng-select (change)="enableColumn('SecsubjectValue',$event)" [searchable]="false" [clearable]="false" placeholder="Select" formControlName="SecsubjectValue" class="permissibility-select p-r" [readonly]="this.readonly">
+                                                                <ng-option value="">Select</ng-option>
+                                                                <ng-option *ngFor="let iconArrays of iconArray" [value]="iconArrays.value">
+                                                                    <i *ngIf="iconArrays.icon !== null" [ngClass]="iconArrays.class" [ngStyle]="{'color': iconArrays.color === '' ? defaultColor : iconArrays.color}">{{iconArrays.icon}}</i>
+                                                                    <span *ngIf="iconArrays.icon === null" class="transparent-bg">{{iconArrays.value}}</span>
+                                                                </ng-option>
+                                                            </ng-select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="independence__restrictions__grid__item" [ngClass]="{'col-4': permsibilityget && permsibilityget.Euchannel1Piethree !== null, 'col': permsibilityget && permsibilityget.Euchannel1Piethree === null}">
+                                            <div class="row grid__box">
+                                                <div class="d-flex flex-column" [ngClass]="{'w-3': permsibilityget && permsibilityget.Euchannel1Piethree !== null, 'w-50': permsibilityget && permsibilityget.Euchannel1Piethree === null  }">
+                                                    <div class="form-row">
+                                                        <div class="form-group col-md-12">
+                                                            <ng-select (change)="enableColumn('EuauditedValue',$event)" appearance="outline" [searchable]="false" [clearable]="false" placeholder="Select" formControlName="EuauditedValue" class="permissibility-select p-r" [readonly]="this.readonly">
+                                                                <ng-option value="">Select</ng-option>
+                                                                <ng-option *ngFor="let iconArrays of iconArray" [value]="iconArrays.value">
+                                                                    <i *ngIf="iconArrays.icon !== null" [ngClass]="iconArrays.class" [ngStyle]="{'color': iconArrays.color === '' ? defaultColor : iconArrays.color}">{{iconArrays.icon}}</i>
+                                                                    <span *ngIf="iconArrays.icon === null" class="transparent-bg">{{iconArrays.value}}</span>
+                                                                </ng-option>
+                                                            </ng-select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex flex-column" [ngClass]="{'w-3': permsibilityget && permsibilityget.Euchannel1Piethree !== null, 'w-50': permsibilityget && permsibilityget.Euchannel1Piethree === null  }">
+                                                    <div class="form-row">
+                                                        <div class="form-group col-md-12">
+                                                            <ng-select (change)="enableColumn('EusubjectValue',$event)" appearance="outline" [searchable]="false" [clearable]="false" placeholder="Select" class="permissibility-select p-r" formControlName="EusubjectValue" [readonly]="this.readonly">
+                                                                <ng-option value=""> Select</ng-option>
+                                                                <ng-option *ngFor="let iconArrays of iconArray" [value]="iconArrays.value">
+                                                                    <i *ngIf="iconArrays.icon !== null" [ngClass]="iconArrays.class" [ngStyle]="{'color': iconArrays.color === '' ? defaultColor : iconArrays.color}">{{iconArrays.icon}}</i>
+                                                                    <span *ngIf="iconArrays.icon === null" class="transparent-bg">{{iconArrays.value}}</span>
+                                                                </ng-option>
+                                                            </ng-select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div *ngIf="permsibilityget && permsibilityget.Euchannel1Piethree !== null" class="d-flex flex-column" [ngClass]="{'w-3': permsibilityget && permsibilityget.Euchannel1Piethree !== null, 'w-50': permsibilityget && permsibilityget.Euchannel1Piethree === null  }">
+                                                    <div class="form-row">
+                                                        <div class="form-group col-md-12">
+                                                            <ng-select (change)="enableColumn('EuAuditedNoValuationValue',$event)" appearance="outline" [searchable]="false" [clearable]="false" placeholder="Select" formControlName="EuAuditedNoValuationValue" class="permissibility-select p-r" [readonly]="this.readonly">
+                                                                <ng-option value="">Select</ng-option>
+                                                                <ng-option *ngFor="let iconArrays of iconArray" [value]="iconArrays.value">
+                                                                    <i *ngIf="iconArrays.icon !== null" [ngClass]="iconArrays.class" [ngStyle]="{'color': iconArrays.color === '' ? defaultColor : iconArrays.color}">{{iconArrays.icon}}</i>
+                                                                    <span *ngIf="iconArrays.icon === null" class="transparent-bg">{{iconArrays.value}}</span>
+                                                                </ng-option>
+                                                            </ng-select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col independence__restrictions__grid__item">
+                                            <div class="row grid__box">
+                                                <div class="w-50 d-flex flex-column">
+                                                    <div class="form-row">
+                                                        <div class="form-group col-md-12">
+                                                            <ng-select (change)="enableColumn('OtAuditedValue',$event)" appearance="outline" [searchable]="false" [clearable]="false" placeholder="Select" formControlName="OtAuditedValue" class="permissibility-select p-r" [readonly]="this.readonly">
+                                                                <ng-option value="">Select</ng-option>
+                                                                <ng-option *ngFor="let iconArrays of iconArray" [value]="iconArrays.value">
+                                                                    <i *ngIf="iconArrays.icon !== null" [ngClass]="iconArrays.class" [ngStyle]="{'color': iconArrays.color === '' ? defaultColor : iconArrays.color}">{{iconArrays.icon}}</i>
+                                                                    <span *ngIf="iconArrays.icon === null" class="transparent-bg">{{iconArrays.value}}</span>
+                                                                </ng-option>
+                                                            </ng-select>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="w-50 d-flex flex-column">
+                                                    <div class="form-row">
+                                                        <div class="form-group col-md-12">
+                                                            <ng-select (change)="enableColumn('OtSubjectValue',$event)" appearance="outline" [searchable]="false" [clearable]="false" placeholder="Select" formControlName="OtSubjectValue" class="permissibility-select p-r" [readonly]="this.readonly">
+                                                                <ng-option value="">Select</ng-option>
+                                                                <ng-option *ngFor="let iconArrays of iconArray" [value]="iconArrays.value">
+                                                                    <i *ngIf="iconArrays.icon !== null" [ngClass]="iconArrays.class" [ngStyle]="{'color': iconArrays.color === '' ? defaultColor : iconArrays.color}">{{iconArrays.icon}}</i>
+                                                                    <span *ngIf="iconArrays.icon === null" class="transparent-bg">{{iconArrays.value}}</span>
+                                                                </ng-option>
+                                                            </ng-select>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col independence__restrictions__grid__item">
+                                            <div class="row grid__box">
+                                                <div class="w-50 d-flex flex-column">
+                                                    <div class="form-row">
+                                                        <div class="form-group col-md-12">
+                                                            <ng-select (change)="enableColumn('Ch1Value',$event)" appearance="outline" [searchable]="false" [clearable]="false" placeholder="Select" formControlName="Ch1Value" class="permissibility-select p-r" [readonly]="this.readonly">
+                                                                <ng-option value="">Select</ng-option>
+                                                                <ng-option *ngFor="let iconArrays of iconArray" [value]="iconArrays.value">
+                                                                    <i *ngIf="iconArrays.icon !== null" [ngClass]="iconArrays.class" [ngStyle]="{'color': iconArrays.color === '' ? defaultColor : iconArrays.color}">{{iconArrays.icon}}</i>
+                                                                    <span *ngIf="iconArrays.icon === null" class="transparent-bg">{{iconArrays.value}}</span>
+                                                                </ng-option>
+                                                            </ng-select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="w-50 d-flex flex-column">
+                                                    <div class="form-row">
+                                                        <div class="form-group col-md-12">
+                                                            <ng-select (change)="enableColumn('Ch1NsaValue',$event)" appearance="outline" [searchable]="false" [clearable]="false" placeholder="Select" formControlName="Ch1NsaValue" class="permissibility-select p-r" [readonly]="this.readonly">
+                                                                <ng-option value="">Select</ng-option>
+                                                                <ng-option *ngFor="let iconArrays of iconArray" [value]="iconArrays.value">
+                                                                    <i *ngIf="iconArrays.icon !== null" [ngClass]="iconArrays.class" [ngStyle]="{'color': iconArrays.color === '' ? defaultColor : iconArrays.color}">{{iconArrays.icon}}</i>
+                                                                    <span *ngIf="iconArrays.icon === null" class="transparent-bg">{{iconArrays.value}}</span>
+                                                                </ng-option>
+                                                            </ng-select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="independence__restrictions__grid__item col-modify">
+                                            <div class="w-100 d-flex flex-column">
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-12">
+                                                        <ng-select (change)="enableColumn('Ch2Value',$event)" appearance="outline" [searchable]="false" [clearable]="false" placeholder="Select" formControlName="Ch2Value" class="permissibility-select p-r" [readonly]="this.readonly">
+                                                            <ng-option value="">Select</ng-option>
+                                                            <ng-option *ngFor="let iconArrays of iconArray" [value]="iconArrays.value">
+                                                                <i *ngIf="iconArrays.icon !== null" [ngClass]="iconArrays.class" [ngStyle]="{'color': iconArrays.color === '' ? defaultColor : iconArrays.color}">{{iconArrays.icon}}</i> <span *ngIf="iconArrays.icon === null"
+                                                                    class="transparent-bg">{{iconArrays.value}}</span>
+                                                            </ng-option>
+                                                        </ng-select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pt-4 px-0" *ngIf="enableLocal">
+                    <div class="col-12 p-0">
+                        <app-loading [show]="loading"></app-loading>
+                        <mat-tree *ngIf="!loading" class="greyBackground" [dataSource]="dataSource" [treeControl]="treeControl">
+                            <!-- children of main node -->
+                            <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding [ngClass]="{'pl-custom pb-2' : node.level === 3}">
+                                <!-- <small style="color:white">{{node.deviation}}</small>
+                                -->
+                                <div class="d-flex flex-row country-textarea">
+                                    <span class="material-icons deviation-local" *ngIf="node.deviation === true">error_outline</span>
+                                    <mat-checkbox class="checklist-leaf-node custom-width" [checked]="node.selected" [disabled]="true">{{node.name.length > 13 ? (node.name | slice:0:11)+'...' : node.name }}</mat-checkbox>
+                                    <div class="col px-0" *ngIf="node.selected">
+                                        <div class="form-row">
+                                            <div class="col pr-0">
+                                                <div class="col-12 px-0 row tree-dropdown mx-0">
+                                                    <div class="w-50">
+                                                        <ng-select [disabled]="!(selectedColumnName.includes('SecauditedValue') && selectedColumnName.length > 0)" appendTo="body" [searchable]="false" [clearable]="false" placeholder="Select" class="permissibility-select custom-padding" [(ngModel)]="node.permissibility.SecauditedValue"
+                                                            (ngModelChange)="updateNode(node, 'SecauditedValue', $event)" [ngClass]="{'highlight-deviation': node.permissibility.SecauditedValue !== node.permissibilityGlobal.SecauditedValue}" [readonly]="this.readonly">
+                                                            <ng-option value="" class="asd">Select</ng-option>
+                                                            <ng-option *ngFor="let iconArrays of iconArray" [value]="iconArrays.value">
+                                                                <i *ngIf="iconArrays.icon !== null" [ngClass]="iconArrays.class" [ngStyle]="{'color': iconArrays.color === '' ? defaultColor : iconArrays.color}">{{iconArrays.icon}}</i> <span *ngIf="iconArrays.icon === null"
+                                                                    class="transparent-bg">{{iconArrays.value}}</span>
+                                                            </ng-option>
+                                                        </ng-select>
+                                                    </div>
+                                                    <div class="w-50">
+                                                        <ng-select [disabled]="!(selectedColumnName.includes('SecsubjectValue') && selectedColumnName.length > 0)" appendTo="body" [searchable]="false" [clearable]="false" placeholder="Select" class="permissibility-select custom-padding" [(ngModel)]="node.permissibility.SecsubjectValue"
+                                                            (ngModelChange)="updateNode(node, 'SecsubjectValue', $event)" [ngClass]="{'highlight-deviation': node.permissibility.SecsubjectValue !== node.permissibilityGlobal.SecsubjectValue}" [readonly]="this.readonly">
+                                                            <ng-option value="">Select</ng-option>
+                                                            <ng-option *ngFor="let iconArrays of iconArray" [value]="iconArrays.value">
+                                                                <i *ngIf="iconArrays.icon !== null" [ngClass]="iconArrays.class" [ngStyle]="{'color': iconArrays.color === '' ? defaultColor : iconArrays.color}">{{iconArrays.icon}}</i> <span *ngIf="iconArrays.icon === null"
+                                                                    class="transparent-bg">{{iconArrays.value}}</span>
+                                                            </ng-option>
+                                                        </ng-select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="pr-0" [ngClass]="{'col-4':  enableThirdColumn, 'col':!enableThirdColumn}">
+                                                <div class="col-12 px-0 row tree-dropdown mx-0">
+                                                    <div [ngClass]="{'w-50': !enableThirdColumn, 'w-30': enableThirdColumn}">
+                                                        <ng-select [disabled]="!(selectedColumnName.includes('EuauditedValue') && selectedColumnName.length > 0)" appendTo="body" [searchable]="false" [clearable]="false" placeholder="Select" class="permissibility-select custom-padding" [(ngModel)]="node.permissibility.EuauditedValue"
+                                                            (ngModelChange)="updateNode(node, 'EuauditedValue', $event)" [ngClass]="{'highlight-deviation': node.permissibility.EuauditedValue !== node.permissibilityGlobal.EuauditedValue}" [readonly]="this.readonly">
+                                                            <ng-option value="">Select</ng-option>
+                                                            <ng-option *ngFor="let iconArrays of iconArray" [value]="iconArrays.value">
+                                                                <i *ngIf="iconArrays.icon !== null" [ngClass]="iconArrays.class" [ngStyle]="{'color': iconArrays.color === '' ? defaultColor : iconArrays.color}">{{iconArrays.icon}}</i> <span *ngIf="iconArrays.icon === null"
+                                                                    class="transparent-bg">{{iconArrays.value}}</span>
+                                                            </ng-option>
+                                                        </ng-select>
+                                                    </div>
+                                                    <div [ngClass]="{'w-50': !enableThirdColumn, 'w-30': enableThirdColumn}">
+                                                        <ng-select [disabled]="!(selectedColumnName.includes('EusubjectValue') && selectedColumnName.length > 0)" appendTo="body" [searchable]="false" [clearable]="false" placeholder="Select" class="permissibility-select custom-padding" [(ngModel)]="node.permissibility.EusubjectValue"
+                                                            (ngModelChange)="updateNode(node, 'EusubjectValue', $event)" [ngClass]="{'highlight-deviation': node.permissibility.EusubjectValue !== node.permissibilityGlobal.EusubjectValue}" [readonly]="this.readonly">
+                                                            <ng-option value="">Select</ng-option>
+                                                            <ng-option *ngFor="let iconArrays of iconArray" [value]="iconArrays.value">
+                                                                <i *ngIf="iconArrays.icon !== null" [ngClass]="iconArrays.class" [ngStyle]="{'color': iconArrays.color === '' ? defaultColor : iconArrays.color}">{{iconArrays.icon}}</i> <span *ngIf="iconArrays.icon === null"
+                                                                    class="transparent-bg">{{iconArrays.value}}</span>
+                                                            </ng-option>
+                                                        </ng-select>
+                                                    </div>
+                                                    <div class="w-30" [ngClass]="{'d-none': !enableThirdColumn}">
+                                                        <ng-select [disabled]="!(selectedColumnName.includes('EuAuditedNoValuationValue') && selectedColumnName.length > 0)" appendTo="body" [searchable]="false" [clearable]="false" placeholder="Select" class="permissibility-select custom-padding" [(ngModel)]="node.permissibility.EuAuditedNoValuationValue"
+                                                            (ngModelChange)="updateNode(node, 'EuAuditedNoValuationValue', $event)" [ngClass]="{'highlight-deviation': node.permissibility.EuAuditedNoValuationValue !== node.permissibilityGlobal.EuAuditedNoValuationValue}"
+                                                            [readonly]="this.readonly">
+                                                            <ng-option value="">Select</ng-option>
+                                                            <ng-option *ngFor="let iconArrays of iconArray" [value]="iconArrays.value">
+                                                                <i *ngIf="iconArrays.icon !== null" [ngClass]="iconArrays.class" [ngStyle]="{'color': iconArrays.color === '' ? defaultColor : iconArrays.color}">{{iconArrays.icon}}</i> <span *ngIf="iconArrays.icon === null"
+                                                                    class="transparent-bg">{{iconArrays.value}}</span>
+                                                            </ng-option>
+                                                        </ng-select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col pr-0">
+                                                <div class="col-12 px-0 row tree-dropdown mx-0">
+                                                    <div class="w-50">
+                                                        <ng-select [disabled]="!(selectedColumnName.includes('OtAuditedValue') && selectedColumnName.length > 0)" appendTo="body" [searchable]="false" [clearable]="false" placeholder="Select" class="permissibility-select custom-padding" [(ngModel)]="node.permissibility.OtAuditedValue"
+                                                            (ngModelChange)="updateNode(node, 'OtAuditedValue', $event)" [ngClass]="{'highlight-deviation': node.permissibility.OtAuditedValue !== node.permissibilityGlobal.OtAuditedValue}" [readonly]="this.readonly">
+                                                            <ng-option value="">Select</ng-option>
+                                                            <ng-option *ngFor="let iconArrays of iconArray" [value]="iconArrays.value">
+                                                                <i *ngIf="iconArrays.icon !== null" [ngClass]="iconArrays.class" [ngStyle]="{'color': iconArrays.color === '' ? defaultColor : iconArrays.color}">{{iconArrays.icon}}</i> <span *ngIf="iconArrays.icon === null"
+                                                                    class="transparent-bg">{{iconArrays.value}}</span>
+                                                            </ng-option>
+                                                        </ng-select>
+                                                    </div>
+                                                    <div class="w-50">
+                                                        <ng-select [disabled]="!(selectedColumnName.includes('OtSubjectValue') && selectedColumnName.length > 0)" appendTo="body" [searchable]="false" [clearable]="false" placeholder="Select" class="permissibility-select custom-padding" [(ngModel)]="node.permissibility.OtSubjectValue"
+                                                            (ngModelChange)="updateNode(node, 'OtSubjectValue', $event)" [ngClass]="{'highlight-deviation': node.permissibility.OtSubjectValue !== node.permissibilityGlobal.OtSubjectValue}" [readonly]="this.readonly">
+                                                            <ng-option value="">Select</ng-option>
+                                                            <ng-option *ngFor="let iconArrays of iconArray" [value]="iconArrays.value">
+                                                                <i *ngIf="iconArrays.icon !== null" [ngClass]="iconArrays.class" [ngStyle]="{'color': iconArrays.color === '' ? defaultColor : iconArrays.color}">{{iconArrays.icon}}</i> <span *ngIf="iconArrays.icon === null"
+                                                                    class="transparent-bg">{{iconArrays.value}}</span>
+                                                            </ng-option>
+                                                        </ng-select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col pr-0">
+                                                <div class="col-12 px-0 row tree-dropdown mx-0">
+                                                    <div class="w-50">
+                                                        <ng-select [disabled]="!(selectedColumnName.includes('Ch1Value') && selectedColumnName.length > 0)" appendTo="body" [searchable]="false" [clearable]="false" placeholder="Select" class="permissibility-select custom-padding" [(ngModel)]="node.permissibility.Ch1Value"
+                                                            (ngModelChange)="updateNode(node, 'Ch1Value', $event)" [ngClass]="{'highlight-deviation': node.permissibility.Ch1Value !== node.permissibilityGlobal.Ch1Value}" [readonly]="this.readonly">
+                                                            <ng-option value="">Select</ng-option>
+                                                            <ng-option *ngFor="let iconArrays of iconArray" [value]="iconArrays.value">
+                                                                <i *ngIf="iconArrays.icon !== null" [ngClass]="iconArrays.class" [ngStyle]="{'color': iconArrays.color === '' ? defaultColor : iconArrays.color}">{{iconArrays.icon}}</i> <span *ngIf="iconArrays.icon === null"
+                                                                    class="transparent-bg">{{iconArrays.value}}</span>
+                                                            </ng-option>
+                                                        </ng-select>
+                                                    </div>
+                                                    <div class="w-50">
+                                                        <ng-select [disabled]="!(selectedColumnName.includes('Ch1NsaValue') && selectedColumnName.length > 0)" appendTo="body" [searchable]="false" [clearable]="false" placeholder="Select" class="permissibility-select custom-padding p-r" [(ngModel)]="node.permissibility.Ch1NsaValue"
+                                                            (ngModelChange)="updateNode(node, 'Ch1NsaValue', $event)" [ngClass]="{'highlight-deviation': node.permissibility.Ch1NsaValue !== node.permissibilityGlobal.Ch1NsaValue}" [readonly]="this.readonly">
+                                                            <ng-option value="">Select</ng-option>
+                                                            <ng-option *ngFor="let iconArrays of iconArray" [value]="iconArrays.value">
+                                                                <i *ngIf="iconArrays.icon !== null" [ngClass]="iconArrays.class" [ngStyle]="{'color': iconArrays.color === '' ? defaultColor : iconArrays.color}">{{iconArrays.icon}}</i> <span *ngIf="iconArrays.icon === null"
+                                                                    class="transparent-bg">{{iconArrays.value}}</span>
+                                                            </ng-option>
+                                                        </ng-select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-modify pr-0">
+                                                <div class="col-12 px-0 row tree-dropdown mx-0">
+                                                    <div class="w-100">
+                                                        <ng-select [disabled]="!(selectedColumnName.includes('Ch2Value') && selectedColumnName.length > 0)" appendTo="body" [searchable]="false" [clearable]="false" placeholder="Select" class="permissibility-select custom-padding" [(ngModel)]="node.permissibility.Ch2Value"
+                                                            (ngModelChange)="updateNode(node, 'Ch2Value', $event)" [ngClass]="{'highlight-deviation': node.permissibility.Ch2Value !== node.permissibilityGlobal.Ch2Value}" [readonly]="this.readonly">
+                                                            <ng-option value="">Select</ng-option>
+                                                            <ng-option *ngFor="let iconArrays of iconArray" [value]="iconArrays.value">
+                                                                <i *ngIf="iconArrays.icon !== null" [ngClass]="iconArrays.class" [ngStyle]="{'color': iconArrays.color === '' ? defaultColor : iconArrays.color}">{{iconArrays.icon}}</i> <span *ngIf="iconArrays.icon === null"
+                                                                    class="transparent-bg">{{iconArrays.value}}</span>
+                                                            </ng-option>
+                                                        </ng-select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </mat-tree-node>
+                            <mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding class="parentNode" [ngClass]="{'pl-1_5 pr-0':node.level === 1, 'pl-custom-tree pr-0' : node.level === 2, 'd-none': node.level === 0 }">
+                                <!-- deviation icon -->
+                                <span *ngIf="node.level === 1 && node.name !== 'Americas' && node.deviation" class="material-icons deviation-area">error_outline</span>
+                                <span *ngIf="node.level === 1 && node.name === 'Americas' && node.deviation" class="material-icons deviation-area-america">error_outline</span>
+                                <span *ngIf="node.level === 2 && node.deviation" class="material-icons deviation-region">error_outline</span>
+                                <!-- icon button, main node -->
+                                <div class="box_item" [ngClass]="{'borderTop': node.level === 1 && node.name === 'Americas'}">
+                                    <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'toggle ' + node.name" class="btn-tree btn-margin_top">
+                                        <mat-icon class="mat-icon-rtl-mirror">
+                                            {{treeControl.isExpanded(node) ? 'remove' : 'add'}}
+                                        </mat-icon>
+                                    </button>
+                                    <mat-checkbox class="checklist-leaf-node" [indeterminate]="descendantsPartiallySelected(node)" [checked]="node.selected" [disabled]="true" *ngIf="node.level !== 1">
+                                        {{node.name}}
+                                    </mat-checkbox>
+                                    <!-- Label Area level -->
+                                    <span *ngIf="node.level === 1" class="area-label">{{node.name}}</span>
+                                </div>
+                            </mat-tree-node>
+                        </mat-tree>
+                    </div>
+                </div>
+                <hr class="mt-4" />
+                <div class="col-12 mb-3">
+                    <div class="row">
+                        <div class="col-6 form-button">
+                            <button type="button" class="col-4 py-2 btn float-left btn-outline-dark" (click)="cancelForm()" [disabled]="this.readonly"> Cancel</button>
+                        </div>
+                        <div class="col-6 form-button">
+                            <button class="col-4 py-2 btn float-right btn-warning" (click)="Submit()" type="button" [disabled]="this.readonly">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+        <div class="col-12 d-flex align-items-center justify-content-center min-height" *ngIf="IdService === 0 || serviceline.SLcode === 0">
+            <h5>You need to create a record in Service Details with a Service Line.</h5>
+        </div>
+    </div>
+    <div class="col-12 min-height" *ngIf="loadingResult && IdService !== 0 && serviceline.SLcode !== 0">
+        <app-loading [show]="loadingResult"></app-loading>
+    </div>
+</div>

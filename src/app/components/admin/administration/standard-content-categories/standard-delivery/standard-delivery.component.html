@@ -1,0 +1,60 @@
+<div class="col-12 px-0 _center">
+  <div class="container-fluid col-10 mt-3 delivery">
+    <main>
+      <div class="col-12 px-0">
+        <button type="button" class="py-2 btn float-right btn-outline-dark font-weight-bold mb-3 _main">
+          <i class="material-icons mr-2 small-icon">add_circle</i> <span class="pt-2">Add New Form of
+            Delivery</span></button>
+
+      </div>
+
+      <table class="table table-sm table-hover mt-3">
+        <thead>
+          <tr>
+            <th scope="col">Order</th>
+            <th scope="col">Delivery Name</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <ng-select [searchable]="false" [clearable]="false" [items]="staticArray" class="dropdown__order">
+              </ng-select>
+            </td>
+            <td>
+              <p class="mb-0">Business Income Tax Compliance </p>
+            </td>
+            <td class="nowrap text-right">
+              <button class="btn">
+                <span class="material-icons btn-19">edit</span>
+              </button>
+              <button class="btn">
+                <span class="material-icons text-red btn-19">cancel</span>
+              </button>
+
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <ng-select [searchable]="false" [clearable]="false" [items]="staticArray" class="dropdown__order">
+              </ng-select>
+            </td>
+            <td>
+              <p class="mb-0">Client access to EY Technology that is hosted in EY designated and managed enviroments
+              </p>
+            </td>
+            <td class="nowrap text-right">
+              <button class="btn">
+                <span class="material-icons btn-19">edit</span>
+              </button>
+              <button class="btn">
+                <span class="material-icons text-red btn-19">cancel</span>
+              </button>
+
+            </td>
+          </tr>
+      </table>
+    </main>
+  </div>
+</div>

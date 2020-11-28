@@ -1,0 +1,71 @@
+<div class="container-fluid pr-0 animated fadeIn mb-3 mt-5" *ngIf="active">
+    <div class="animated fadeIn" *ngIf="IdService !== 0">
+        <main class="animated fadeIn">
+            <div class="col-12 mb-3 px-0">
+                <h3>Independence Considerations</h3>
+                <h5 class="required-label">Global Independence Considerations</h5>
+                <p>Please select Independence considerations below as relevant for this service.</p>
+            </div>
+            <div class="col-12 mt-3 px-0">
+                <div class="row">
+                    <div class="col-4" *ngFor="let datastores of datastore">
+                        <mat-checkbox class="wrap" #checkbox [value]="datastores.independenceName" [(ngModel)]="datastores.isChecked" (change)="getcheckbox($event,datastores)" [disabled]="this.readonly">
+                            {{datastores.independenceName}}
+                        </mat-checkbox>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 mt-3 px-0">
+                <div class="row">
+                    <div class="col-4">
+                        <mat-checkbox [checked]="nonglobe" (change)="showHidetool($event)" [disabled]="this.readonly"> No global independence considerations
+                        </mat-checkbox>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="gobalconsideration">
+                <div class="col-12 mt-3 px-0">
+                    <div class="mt-3" *ngFor="let checkedItem of checked; let i=index">
+                        <div class="text-right">
+                            <button type="button" class="link-independence" [ngClass]="{collapsed: true}" data-toggle="collapse" attr.data-target="{{'#delivery'+i}}" aria-expanded="true" attr.aria-controls="{{'collapse'+ i}}" [disabled]="this.readonly">
+                <span class="show">Show standard text</span>
+                <span class="hide">Hide standard text</span>
+              </button>
+                        </div>
+                        <div class="collapse" id="{{'delivery'+i}}">
+                            <div class="text-left mt-3 mb-3" [innerHTML]="checkedItem.description | safehtml">
+                            </div>
+                        </div>
+                        <div>
+                            <span> {{checkedItem.value}} </span>
+                            <ckeditor class="tool-guidance" [editor]="Editor" [(ngModel)]="checkedItem.textboxdescription" [disabled]="this.readonly"></ckeditor>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Local Independence Considerations tree -->
+            <div class="col-12 py-3 px-0" *ngIf="enableLocal">
+                <h5>Local Independence Considerations</h5>
+                <p class="pb-3">Please select region or location to input local independence considerations.</p>
+                <app-tree-textarea (sendNode)="getConsiderationByNode($event)" [dataSourceTree]="tree" [forceTree]="forceTree" [locationsSaved]="locationsSaved" [placeholderRegion]="'Enter local independence considerations for region'" [placeholderCountry]="'Enter local independence considerations for location'"
+                    [dataStore]="nodeConsiderations" [countryList]="countryList" [clearTree]="clearTree" (setForceTree)="setForceFlag($event)" (setclearTree)="setClearFlag($event)"></app-tree-textarea>
+            </div>
+            <!-- End Local Independence Considerations tree -->
+            <hr>
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-6 form-button">
+                        <button type="button" class="col-4 py-2 btn float-left btn-outline-dark" (click)="cancel()">Cancel</button>
+                    </div>
+                    <div class="col-6 form-button">
+                        <button class="col-4 py-2 btn float-right btn-warning" type="submit" (click)="Submit()">Save</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <div class="col-12 d-flex align-items-center justify-content-center min-height" *ngIf="IdService === 0">
+        <h5>You need to create a record in Service Details.</h5>
+    </div>
+</div>

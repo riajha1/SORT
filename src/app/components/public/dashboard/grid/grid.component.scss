@@ -1,0 +1,152 @@
+@import "../../../../../stylesheets/abstracts/variable";
+.btn-custom-collapse:focus {
+    box-shadow: none;
+    outline: 0;
+}
+
+.col-custom {
+    flex: 0 0 48.666667%;
+    max-width: 47.666667%;
+}
+
+.card-footer {
+    text-align: left;
+    display: block;
+    width: 100%;
+    border-radius: 0px;
+    background-color: $grey2-color;
+    border: none;
+    font-size: 10px;
+    padding: 4px 4px 4px 12px!important;
+    position: relative;
+    font-family: $EYInterstate-Light;
+    & .buttonCodes {
+        z-index: 3000;
+        cursor: pointer;
+        & .button-icon {
+            color: $white-color;
+            background: $dark-color;
+            border-radius: 40px;
+            font-size: .875rem;
+            margin-left: 3px;
+            margin-top: 2px;
+        }
+    }
+    & span.icon-box {
+        position: absolute;
+        right: 10px;
+        top: 7px;
+        & i {
+            font-size: .9rem;
+        }
+    }
+}
+
+.column:not(.col-12) {
+    padding-bottom: 15px;
+}
+
+.column:not(.col-4) {
+    & .card {
+        border-bottom: none;
+        & .card-title {
+            margin: 0px !important;
+        }
+    }
+    &:last-child {
+        & .card {
+            border-bottom: 1px solid $grey2-color;
+        }
+    }
+}
+
+hr {
+    margin-top: .2rem;
+    margin-bottom: .2rem;
+}
+
+.card {
+    border-radius: 0px;
+    & .card-body {
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+        & .box {
+            cursor: pointer;
+        }
+        & .card-title {
+            font-family: $EYInterstate-Bold;
+            line-height: 13px;
+            font-weight: bold;
+            font-size: .875rem;
+            margin-top: 3.5%;
+            color: $dark-color !important;
+            height: 1.5rem;
+        }
+        & .card-text {
+            font-family: $EYInterstate-Light;
+            font-size: .75rem;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+            min-height: 36px;
+        }
+        & .badge.badge-service {
+            font-size: .65rem;
+            font-family: $EYInterstate-Light !important;
+            font-weight: bold;
+            background: $dark-color;
+            color: $white-color;
+            padding: 3px 7px;
+        }
+        & .badge.badge-subservice {
+            font-size: .65rem;
+            font-family: $EYInterstate-Light !important;
+            font-weight: bold;
+            background: $grey1-color;
+            color: $white-color;
+            padding: 3px 7px;
+            position: relative;
+            &.button {
+                padding: 3px 4px !important;
+                cursor: pointer;
+                & span.open::after {
+                    content: "...";
+                }
+            }
+        }
+        & .bubble-yellow {
+            border: 1px solid $yellow-color;
+            background-color: $yellow-color;
+            border-radius: 50%;
+            padding: 0 3px;
+            font-size: .75rem;
+            margin-right: 3px;
+        }
+    }
+}
+
+.column.col-12 .card-body .box {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+.column.col-12 .card-body.row {
+    margin-left: 2px !important;
+    margin-right: 2px !important;
+    padding-bottom: 0px;
+}
+
+.transparent-bg {
+    font-family: $EYInterstate-Light;
+    background-color: transparent;
+    font-size: .8rem;
+    line-height: 0;
+    vertical-align: text-top;
+    &.list {
+        vertical-align: middle !important;
+    }
+}

@@ -1,0 +1,108 @@
+<app-loading [show]="loading"></app-loading>
+<div *ngIf="!loading">
+    <div malihu-scrollbar [scrollbarOptions]="scrollbarOptions" class="sidebar d-lg-block animated fast fadeIn" [ngClass]="{'d-block':enableLeftHandFilter, 'd-none':!enableLeftHandFilter }">
+        <div id="sidebar-wrapper">
+            <app-collapse-filter (clear)="clearAll()" (checkOptions)="getFilterOption($event)" [enableItems]="enableBucketsLeftHand" [options]="FilterTree" [onlyOneServiceLine]="onlyOneServiceLine"></app-collapse-filter>
+        </div>
+    </div>
+    <main role="main" class="main__box">
+        <div class="container-fluid p-0">
+            <div class="row mb-1 pl-1 pr-0 pt-3">
+                <div class="col-12 d-block d-lg-none mb-2">
+                    <button class="btn btn-sm btn-outline-secondary rounded float-right" (click)="displayFilters()">
+                            <i class="material-icons mr-1">
+                                {{!enableLeftHandFilter ? 'visibility' : 'visibility_off'}}
+                            </i>    
+                            <span *ngIf="enableLeftHandFilter">Hide Filters</span>
+                            <span *ngIf="!enableLeftHandFilter">Show Filters</span>
+                    </button>
+                </div>
+                <!-- Option filter -->
+                <div class="col-12 pr-2">
+                    <div class="row pb-1 mr-0 ml-0 servicefilter" *ngIf="!loadingResult">
+                        <div class="col mr-1 mb-2 border d-flex align-items-center px-2 py-2 sl-options" *ngFor="let control of serviceLineOptions; let i=index">
+                            <div class="custom-control custom__checkbox">
+                                <input type="checkbox" [checked]="control.selected" [disabled]="control.selected && control.value === 'All'" [value]="control.value" (change)="getSelectedServiceValues($event)" class="custom__checkbox__input custom-control-input" id="{{control.name}}"
+                                />
+                                <label class="custom-control-label">{{control.name === 'Strategy and Transactions' ? control.prefix : control.name}} 
+                                    <span class="ml-auto">({{control.total}})</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="dropdown col p-0 mb-2" *ngIf="filterNav.client.GISId">
+                            <button class="btn dropdown-toggle btn-block py-2" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Independence Restriction
+                                </button>
+                            <div class="dropdown-menu py-2 dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                                <ng-container *ngFor="let option of iconArray">
+                                    <div class="dropdown-item custom-control custom__checkbox">
+                                        <input type="checkbox" [checked]="allIndependenceSelected.includes(option.value)" class="custom__checkbox__input custom-control-input" [id]="option.value" (change)="showPermissibility($event.target.id)" />
+                                        <label *ngIf="option.icon !== null" class="custom-control-label d-flex align-items-center"> 
+                                            <i style="font-size: 1.1rem" [ngStyle]="{'color': option.color === '' ? defaultColor : option.color}" class="material-icons">{{option.icon}}</i>
+                                        <span class="d-flex align-items-center" [ngStyle]="{'width': '100%', 'height':'100%'}" class="text-wrap">{{option.label}}</span>
+                                        </label>
+                                        <label *ngIf="option.icon === null" class="custom-control-label" [ngClass]="{'remove-space':option.icon === null}">
+                                            <span class="d-flex align-items-center" [ngStyle]="{'width': '100%', 'height':'100%', 'font-size':'.85rem'}" class="text-wrap">{{option.value}}</span>
+                                        </label>
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Option filter -->
+                <!-- Nav filter -->
+                <nav class="col ml-3 mr-2 mb-1 navbar navbar-expand-lg navbar-light" *ngIf="!loadingResult">
+                    <span class="navbar-text py-0" *ngIf="!loadingResult">
+                        {{ result }} service offerings found {{(matchFilter && matchFilter.word != '') || (allIndependenceSelected.length > 0) ? 'in' : ''}} 
+                        <span *ngIf="matchFilter && matchFilter.word != '' "> "{{ matchFilter.word }}"</span>
+                    <button *ngIf="(matchFilter && matchFilter.word != '')" type="button" class="btn-remove-search pr-0" (click)="removeMatchFilter()" matTooltip="Remove search" matTooltipPosition="right">
+                            <span class="material-icons"> cancel</span>
+                    </button>
+                    <span class="independence-filter" *ngIf="allIndependenceSelected.length > 0"> "{{ allIndependenceSelectedString }}"</span>
+                    <button *ngIf="(allIndependenceSelected.length > 0)" type="button" class="btn-remove-search pr-0" (click)="removeIndepenceRestrictionsFilter()" matTooltip="Remove search" matTooltipPosition="right">
+                            <span class="material-icons"> cancel</span>
+                    </button>   
+                    </span>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarText">
+                        <ul class="navbar-nav ml-auto align-items-center">
+                            <li class="nav-item">
+                                <span class="navbar-text mr-1">Showing {{ limit }} of {{ result }} | Sort by</span>
+                            </li>
+                            <li class="nav-item nav__select">
+                                <select class="form-control mr-2" #sortOptions (change)="orderByServices('asc')">
+                                    <option value="Service Title">Service Title</option>
+                                    <option vañue="Independence Restriction" *ngIf="this.filterNav.client.GISId">Independence Restriction</option>
+                                </select>
+                            </li>
+                            <li class="nav-item">
+                                <div class="btn-group" role="group" aria-label="view grid">
+                                    <button class="btn btn-custom-active p-1" (click)="orderByServices()">
+                                        <i class="material-icons" *ngIf="sortby" matTooltip="Ascending" matTooltipPosition="below">arrow_upward</i>
+                                        <i class="material-icons" *ngIf="!sortby" matTooltip="Descending" matTooltipPosition="below">arrow_downward</i>
+                                    </button>
+                                    <button class="btn btn-custom p-1" [ngClass]="{ 'btn-custom-active': !enableGrid }" (click)="listGridView()" matTooltip="Card view" matTooltipPosition="below">
+                                        <i class="material-icons" [ngClass]="{'font-size':'2rem'}">view_module</i>
+                                    </button>
+                                    <button class="btn btn-custom p-0" [ngClass]="{ 'btn-custom-active': enableGrid }" (click)="listGridView()" matTooltip="List view" matTooltipPosition="below">
+                                        <i class="material-icons" [ngClass]="{'font-size':'2rem'}">menu</i>
+                                    </button>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+                <!-- End Nav filter -->
+            </div>
+            <app-loading [show]="loadingResult"></app-loading>
+            <app-grid *ngIf="!loadingResult" [dataGrid]="resultFilter" [iconArray]="iconArray" [enableGrid]="enableGrid" [filterNav]="filterNav" [serviceLine]="serviceLineOptions" [page]="page" [pageSize]="pageSize" (updateShowing)="getShowingItems($event)" [countryCodeSelected]="country"></app-grid>
+            <!-- Pagination -->
+            <div class="pagination my-3 col-12 d-flex justify-content-center">
+                <ngb-pagination [pageSize]="pageSize" [collectionSize]="enableResultFilter" [(page)]="page" [maxSize]="maxPages" [rotate]="true" [ellipses]="false" [boundaryLinks]="true"></ngb-pagination>
+            </div>
+        </div>
+    </main>
+</div>

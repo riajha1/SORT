@@ -1,0 +1,43 @@
+<div class="container-fluid pr-0 animated fadeIn mb-3 mt-5" *ngIf="active">
+    <main *ngIf="IdService !== 0">
+        <div class="col-12 px-0">
+            <h3>Service Line Guidance</h3>
+        </div>
+        <div class="col-12 mb-2 default-height px-0">
+            <div class="row">
+                <div class="col-12 pt-3">
+                    <h5>Global Service Line Guidance</h5>
+                    <form [formGroup]="guidanceForm" (ngSubmit)="submit()" *ngIf="globalGuidance">
+                        <div class="form-group">
+                            <label for="serviceGuidance" class="richtext-label">Enter global service line guidance in the text field below.</label>
+                            <ckeditor formControlName="QualityConsiderations" [editor]="Editor" [disabled]="this.readonly"></ckeditor>
+                        </div>
+                    </form>
+                    <div class="form-group">
+                        <mat-checkbox [checked]="!globalGuidance" (change)="showHideGuidance($event)" [disabled]="this.readonly">No global service line guidance</mat-checkbox>
+                    </div>
+                </div>
+                <div class="col-12 py-3" *ngIf="enableLocal">
+                    <h5>Local Service Line Guidance</h5>
+                    <p class="pb-3">Please select region or location to input local service line guidance.</p>
+                    <app-tree-textarea (sendNode)="getGuidanceByNode($event)" [dataSourceTree]="tree" [locationsSaved]="locationsSaved" [forceTree]="forceTree" [placeholderRegion]="'Enter local service line guidance for region'" [placeholderCountry]="'Enter local service line guidance for location'"
+                        [dataStore]="nodeGuidance" [countryList]="countryList" [clearTree]="clearTree" (setclearTree)="setClearFlag($event)" (setForceTree)="setForceFlag($event)"></app-tree-textarea>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="col-12">
+            <div class="row">
+                <div class="col-6 form-button">
+                    <button type="button" class="col-4 py-2 btn float-left btn-outline-dark" (click)="cancel()">Cancel</button>
+                </div>
+                <div class="col-6 form-button">
+                    <button class="col-4 py-2 btn float-right btn-warning" type="button" (click)="submit()">Save</button>
+                </div>
+            </div>
+        </div>
+    </main>
+    <div *ngIf="IdService === 0" class="col-12 d-flex align-items-center justify-content-center min-height">
+        <h5>You need to create a record in Service Details.</h5>
+    </div>
+</div>

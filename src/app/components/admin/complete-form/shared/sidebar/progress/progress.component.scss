@@ -1,0 +1,82 @@
+@import "../../../../../../../stylesheets/abstracts/variable";
+.options {
+    height: 66px;
+    padding: 12px 12px 12px 26px;
+    background-color: $dark2-color;
+    cursor: pointer;
+    &.active {
+        background-color: $dark-color;
+        border-left-style: inset;
+        border-left: 3px solid $yellow-color;
+    }
+    & small {
+        display: block;
+        font-size: .77rem;
+        font-family: $EYInterstate-Light;
+        &:first-child {
+            font-family: $EYInterstate-Bold !important;
+            font-size: .75rem;
+        }
+    }
+    & .porcentage {
+        position: absolute;
+        top: 16px;
+        left: 14px;
+        font-size: 13px;
+        z-index: 1000;
+    }
+}
+
+.icon-check {
+    position: absolute;
+    top: 12px;
+    left: 14px;
+    color: $yellow-color
+}
+
+// spinner sidebard
+.shadow-progress {
+    position: absolute;
+    top: 0px;
+    & svg {
+        width: 50px !important;
+        height: 50px !important;
+        & circle {
+            stroke-dashoffset: 0px !important;
+            stroke-dasharray: 282.743px !important;
+            stroke-width: 10% !important;
+            fill: transparent !important;
+            stroke: rgba(235, 235, 238, 0.2) !important;
+        }
+    }
+}
+
+::ng-deep .mat-progress-spinner {
+    position: relative;
+    top: 10px;
+}
+
+::ng-deep .mat-progress-spinner,
+::ng-deep .mat-progress-spinner svg {
+    width: 50px !important;
+    height: 50px !important;
+}
+
+::ng-deep .mat-progress-spinner svg {
+    top: -10px !important;
+}
+
+::ng-deep .mat-progress-spinner circle,
+::ng-deep .mat-spinner circle {
+    stroke: $yellow-color !important;
+    fill: transparent !important;
+}
+
+.options.active ::ng-deep .mat-primary.spinner-background {
+    background-color: $dark-color !important;
+}
+
+::ng-deep .mat-primary.spinner-background {
+    background-color: $dark2-color !important;
+    border: none !important
+}

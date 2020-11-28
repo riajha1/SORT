@@ -1,0 +1,19 @@
+<div class="technology-section">
+    <div class="technology-fix-flag" #technologyDiv></div>
+    <div class="section_independent__item">
+        <h1 class="section_independent__title">EY Technology</h1>
+        <div class="col-12 independent_description" *ngIf="technology">
+            <app-read-more [height]="168" *ngIf="technology" [enable]="enableReadmore" [targetdiv]="technologyDiv" [section]="'Eytechnology'" [enableHighlight]="enableHighlight">
+                <section *ngFor="let item of technology" class="section__technology">
+                    <i class="material-icons mr-2">settings_applications</i>
+                    <span *ngIf="item.TechnologyDescription !== ''" class="truncate_dynamic" appHighlight [searchedWords]="listOfWords" classToApply="highlight-word" [text]="item.TechnologyName"></span>
+                    <span *ngIf="item.TechnologyDescription === ''" class="alltext" appHighlight [searchedWords]="listOfWords" classToApply="highlight-word" [text]="item.TechnologyName"></span>
+                    <button *ngIf="item.TechnologyDescription !== ''" class="btn" (click)="showInfo(item.TechnologyName,item.TechnologyDescription)">
+                        <span class="material-icons">info</span>
+                    </button>
+                </section>
+                <section *ngIf="guidance" [innerHTML]="guidance.guidanceEytechnology | safehtml" [ngClass]='{"space-sections" : technology.length > 0 }'></section>
+            </app-read-more>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,9 @@
+<div class="sidebar pb-5" malihu-scrollbar [scrollbarOptions]="scrollbarOptions">
+    <div class="row m-0">
+        <div class="col-12 header">
+            <small>{{label}}</small>
+        </div>
+        <div class="col-12 option_item option_item_fixed d-flex align-items-center" [ngClass]="{active: sidebar[10].active, inactive: !sidebar[10].active}" (click)="activeTab('Service Summary')" [active]="sidebar[10].active"><small>Service Summary</small></div>
+        <app-progress *ngFor="let option of sidebar | slice:0:10" class="options_box" (activeTab)="activeTab($event)" [progress]="option.progress" [title]="option.title" [subtitle]="option.subtitle" [active]="option.active"></app-progress>
+    </div>
+</div>

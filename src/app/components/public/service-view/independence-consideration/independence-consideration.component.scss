@@ -1,0 +1,76 @@
+@import "../../../../../stylesheets/abstracts/variable";
+@import "../../../../../stylesheets/abstracts/placeholder";
+.consideration-section {
+    position: relative;
+    & .consideration-fix-flag {
+        position: absolute;
+        top: -111px
+    }
+}
+
+.section__considerations__subsection {
+    border: 1px solid $grey3-color;
+    & .section__considerations__subtitle {
+        @extend %film;
+        background: $grey3-color;
+        color: $dark-color;
+        border-top: 1px solid $grey3-color;
+        padding-left: .7rem;
+        margin-bottom: .8rem;
+        font-size: 1rem;
+    }
+}
+
+.section__considerations_accordion {
+    & .card:nth-child(1) {
+        color: $dark-color;
+    }
+    & .card {
+        border-radius: 0;
+        margin-bottom: 1rem;
+        padding: 0;
+        & .card-header {
+            background: $white-color;
+            margin-bottom: 0;
+            border-bottom: 0;
+            & h2 {
+                line-height: .5 !important;
+            }
+            & button {
+                font-family: $EYInterstate-Light;
+                font-size: .9rem;
+                color: $dark-color;
+                font-weight: bold;
+                padding-left: 0px;
+                padding-top: .3rem;
+                width: 100%;
+                text-align: left;
+                &.collapsed {
+                    & i {
+                        &.down {
+                            display: inline-block !important;
+                        }
+                        &.up {
+                            display: none !important;
+                        }
+                    }
+                }
+                & i {
+                    position: absolute;
+                    right: 14px;
+                    &.down {
+                        display: none;
+                    }
+                    &.up {
+                        display: inline-block;
+                    }
+                }
+            }
+        }
+        & .card-body {
+            font-family: $EYInterstate-Light;
+            font-size: .9rem;
+            padding-top: .5rem;
+        }
+    }
+}

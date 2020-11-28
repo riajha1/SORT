@@ -1,0 +1,166 @@
+<div class="container-fluid p-0 animated fadeIn mb-3 mt-5" *ngIf="active">
+    <app-loading [show]="loading"></app-loading>
+    <div class="col-12 pr-0" *ngIf="!loading">
+        <h3>Service Details</h3>
+        <form [formGroup]="detailForm" (ngSubmit)="submit()">
+            <div class="form-group">
+                <label for="title" class="required-label">Service Title</label>
+                <input type="text" formControlName="title" class="form-control" #title maxlength="125" (keypress)="omitSpecialChar($event)" [readonly]="this.readonly">
+                <p class="mb-0 d-flex">
+                    <span *ngIf="!detailForm.get('title').valid && detailForm.get('title').touched" class="help-block text-danger mr-auto">
+            <span *ngIf="detailForm.get('title').errors?.serviceNameIsBusy">The name of Service already exists.</span>
+                    <span *ngIf="detailForm.get('title').errors?.required">This field is required!</span>
+                    </span>
+                    <small class="ml-auto">Chars:{{title.value.length}}/125</small>
+                </p>
+            </div>
+            <div class="row">
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label class="required-label">Select Origin of Service</label>
+                        <ng-select formControlName="OriginOfService" [items]="originOfList" [searchable]="false" [clearable]="false" bindLabel="Name" bindValue="Prefix" class="heightSelect" [readonly]="this.readonly" ></ng-select>
+                    </div>
+                    <div class="form-group">
+                        <label for="subserviceline" class="required-label">Select Sub-Service Line</label>
+                        <ng-select formControlName="subserviceline" [items]="subServiceLines" [loading]=loadingSSL loadingText='Loading...' [searchable]="false" [clearable]="false" [multiple]="true" bindLabel="subServiceLineName" (change)="onValueChangeSubService($event)" (remove)="onRemoveCompetency($event)" [readonly]="this.readonly">
+                        </ng-select>
+                    </div>
+                    <div class="form-group">
+                        <label for="solutions">Select Solution</label>
+                        <ng-select formControlName="solution" [items]="solutions" [searchable]="true" [clearable]="false" [multiple]="true" bindLabel="solutionDescription" (change)="onValueChangeSolution($event)"  [readonly]="this.readonly">
+                        </ng-select>
+                    </div>
+                    <div class="form-group">
+                        <label for="sector">Select Sector</label>
+                        <ng-select formControlName="sector" [items]="sectors" [searchable]="true" [clearable]="false" [multiple]="true" bindLabel="sectorName" (change)="onValueChangeSector($event)"  [readonly]="this.readonly"></ng-select>
+                    </div>
+                    <div class="form-group">
+                        <label for="gfisCodes" class="required-label">Select Global GFIS Code</label>
+                        <ng-select formControlName="gfisCodes" [items]="gfis" [searchable]="true" [clearable]="false" [multiple]="true" bindLabel="merge"  [readonly]="this.readonly">
+                        </ng-select>
+                        <span *ngIf="!detailForm.get('gfisCodes').valid && detailForm.get('gfisCodes').touched" class="help-block text-danger mr-auto">
+              <span *ngIf="detailForm.get('gfisCodes').errors?.required">This field is required!</span>
+                        </span>
+                    </div>
+                    <mat-checkbox  [disabled]="this.readonly">Add Local GFIS Codes</mat-checkbox>
+                </div>
+                <div class="col-12 col-md-6">
+
+                    <div class="form-group">
+                        <label for="serviceline" class="required-label">Select Service Line</label>
+                        <ng-select formControlName="serviceline" [items]="serviceLines" [searchable]="false" [clearable]="false" bindLabel="serviceLineName" bindValue="serviceLineName" (change)="onValueChangeSL($event)" class="heightSelect"  [readonly]="this.readonly"></ng-select>
+                        <span *ngIf="!detailForm.get('serviceline').valid && detailForm.get('serviceline').touched" class="help-block text-danger mr-auto">
+              <span *ngIf="detailForm.get('serviceline').errors?.required">This field is required!</span>
+                        </span>
+                    </div>
+                    <div class="form-group">
+                        <label for="competencyDomain" class="required-label">Select Competency</label>
+                        <ng-select formControlName="competencyDomain" [items]="competencyDomains" [searchable]="false" [clearable]="false" [multiple]="true" bindLabel="competencyDomainName" [virtualScroll]="true" [loading]=loadingCompetency loadingText='Loading...'  [readonly]="this.readonly"></ng-select>
+                        <span *ngIf="!detailForm.get('competencyDomain').valid && detailForm.get('competencyDomain').touched" class="help-block text-danger mr-auto">
+              <span *ngIf="detailForm.get('competencyDomain').errors?.required">This field is required!</span>
+                        </span>
+                    </div>
+                    <div class="form-group">
+                        <label>Select Field of Play</label>
+                        <ng-select formControlName="FieldOfPlay" [items]="storeFieldList" [searchable]="false" [clearable]="false" [multiple]="true" loadingText='Loading...' bindLabel="FopName"  [readonly]="this.readonly">
+                        </ng-select>
+                    </div>
+                    <div class="form-group">
+                        <label for="solutions">Select Client Need</label>
+                        <ng-select formControlName="clientNeed" [items]="clientNeeds" [searchable]="true" [clearable]="false" [multiple]="true" bindLabel="clientNeedName" (change)="onValueChangeClientNeed($event)"  [readonly]="this.readonly">
+                        </ng-select>
+                    </div>
+                    <div class="form-group info-icon">
+                        <span class="info-icon__icon" mat-raised-button #tooltip2="matTooltip" matTooltip="Small" (mouseenter)="$event.stopImmediatePropagation()" (mouseleave)="$event.stopImmediatePropagation()" (click)="openModal()" aria-label="Button that displays a tooltip when focused or hovered over">
+                            <i class="material-icons">info</i>
+                        </span>
+                        <label for="mercuryCodes" class="required-label">Select MSC Mercury Service Code</label>
+                        <ng-select formControlName="mercuryCodes" [items]="mercury" [searchable]="true" [clearable]="false" [multiple]="true" bindLabel="merge"  [readonly]="this.readonly"></ng-select>
+                        <span *ngIf="!detailForm.get('mercuryCodes').valid && detailForm.get('mercuryCodes').touched" class="help-block text-danger mr-auto">
+              <span *ngIf="detailForm.get('mercuryCodes').errors?.required">This field is required!</span>
+                        </span>
+                    </div>
+                    <mat-checkbox  [disabled]="this.readonly">Local service, not a Mercury location</mat-checkbox>
+                </div>
+                <div class="col-12 mt-3">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="finance-text">Enter text to describe use of finance codes.</label>
+                                <textarea (keypress)="omitSpecialChar($event)" formControlName="financeCodeFreeText" class="form-control" rows="2"  [readonly]="this.readonly"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <h5 class="required-label">Headline Description</h5>
+                            <label>Enter short headline description of this service that will be visible to users while Browsing to
+                help them select the correct service.</label>
+                            <div class="form-group">
+                                <textarea placeholder="Headline Service Description (suggested 125 chars for best viewing/max. 250 chars)" (keypress)="omitSpecialChar($event)" formControlName="headlineDescription" class="form-control pt-1" rows="2" #headline maxlength="250" [readonly]="this.readonly"></textarea>
+                                <p class="mb-0 d-flex">
+                                    <span *ngIf="!detailForm.get('headlineDescription').valid && detailForm.get('headlineDescription').touched" class="help-block text-danger mr-auto">
+                    <span *ngIf="detailForm.get('headlineDescription').errors?.required">This field is required!</span>
+                                    </span>
+                                    <small class="ml-auto">Chars:{{headline.value.length}}/250</small></p>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <h5 class="required-label">Full Service Description</h5>
+                            <ul class="hyphenList">
+                                <li>Write this section in accordance with Best Practices (link to help text) when drafting this section;
+                                </li>
+                                <li>The service details in description should be consistent with and relevant to the Form of Delivery picked below;</li>
+                                <li>References to Independence Policy should not be included here;</li>
+                                <li>The target audience is engagement teams and account teams, therefore text should be clear for users not familiar with this service to understand what it entails.</li>
+                            </ul>
+                            <div class="form-group">
+                                <label for="serviceDescription" class="richtext-label">Enter Full Service Description in the text field
+                  below.</label>
+                                <ckeditor formControlName="description" [editor]="Editor" id="serviceDescription" [disabled]="this.readonly"></ckeditor>
+                                <p class="mb-0">
+                                    <span *ngIf="!detailForm.get('description').valid && detailForm.get('description').touched" class="help-block text-danger mr-auto">
+                    <span *ngIf="detailForm.get('description').errors?.required">This field is required!</span>
+                                    </span>
+                                </p>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="ServiceLineCollateral" class="richtext-label">Enter the Service Line Collateral in the text field below if required or applicable.</label>
+                                <ckeditor formControlName="ServiceLineCollateral" [editor]="Editor" id="ServiceLineCollateral" [disabled]="this.readonly">
+                                </ckeditor>
+                            </div>
+                            <div class="form-group mt-3">
+                                <h5>Form of Delivery</h5>
+                                <label for="ServiceLineCollateral" class="richtext-label">
+                                  Select Forms of Delivery that apply to this service. If none applies, leave it blank.</label>
+                                  <div class="form-group" *ngFor="let item of delivery; let i = index">
+                                    <mat-checkbox class="deliveryoptions" [checked]="selectedDeliveryName.includes(item.deliveryMethodName)" (change)="selectedDeliveryOption(item)" [disabled]="this.readonly">
+                                      <p class="mb-0">{{item.deliveryMethodName}}</p>
+                                    </mat-checkbox>
+                                    <button [ngClass]="{collapsed: true}" class="btn btn-link p-0 link-delivery" type="button" data-toggle="collapse" attr.data-target="{{'#delivery'+i}}" aria-expanded="true" attr.aria-controls="{{'collapse'+ i}}">
+                                      <span class="show">Show standard text</span>
+                                      <span class="hide">Hide standard text</span>
+                                    </button>
+                                    <div class="collapse general-delivery" id="{{'delivery'+i}}" attr.aria-labelledby="heading{{i}}">
+                                      <div class="card card-body" [innerHTML]="item.deliveryMethodDescription | safehtml">
+                                      </div>
+                                    </div>
+                                  </div>
+</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-6 form-button">
+                        <button type="button" class="col-4 py-2 btn float-left btn-outline-dark"  [disabled]="this.readonly" (click)="cancelForm()">Cancel</button>
+                    </div>
+                    <div class="col-6 form-button">
+                        <button class="col-4 py-2 btn float-right btn-warning"  [disabled]="this.readonly" type="submit">Save</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

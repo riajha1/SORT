@@ -1,0 +1,225 @@
+@import "../abstracts/variable";
+// -----------------------------------------------------------------------------
+// This file contains very basic styles.
+// -----------------------------------------------------------------------------
+
+/**
+ * Set up a decent box model on the root element
+ */
+
+html {
+    height: 100%;
+    box-sizing: border-box;
+}
+
+
+/**
+   * Make all elements from the DOM inherit from the parent box-sizing
+   * Since `*` has a specificity of 0, it does not override the `html` value
+   * making all elements inheriting from the root box-sizing value
+   * See: https://css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice/
+   */
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+body {
+    font-family: $EYInterstate-Regular !important;
+    font-size: $default-font;
+    height: 100%;
+    margin: 0 !important;
+    --ck-z-default: 100;
+    --ck-z-modal: calc(var(--ck-z-default) + 999);
+}
+
+
+/*  Basic styles for links */
+
+a {
+    text-decoration: none;
+}
+
+.btn {
+    border-radius: 0px !important;
+}
+
+.form-control {
+    border-radius: 0px !important;
+}
+
+.material-icons {
+    display: inline-flex;
+    vertical-align: top;
+}
+
+.material-spin {
+    -webkit-animation: material-spin 2s infinite linear;
+    animation: material-spin 2s infinite linear;
+}
+
+.material-2x {
+    font-size: 2.2rem;
+}
+
+@keyframes material-spin {
+    0% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+    100% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+}
+
+.note {
+    animation-name: slidein;
+    animation-duration: .9s;
+}
+
+.considerations_data p {
+    margin-bottom: 0px !important;
+}
+
+.readme-box p {
+    margin-bottom: 24px !important;
+}
+
+.readme-box ul {
+    margin-bottom: 24px;
+}
+
+.swal2-styled.swal2-confirm,
+.swal2-actions:not(.swal2-loading) .swal2-styled.swal2-confirm:hover {
+    background-color: $yellow-color !important;
+    background-image: none !important;
+    border-radius: 0px !important;
+    font-size: 1rem !important;
+    margin: 0px !important;
+    border: 1px solid $yellow-color !important;
+}
+
+.swal2-styled:focus {
+    outline: 0 !important;
+    box-shadow: 0 0 0 0.2rem transparent !important;
+}
+
+.swal2-styled.swal2-cancel {
+    background-color: transparent !important;
+    border: 1px solid $dark-color !important;
+    color: $dark-color !important;
+    border-color: $dark-color !important;
+    border-radius: 0px !important;
+    font-size: 1rem !important;
+}
+
+.swal2-popup {
+    border-radius: 0px !important;
+    width: 20em !important;
+    min-height: 10em !important;
+}
+
+.independent_description a {
+    color: $black-color;
+    text-decoration: none;
+}
+
+.cdk-global-overlay-wrapper,
+.cdk-overlay-container {
+    z-index: 9999!important;
+}
+
+.highlight-word {
+    background-color: $yellow-color !important;
+}
+
+.pagination {
+    display: flex;
+    padding-left: 0;
+    list-style: none;
+    font-family: $EYInterstate-Light;
+    & .page-item {
+        &.active {
+            & a.page-link {
+                background-color: transparent !important;
+                border-bottom: 2px solid $dark-color !important;
+                padding: .4rem .75rem;
+            }
+        }
+        &:not(.active) .page-link {
+            padding: .4rem .75rem;
+            border-bottom: 2px solid transparent !important;
+            &:hover {
+                font-weight: bold;
+                cursor: pointer;
+                background-color: transparent !important;
+            }
+        }
+        &.disabled {
+            display: none;
+        }
+    }
+    & .previous-item a {
+        visibility: hidden;
+        position: relative;
+        padding: 0;
+        width: 1rem;
+        &::after {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 7px;
+            visibility: visible;
+            content: "<";
+            text-align: center;
+        }
+    }
+    & .next-item a {
+        visibility: hidden;
+        position: relative;
+        padding: 0;
+        width: 1rem;
+        &::after {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 7px;
+            visibility: visible;
+            content: ">";
+            text-align: center;
+        }
+    }
+    & .first-item a {
+        visibility: hidden;
+        position: relative;
+        padding: 0;
+        width: 2.5rem;
+        &::after {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 7px;
+            visibility: visible;
+            content: "<<";
+            text-align: center;
+        }
+    }
+    & .last-item a {
+        visibility: hidden;
+        position: relative;
+        padding: 0;
+        width: 2.5rem;
+        &::after {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 7px;
+            visibility: visible;
+            content: ">>";
+            text-align: center;
+        }
+    }
+}

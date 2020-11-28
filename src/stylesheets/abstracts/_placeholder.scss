@@ -1,0 +1,29 @@
+%marginsection {
+    padding: 20px 55px 20px 23px;
+    border: 1px solid $grey4-color;
+}
+
+%film {
+    position: relative;
+    font-family: $EYInterstate-Light;
+    font-size: 1rem;
+    font-weight: bold;
+    background: $dark-color;
+    color: $white-color;
+    padding: .5rem 23px;
+    margin-bottom: 0px;
+}
+
+%filmIcon {
+    position: absolute;
+    right: .8rem;
+    top: 8px;
+    cursor: pointer;
+}
+
+%defaultBackground {
+    background: $grey3-color;
+    min-height: 200px;
+    font-family: $noto-sans;
+    font-size: .85rem;
+}

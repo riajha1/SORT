@@ -1,0 +1,41 @@
+<div class="conflict-section">
+    <div class="conflict-fix-flag" #conflictsDiv></div>
+    <div class="section_independent__item">
+        <h1 class="section_independent__title">Conflicts Considerations</h1>
+        <div class="col-12 conflicts_box" *ngIf="conflicts">
+            <div class="row border-0">
+                <div class="col-12 border-0 p-0 conflict_box_title">
+                    <strong> 
+                        <span *ngIf="conflicts.checkRequired === 0">Conflict Check Not Required</span>
+                        <span *ngIf="conflicts.checkRequired === 1">Conflict Check Required: Mandatory </span>
+                        <span *ngIf="conflicts.checkRequired === 2">Conflict Check Required: Potentially based on the activity</span>
+                    </strong>
+                </div>
+                <app-read-more [height]="48" *ngIf="conflicts" [enable]="conflicts.readmoreGuide" [targetdiv]="conflictsDiv">
+                    <section *ngIf="conflicts.checkRequired === 0 && conflicts.never" [innerHTML]="conflicts.never | safehtml"></section>
+                    <section *ngIf="conflicts.checkRequired === 1 && conflicts.always" [innerHTML]="conflicts.always | safehtml"></section>
+                    <section *ngIf="conflicts.checkRequired === 2 && conflicts.counterparty" [innerHTML]="conflicts.counterparty | safehtml"></section>
+                </app-read-more>
+                <div class="col-12 p-0 mt-2 section__conflict_accordion" *ngIf="conflicts.guidance || (conflictsDelivery && conflictsDelivery.length > 0)">
+                    <div class="col-12 card" *ngIf="conflicts.guidance != '' || (conflictsDelivery && conflictsDelivery.length > 0)">
+                        <div class="card-header p-1" id="heading1">
+                            <h2 class="mb-0">
+                                <button [ngClass]="{collapsed: true}" class="btn btn-link" type="button" data-toggle="collapse" data-target="#conflicts1" aria-expanded="true" aria-controls="collapse1">
+                                    Service Specific Conflicts Considerations
+                                </button>
+                            </h2>
+                        </div>
+                        <div class="collapse" id="conflicts1">
+                            <div class="card-body border-0 pt-0">
+                                <section *ngIf="conflicts.guidance != ''" [innerHTML]="conflicts.guidance | safehtml"></section>
+                                <section *ngIf="conflictsDelivery && conflictsDelivery.length > 0">
+                                    <section *ngFor="let delivery of conflictsDelivery" [innerHTML]="'<strong>('+ delivery.nameDeliveryMethod + ')&nbsp;</strong>' + delivery.descriptionDeliveryMethod | safehtml"></section>
+                                </section>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

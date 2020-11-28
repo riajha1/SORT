@@ -1,0 +1,13 @@
+<span *ngIf="!overWrite" class="d-flex justify-content-center align-items-center w-100 text-center" [ngSwitch]="restrictions">
+    <ng-container *ngFor="let iconArray of iconArray">
+        <span *ngIf="iconArray.icon !== null" class="d-flex justify-content-center align-items-center text-center" matTooltip="{{iconArray.label}}" matTooltipPosition="above">
+            <i class="material-icons" [ngStyle]="{'color': iconArray.color === '' ? defaultColor : iconArray.color}" *ngSwitchCase="iconArray.value">{{iconArray.icon}}</i>
+        </span>
+<span *ngIf="iconArray.icon === null" class="d-flex justify-content-center align-items-center text-center" matTooltip="{{iconArray.label}}" matTooltipPosition="above">
+            <span class="transparent-bg" *ngSwitchCase="iconArray.value">{{iconArray.value}}</span>
+</span>
+</ng-container>
+</span>
+<span class="d-flex justify-content-center align-items-center w-100 text-center" *ngIf="overWrite" matTooltip="Prohibited" matTooltipPosition="above">
+    <i class="material-icons">not_interested</i>
+</span>

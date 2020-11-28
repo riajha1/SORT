@@ -1,0 +1,45 @@
+@import "../../../../../../../stylesheets/abstracts/variable";
+@import "../../../../../../../stylesheets/base/base_form";
+// Delivery section
+.deliveryoptions+button {
+    display: block;
+}
+
+.link-delivery {
+    margin-left: 24px;
+    color: $dark-color;
+    text-decoration: underline;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.general-delivery {
+    & .card {
+        border: none;
+        padding: 5px;
+        margin-left: 24px;
+    }
+}
+
+// hide and show link logic
+button.link-delivery:not(.collapsed)>.show,
+button.link-delivery.collapsed>.hide {
+    display: none;
+}
+
+button.link-delivery.collapsed>.show {
+    display: block;
+}
+
+.hyphenList {
+    padding-left: 1.5rem;
+    & li {
+        list-style-type: none;
+        text-indent: -5px;
+        &:before {
+            content: "- ";
+            position: relative;
+            left: -5px;
+        }
+    }
+}

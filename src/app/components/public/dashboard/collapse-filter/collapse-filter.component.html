@@ -1,0 +1,38 @@
+<h4 class="mt-4 mb-4 pl-4 pr-2 sidebar__title">
+    <i class="material-icons">filter_list </i> Filters
+    <button class="btn btn-sm clear" (click)="clearAll()">Clear</button>
+</h4>
+<div id="filterOptions" class="filterOptions">
+    <ng-container *ngFor="let option of options;let i = index">
+        <div class="filter-item" *ngIf="enableItems.includes(option.dbname) || enableItems.length === 0">
+            <a [ngClass]="{collapsed: true}" class="btn filter-item__link" data-toggle="collapse"
+                href="#{{ option.id }}" role="button" aria-expanded="true" attr.aria-controls="{{'collapse'+i}}">
+                <span>{{ option.label }}</span>
+            </a>
+            <div class="collapse" [id]="option.id">
+                <div class="card-body border-0">
+                    <div class="custom-control custom-checkbox mb-2 animated fadeIn"
+                        *ngFor="let child of option.children">
+                        <input type="checkbox" class="styled-checkbox custom-control-input" [checked]="child.selected"
+                            [id]="child.id" (change)="checkOption($event)" />
+                        <label *ngIf="option.id === 'SSL' && !onlyOneServiceLine" class="custom-control-label"
+                            [for]="child.id">{{ child.splitlabel }}</label>
+                        <label *ngIf="option.id !== 'SSL' && !onlyOneServiceLine" class="custom-control-label"
+                            [for]="child.id">{{ child.label }}</label>
+                        <label *ngIf="onlyOneServiceLine" class="custom-control-label"
+                            [for]="child.id">{{ child.label }}</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+</div>
+
+
+<!-- <a  style="color:#fff" (click)="toggle()">click to check</a>
+<div *ngIf="show === true" style="color:#fff">
+    <p>one</p>
+    <p>two</p>
+    <p>three</p>
+    <p>four</p>
+</div> -->

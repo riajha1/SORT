@@ -1,0 +1,720 @@
+<a class="nav-link print" (click)="saveWord()">
+    <i class="material-icons">
+    print
+  </i>
+</a>
+<div id="exportContent" #exportContent style="display:none">
+    <div class="col-12 print-view p-0">
+        <p style="font-size: 14.667px; font-family: 'Calibri (Body)'">Created: {{create}}</p>
+        <div class="row">
+            <div class="col-12">
+                <div class="row header-bar px-2 py-1">
+                    <div class="col-4 header d-flex align-items-end align-items-center">
+                        <img src="{{this.iconsWord.EyLogo}}" style="width: 50px;height: 50px;" alt="logo sort">
+                        <span class="text-sort">| Service Offering Reference Tool</span>
+                    </div>
+                    <div class="col-8 text-right pt-2">
+                        <span class="mb-0 mr-2 small-text" *ngIf="filter.client.GISId">
+              {{filter.client.ClientName}}
+              <span *ngIf="filter.client.MDMId">({{filter.client.MDMId}})</span>
+                        <span *ngIf="!filter.client.MDMId && filter.client.gfisid">({{filter.client.gfisid}})</span>
+                        </span>
+                    </div>
+                    <div>
+                        <span class="mb-0 mr-2 small-text location">Location Selected: {{country}}</span>
+                    </div>
+                </div>
+            </div>
+            <nav aria-label="breadcrumb" *ngIf="breadcrumb" class="breadcrumb pt-3 pb-0 mb-0 col-12">
+                <div class="row" style="width: 100%;">
+                    <div class="col" style="margin: 0;">
+                        <span *ngIf="this.originServiceString !== ''" matToolTip="Origin Of Service">{{originServiceString}} |
+            </span>
+                        <span *ngFor="let b of breadcrumb.sl; let i = index" matTooltip="Service Line" #ref matTooltipPosition="above">{{b}}
+              <span *ngIf="breadcrumb.sl.length !== i + 1" class="comma">,</span>
+                        <span *ngIf="breadcrumb.sl.length === i + 1" class="mx-1">|</span>
+                        </span>
+                        <span *ngFor="let b of breadcrumb.ssl; let i = index" matTooltip="Sub Service Line" #ref matTooltipPosition="above">{{b}}
+              <span *ngIf="breadcrumb.ssl.length !== i + 1" class="comma">,</span>
+                        <span *ngIf="breadcrumb.ssl.length === i + 1" class="mx-1">|</span></span>
+                        <span *ngFor="let b of breadcrumb.competency; let i = index" matTooltip="Competency/Domain" #ref matTooltipPosition="above">{{b}}
+              <span *ngIf="breadcrumb.competency.length !== i + 1" class="comma">,</span>
+                        <span *ngIf="breadcrumb.competency.length === i + 1" class="mx-1">|</span></span>
+                        <span *ngFor="let b of breadcrumb.solution; let i = index" matTooltip="Solution" #ref matTooltipPosition="above">{{b}}
+              <span *ngIf="breadcrumb.solution.length !== i + 1" class="comma">,</span>
+                        <span *ngIf="breadcrumb.solution.length === i + 1" class="mx-1">|</span></span>
+                        <span *ngFor="let b of breadcrumb.sector; let i = index" matTooltip="Sector" #ref matTooltipPosition="above">{{b}}
+              <span *ngIf="breadcrumb.sector.length !== i + 1" class="comma">,</span>
+                        <span *ngIf="breadcrumb.sector.length === i + 1" class="mx-1">|</span></span>
+                        <span *ngFor="let b of breadcrumb.client; let i = index" matTooltip="Client Need" #ref matTooltipPosition="above">{{b}}
+              <span *ngIf="breadcrumb.client.length !== i + 1" class="comma">,</span>
+                        <span *ngIf="breadcrumb.client.length === i + 1" class="mx-1">|</span></span>
+                    </div>
+                </div>
+            </nav>
+            <div *ngIf="serviceData1.header" class="col-11 first-section pr-0 pt-2">
+                <h2 style="font-family: 'Calibri (Body)'">{{serviceData1.header.title}}
+                </h2>
+                <p style="font-size: 14.667px; font-weight: bold;  font-family: 'Calibri (Body)'">
+                    {{serviceData1.header.headline}}
+                </p>
+                <div style="  font-family: 'Calibri (Body)'" [innerHTML]="serviceData1.header.description | safehtml">
+                </div>
+                <div class="row">
+                    <section style="font-family: 'Calibri', 'Calibri', Calibri, 'Calibri', sans-serif" *ngIf="serviceData1.header.collateral !== ''" [innerHTML]="serviceData1.header.collateral | safehtml">
+                    </section>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-11 first-section pr-0 pt-2">
+                <h2 style="  font-family: 'Calibri (Body)'">Independence Restrictions</h2>
+                <div>
+                    <p style="font-size: 14.667px;font-family: 'Calibri (Body)'">
+                        Restrictions shown here must be evaluated in conjunction with the Independence Considerations section below. Symbols in the grid may change based on delivery method selected.
+                    </p>
+                    <p style="  font-family: 'Calibri (Body)'" *ngIf="activityGrid !== ''">
+                        This service has an Activity Grid</p>
+                    <div style=" font-size: 12px !important; font-family: 'Calibri (Body)'" [innerHTML]="activityGrid | safehtml">
+                    </div>
+
+                </div>
+                <div>
+                    <table style="  border: 1px solid black" *ngIf="serviceData1.independece !== null">
+                        <thead>
+                            <tr style="  border: 1px solid black">
+                                <th colspan="2" style="text-align: center; border: 1px solid black"> SEC Channel 1 PIE
+                                </th>
+                                <th *ngIf="serviceData1.independece.euAuditedNoValuation !== ''" colspan="3" style="text-align: center; border: 1px solid black"> EU Channel 1 PIE
+                                </th>
+                                <th *ngIf="serviceData1.independece.euAuditedNoValuation === ''" colspan="2" style="text-align: center; border: 1px solid black"> EU Channel 1 PIE
+                                </th>
+                                <th colspan="2" style="text-align: center; border: 1px solid black">Other Channel 1 PIE</th>
+                                <th colspan="2" style="text-align: center; border: 1px solid black"> Other Channel 1
+                                </th>
+                                <th style="text-align: center; border: 1px solid black">Channel 2</th>
+                            </tr>
+
+                            <tr style="  border: 1px solid black">
+                                <th *ngIf="overWrite" style="text-align: center; border: 1px solid black">
+                                    <span *ngIf="highlight.includes(1)" style="text-align: center;color:red">
+                    {{serviceData1.independece.secaudited}}
+                  </span>
+                                    <span *ngIf="!highlight.includes(1)">
+                    {{serviceData1.independece.secaudited}}
+                  </span>
+                                </th>
+                                <th *ngIf="!overWrite" style="text-align: center; border: 1px solid black">
+                                    {{serviceData1.independece.secaudited}}</th>
+
+
+                                <th *ngIf="overWrite" style="text-align: center; border: 1px solid black">
+                                    <span *ngIf="highlight.includes(2)" style="text-align: center;color:red">
+                    {{serviceData1.independece.secsubject}}
+                  </span>
+                                    <span *ngIf="!highlight.includes(2)">
+                    {{serviceData1.independece.secsubject}}
+                  </span>
+                                </th>
+                                <th *ngIf="!overWrite" style="text-align: center; border: 1px solid black">
+                                    {{serviceData1.independece.secsubject}}</th>
+
+                                <th *ngIf="overWrite" style="text-align: center; border: 1px solid black">
+                                    <span *ngIf="highlight.includes(3)" style="text-align: center;color:red">
+                    {{serviceData1.independece.euaudited}}
+                  </span>
+                                    <span *ngIf="!highlight.includes(3)">
+                    {{serviceData1.independece.euaudited}}
+                  </span>
+                                </th>
+                                <th *ngIf="!overWrite" style="text-align: center; border: 1px solid black">
+                                    {{serviceData1.independece.euaudited}}</th>
+
+
+                                <th *ngIf="overWrite" style="text-align: center; border: 1px solid black">
+                                    <span *ngIf="highlight.includes(4)" style="text-align: center;color:red">
+                    {{serviceData1.independece.eusubject}}
+                  </span>
+                                    <span *ngIf="!highlight.includes(4)">
+                    {{serviceData1.independece.eusubject}}
+                  </span>
+                                </th>
+                                <th *ngIf="!overWrite" style="text-align: center; border: 1px solid black">
+                                    {{serviceData1.independece.eusubject}}</th>
+
+
+                                <th *ngIf="overWrite && permsibilityget.Euchannel1Piethree !== undefined && permsibilityget.Euchannel1Piethree !== null && permsibilityget.Euchannel1Piethree !== '' " style="text-align: center; border: 1px solid black">
+                                    <span *ngIf="highlight.includes(5)" style="text-align: center;color:red">
+                    {{serviceData1.independece.euAuditedNoValuation}}
+                  </span>
+                                    <span *ngIf="!highlight.includes(5)">
+                    {{serviceData1.independece.euAuditedNoValuation}}
+                  </span>
+                                </th>
+                                <th *ngIf="!overWrite && serviceData1.independece.euAuditedNoValuation !== ''" style="text-align: center; border: 1px solid black">
+                                    {{serviceData1.independece.euAuditedNoValuation}}</th>
+
+
+                                <th *ngIf="overWrite" style="text-align: center; border: 1px solid black">
+                                    <span *ngIf="highlight.includes(6)" style="text-align: center;color:red">
+                    {{serviceData1.independece.otAudited}}
+                  </span>
+                                    <span *ngIf="!highlight.includes(6)">
+                    {{serviceData1.independece.otAudited}}
+                  </span>
+                                </th>
+                                <th *ngIf="!overWrite" style="text-align: center; border: 1px solid black">
+                                    {{serviceData1.independece.otAudited}}</th>
+
+
+                                <th *ngIf="overWrite" style="text-align: center; border: 1px solid black">
+                                    <span *ngIf="highlight.includes(7)" style="text-align: center;color:red">
+                    {{serviceData1.independece.otSubject}}
+                  </span>
+                                    <span *ngIf="!highlight.includes(7)">
+                    {{serviceData1.independece.otSubject}}
+                  </span>
+                                </th>
+                                <th *ngIf="!overWrite" style="text-align: center; border: 1px solid black">
+                                    {{serviceData1.independece.otSubject}}
+                                </th>
+
+
+                                <th *ngIf="overWrite" style="text-align: center; border: 1px solid black">
+                                    <span *ngIf="highlight.includes(8)" style="text-align: center;color:red">
+                    {{serviceData1.independece.ch1}}
+                  </span>
+                                    <span *ngIf="!highlight.includes(8)">
+                    {{serviceData1.independece.ch1}}
+                  </span>
+                                </th>
+                                <th *ngIf="!overWrite" style="text-align: center; border: 1px solid black">
+                                    {{serviceData1.independece.ch1}}</th>
+
+
+                                <th *ngIf="overWrite" style="text-align: center; border: 1px solid black">
+                                    <span *ngIf="highlight.includes(9)" style="text-align: center;color:red">
+                    {{serviceData1.independece.ch1nsa !== null ? serviceData1.independece.ch1nsa : ''}}
+                  </span>
+                                    <span *ngIf="!highlight.includes(9)">
+                    {{serviceData1.independece.ch1nsa !== null ? serviceData1.independece.ch1nsa : ''}}
+                  </span>
+                                </th>
+                                <th *ngIf="!overWrite" style="text-align: center; border: 1px solid black">
+                                    {{serviceData1.independece.ch1nsa !== null ? serviceData1.independece.ch1nsa : ''}}</th>
+
+
+                                <th *ngIf="overWrite" style="text-align: center; border: 1px solid black">
+                                    <span *ngIf="highlight.includes(10)" style="text-align: center;color:red">
+                    {{serviceData1.independece.ch2}}
+                  </span>
+                                    <span *ngIf="!highlight.includes(10)">
+                    {{serviceData1.independece.ch2}}
+                  </span>
+                                </th>
+                                <th *ngIf="!overWrite" style="text-align: center; border: 1px solid black">
+                                    {{serviceData1.independece.ch2}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="  border: 1px solid black">
+                                <td *ngIf="!overWrite" style="text-align: center;">
+                                    <span [ngSwitch]="serviceData1.independece.secauditedValue">
+                    <img src="{{this.iconsWord.Check}}" *ngSwitchCase="'Allowed'" alt="logo Check">
+                    <img src="{{this.iconsWord.Warning}}" *ngSwitchCase="'ASTCC'" alt="logo Check">
+                    <img src="{{this.iconsWord.Error}}" *ngSwitchCase="'AA'" alt="logo Check">
+                    <img src="{{this.iconsWord.NotInterested}}" *ngSwitchCase="'Prohib'" alt="logo Check">
+                    <label *ngSwitchCase="'N/A'">N/A</label>
+                  </span>
+
+                                </td>
+                                <td *ngIf="overWrite" style="text-align: center">
+                                    <span style="text-align: center; border: 1px solid red; text-align: center;" *ngIf="highlight.includes(1)" [ngSwitch]="serviceData1.independece.secauditedValue">
+                    <img src="{{this.iconsWord.Check}}" *ngSwitchCase="'Allowed'" alt="logo Check">
+                    <img src="{{this.iconsWord.Warning}}" *ngSwitchCase="'ASTCC'" alt="logo Check">
+                    <img src="{{this.iconsWord.Error}}" *ngSwitchCase="'AA'" alt="logo Check">
+                    <img src="{{this.iconsWord.NotInterested}}" *ngSwitchCase="'Prohib'" alt="logo Check">
+                    <label style="color:red" *ngSwitchCase="'N/A'">N/A</label>
+                  </span>
+                                    <span *ngIf="!highlight.includes(1)" style="text-align: center;" [ngSwitch]="serviceData1.independece.secauditedValue">
+                    <img src="{{this.iconsWord.Check}}" *ngSwitchCase="'Allowed'" alt="logo Check">
+                    <img src="{{this.iconsWord.Warning}}" *ngSwitchCase="'ASTCC'" alt="logo Check">
+                    <img src="{{this.iconsWord.Error}}" *ngSwitchCase="'AA'" alt="logo Check">
+                    <img src="{{this.iconsWord.NotInterested}}" *ngSwitchCase="'Prohib'" alt="logo Check">
+                    <label *ngSwitchCase="'N/A'">N/A</label>
+                  </span>
+                                </td>
+                                <td *ngIf="!overWrite" style="text-align: center;">
+                                    <span [ngSwitch]="serviceData1.independece.secsubjectValue">
+                    <img src="{{this.iconsWord.Check}}" *ngSwitchCase="'Allowed'" alt="logo Check">
+                    <img src="{{this.iconsWord.Warning}}" *ngSwitchCase="'ASTCC'" alt="logo Check">
+                    <img src="{{this.iconsWord.Error}}" *ngSwitchCase="'AA'" alt="logo Check">
+                    <img src="{{this.iconsWord.NotInterested}}" *ngSwitchCase="'Prohib'" alt="logo Check">
+                    <label *ngSwitchCase="'N/A'">N/A</label>
+                  </span>
+                                </td>
+                                <td *ngIf="overWrite" style="text-align: center;">
+                                    <span style="text-align: center; border: 1px solid red; text-align: center;" *ngIf="highlight.includes(2)" [ngSwitch]="serviceData1.independece.secsubjectValue">
+                    <img src="{{this.iconsWord.Check}}" *ngSwitchCase="'Allowed'" alt="logo Check">
+                    <img src="{{this.iconsWord.Warning}}" *ngSwitchCase="'ASTCC'" alt="logo Check">
+                    <img src="{{this.iconsWord.Error}}" *ngSwitchCase="'AA'" alt="logo Check">
+                    <img src="{{this.iconsWord.NotInterested}}" *ngSwitchCase="'Prohib'" alt="logo Check">
+                    <label style="color:red" *ngSwitchCase="'N/A'">N/A</label>
+                  </span>
+                                    <span *ngIf="!highlight.includes(2)" [ngSwitch]="serviceData1.independece.secsubjectValue">
+                    <img src="{{this.iconsWord.Check}}" *ngSwitchCase="'Allowed'" alt="logo Check">
+                    <img src="{{this.iconsWord.Warning}}" *ngSwitchCase="'ASTCC'" alt="logo Check">
+                    <img src="{{this.iconsWord.Error}}" *ngSwitchCase="'AA'" alt="logo Check">
+                    <img src="{{this.iconsWord.NotInterested}}" *ngSwitchCase="'Prohib'" alt="logo Check">
+                    <label *ngSwitchCase="'N/A'">N/A</label>
+                  </span>
+                                </td>
+                                <td *ngIf="!overWrite" style="text-align: center;">
+                                    <span [ngSwitch]="serviceData1.independece.euauditedValue">
+                    <img src="{{this.iconsWord.Check}}" *ngSwitchCase="'Allowed'" alt="logo Check">
+                    <img src="{{this.iconsWord.Warning}}" *ngSwitchCase="'ASTCC'" alt="logo Check">
+                    <img src="{{this.iconsWord.Error}}" *ngSwitchCase="'AA'" alt="logo Check">
+                    <img src="{{this.iconsWord.NotInterested}}" *ngSwitchCase="'Prohib'" alt="logo Check">
+                    <label *ngSwitchCase="'N/A'">N/A</label>
+                  </span>
+                                </td>
+                                <td *ngIf="overWrite" style="text-align: center">
+                                    <span style="text-align: center; border: 1px solid red; text-align: center;" *ngIf="highlight.includes(3)" [ngSwitch]="serviceData1.independece.euauditedValue">
+                    <img src="{{this.iconsWord.Check}}" *ngSwitchCase="'Allowed'" alt="logo Check">
+                    <img src="{{this.iconsWord.Warning}}" *ngSwitchCase="'ASTCC'" alt="logo Check">
+                    <img src="{{this.iconsWord.Error}}" *ngSwitchCase="'AA'" alt="logo Check">
+                    <img src="{{this.iconsWord.NotInterested}}" *ngSwitchCase="'Prohib'" alt="logo Check">
+                    <label style="color:red" *ngSwitchCase="'N/A'">N/A</label>
+                  </span>
+                                    <span *ngIf="!highlight.includes(3)" [ngSwitch]="serviceData1.independece.euauditedValue">
+                    <img src="{{this.iconsWord.Check}}" *ngSwitchCase="'Allowed'" alt="logo Check">
+                    <img src="{{this.iconsWord.Warning}}" *ngSwitchCase="'ASTCC'" alt="logo Check">
+                    <img src="{{this.iconsWord.Error}}" *ngSwitchCase="'AA'" alt="logo Check">
+                    <img src="{{this.iconsWord.NotInterested}}" *ngSwitchCase="'Prohib'" alt="logo Check">
+                    <label *ngSwitchCase="'N/A'">N/A</label>
+                  </span>
+                                </td>
+                                <td *ngIf="!overWrite" style="text-align: center;">
+                                    <span [ngSwitch]="serviceData1.independece.eusubjectValue">
+                    <img src="{{this.iconsWord.Check}}" *ngSwitchCase="'Allowed'" alt="logo Check">
+                    <img src="{{this.iconsWord.Warning}}" *ngSwitchCase="'ASTCC'" alt="logo Check">
+                    <img src="{{this.iconsWord.Error}}" *ngSwitchCase="'AA'" alt="logo Check">
+                    <img src="{{this.iconsWord.NotInterested}}" *ngSwitchCase="'Prohib'" alt="logo Check">
+                    <label *ngSwitchCase="'N/A'">N/A</label>
+                  </span>
+                                </td>
+                                <td *ngIf="overWrite" style="text-align: center">
+                                    <span style="text-align: center; border: 1px solid red; text-align: center;" *ngIf=" highlight.includes(4)" [ngSwitch]="serviceData1.independece.eusubjectValue">
+                    <img src="{{this.iconsWord.Check}}" *ngSwitchCase="'Allowed'" alt="logo Check">
+                    <img src="{{this.iconsWord.Warning}}" *ngSwitchCase="'ASTCC'" alt="logo Check">
+                    <img src="{{this.iconsWord.Error}}" *ngSwitchCase="'AA'" alt="logo Check">
+                    <img src="{{this.iconsWord.NotInterested}}" *ngSwitchCase="'Prohib'" alt="logo Check">
+                    <label style="color:red" *ngSwitchCase="'N/A'">N/A</label>
+                  </span>
+                                    <span *ngIf="!highlight.includes(4)" [ngSwitch]="serviceData1.independece.eusubjectValue">
+                    <img src="{{this.iconsWord.Check}}" *ngSwitchCase="'Allowed'" alt="logo Check">
+                    <img src="{{this.iconsWord.Warning}}" *ngSwitchCase="'ASTCC'" alt="logo Check">
+                    <img src="{{this.iconsWord.Error}}" *ngSwitchCase="'AA'" alt="logo Check">
+                    <img src="{{this.iconsWord.NotInterested}}" *ngSwitchCase="'Prohib'" alt="logo Check">
+                    <label *ngSwitchCase="'N/A'">N/A</label>
+                  </span>
+                                </td>
+                                <td *ngIf="!overWrite && serviceData1.independece.euAuditedNoValuation !== ''" style="text-align: center;">
+                                    <span [ngSwitch]="serviceData1.independece.euAuditedNoValuationValue">
+                    <img src="{{this.iconsWord.Check}}" *ngSwitchCase="'Allowed'" alt="logo Check">
+                    <img src="{{this.iconsWord.Warning}}" *ngSwitchCase="'ASTCC'" alt="logo Check">
+                    <img src="{{this.iconsWord.Error}}" *ngSwitchCase="'AA'" alt="logo Check">
+                    <img src="{{this.iconsWord.NotInterested}}" *ngSwitchCase="'Prohib'" alt="logo Check">
+                    <label *ngSwitchCase="'N/A'">N/A</label>
+                  </span>
+                                </td>
+                                <td *ngIf="overWrite  && serviceData1.independece.euAuditedNoValuation !== ''" style="text-align: center;">
+                                    <span style="text-align: center; border: 1px solid red; text-align: center;" *ngIf="highlight.includes(5)" [ngSwitch]="serviceData1.independece.euAuditedNoValuationValue">
+                    <img src="{{this.iconsWord.Check}}" *ngSwitchCase="'Allowed'" alt="logo Check">
+                    <img src="{{this.iconsWord.Warning}}" *ngSwitchCase="'ASTCC'" alt="logo Check">
+                    <img src="{{this.iconsWord.Error}}" *ngSwitchCase="'AA'" alt="logo Check">
+                    <img src="{{this.iconsWord.NotInterested}}" *ngSwitchCase="'Prohib'" alt="logo Check">
+                    <label style="color:red" *ngSwitchCase="'N/A'">N/A</label>
+                  </span>
+                                    <span *ngIf="!highlight.includes(5)" style="text-align: center;" [ngSwitch]="serviceData1.independece.euAuditedNoValuationValue">
+                    <img src="{{this.iconsWord.Check}}" *ngSwitchCase="'Allowed'" alt="logo Check">
+                    <img src="{{this.iconsWord.Warning}}" *ngSwitchCase="'ASTCC'" alt="logo Check">
+                    <img src="{{this.iconsWord.Error}}" *ngSwitchCase="'AA'" alt="logo Check">
+                    <img src="{{this.iconsWord.NotInterested}}" *ngSwitchCase="'Prohib'" alt="logo Check">
+                    <label *ngSwitchCase="'N/A'">N/A</label>
+                  </span>
+                                </td>
+                                <td *ngIf="!overWrite" style="text-align: center">
+                                    <span style="text-align: center;" [ngSwitch]="serviceData1.independece.otAuditedValue">
+                    <img src="{{this.iconsWord.Check}}" *ngSwitchCase="'Allowed'" alt="logo Check">
+                    <img src="{{this.iconsWord.Warning}}" *ngSwitchCase="'ASTCC'" alt="logo Check">
+                    <img src="{{this.iconsWord.Error}}" *ngSwitchCase="'AA'" alt="logo Check">
+                    <img src="{{this.iconsWord.NotInterested}}" *ngSwitchCase="'Prohib'" alt="logo Check">
+                    <label *ngSwitchCase="'N/A'">N/A</label>
+                  </span>
+                                </td>
+                                <td *ngIf="overWrite" style="text-align: center">
+                                    <span style="text-align: center; border: 1px solid red; text-align: center;" *ngIf="highlight.includes(6)" [ngSwitch]="serviceData1.independece.otAuditedValue">
+                    <img src="{{this.iconsWord.Check}}" *ngSwitchCase="'Allowed'" alt="logo Check">
+                    <img src="{{this.iconsWord.Warning}}" *ngSwitchCase="'ASTCC'" alt="logo Check">
+                    <img src="{{this.iconsWord.Error}}" *ngSwitchCase="'AA'" alt="logo Check">
+                    <img src="{{this.iconsWord.NotInterested}}" *ngSwitchCase="'Prohib'" alt="logo Check">
+                    <label style="color:red" *ngSwitchCase="'N/A'">N/A</label>
+                  </span>
+                                    <span *ngIf="!highlight.includes(6)" style="text-align: center;" [ngSwitch]="serviceData1.independece.otAuditedValue">
+                    <img src="{{this.iconsWord.Check}}" *ngSwitchCase="'Allowed'" alt="logo Check">
+                    <img src="{{this.iconsWord.Warning}}" *ngSwitchCase="'ASTCC'" alt="logo Check">
+                    <img src="{{this.iconsWord.Error}}" *ngSwitchCase="'AA'" alt="logo Check">
+                    <img src="{{this.iconsWord.NotInterested}}" *ngSwitchCase="'Prohib'" alt="logo Check">
+                    <label *ngSwitchCase="'N/A'">N/A</label>
+                  </span>
+                                </td>
+                                <td *ngIf="!overWrite" style="text-align: center;">
+                                    <span [ngSwitch]="serviceData1.independece.otSubjectValue">
+                    <img src="{{this.iconsWord.Check}}" *ngSwitchCase="'Allowed'" alt="logo Check">
+                    <img src="{{this.iconsWord.Warning}}" *ngSwitchCase="'ASTCC'" alt="logo Check">
+                    <img src="{{this.iconsWord.Error}}" *ngSwitchCase="'AA'" alt="logo Check">
+                    <img src="{{this.iconsWord.NotInterested}}" *ngSwitchCase="'Prohib'" alt="logo Check">
+                    <label *ngSwitchCase="'N/A'">N/A</label>
+                  </span>
+                                </td>
+                                <td *ngIf="overWrite" style="text-align: center">
+                                    <span style="text-align: center; border: 1px solid red; text-align: center;" *ngIf="highlight.includes(7)" [ngSwitch]="serviceData1.independece.otSubjectValue">
+                    <img src="{{this.iconsWord.Check}}" *ngSwitchCase="'Allowed'" alt="logo Check">
+                    <img src="{{this.iconsWord.Warning}}" *ngSwitchCase="'ASTCC'" alt="logo Check">
+                    <img src="{{this.iconsWord.Error}}" *ngSwitchCase="'AA'" alt="logo Check">
+                    <img src="{{this.iconsWord.NotInterested}}" *ngSwitchCase="'Prohib'" alt="logo Check">
+                    <label style="color:red" *ngSwitchCase="'N/A'">N/A</label>
+                  </span>
+                                    <span *ngIf="!highlight.includes(7)" [ngSwitch]="serviceData1.independece.otSubjectValue">
+                    <img src="{{this.iconsWord.Check}}" *ngSwitchCase="'Allowed'" alt="logo Check">
+                    <img src="{{this.iconsWord.Warning}}" *ngSwitchCase="'ASTCC'" alt="logo Check">
+                    <img src="{{this.iconsWord.Error}}" *ngSwitchCase="'AA'" alt="logo Check">
+                    <img src="{{this.iconsWord.NotInterested}}" *ngSwitchCase="'Prohib'" alt="logo Check">
+                    <label *ngSwitchCase="'N/A'">N/A</label>
+                  </span>
+                                </td>
+                                <td *ngIf="!overWrite" style="text-align: center;">
+                                    <span style="text-align: center;" [ngSwitch]="serviceData1.independece.ch1value">
+                    <img src="{{this.iconsWord.Check}}" *ngSwitchCase="'Allowed'" alt="logo Check">
+                    <img src="{{this.iconsWord.Warning}}" *ngSwitchCase="'ASTCC'" alt="logo Check">
+                    <img src="{{this.iconsWord.Error}}" *ngSwitchCase="'AA'" alt="logo Check">
+                    <img src="{{this.iconsWord.NotInterested}}" *ngSwitchCase="'Prohib'" alt="logo Check">
+                    <label *ngSwitchCase="'N/A'">N/A</label>
+                  </span>
+                                </td>
+                                <td *ngIf="overWrite" style="text-align: center">
+                                    <span style="text-align: center; border: 1px solid red; text-align: center;" *ngIf=" highlight.includes(8)" [ngSwitch]="serviceData1.independece.ch1value">
+                    <img src="{{this.iconsWord.Check}}" *ngSwitchCase="'Allowed'" alt="logo Check">
+                    <img src="{{this.iconsWord.Warning}}" *ngSwitchCase="'ASTCC'" alt="logo Check">
+                    <img src="{{this.iconsWord.Error}}" *ngSwitchCase="'AA'" alt="logo Check">
+                    <img src="{{this.iconsWord.NotInterested}}" *ngSwitchCase="'Prohib'" alt="logo Check">
+                    <label style="color:red" *ngSwitchCase="'N/A'">N/A</label>
+                  </span>
+                                    <span *ngIf=" !highlight.includes(8)" [ngSwitch]="serviceData1.independece.ch1value">
+                    <img src="{{this.iconsWord.Check}}" *ngSwitchCase="'Allowed'" alt="logo Check">
+                    <img src="{{this.iconsWord.Warning}}" *ngSwitchCase="'ASTCC'" alt="logo Check">
+                    <img src="{{this.iconsWord.Error}}" *ngSwitchCase="'AA'" alt="logo Check">
+                    <img src="{{this.iconsWord.NotInterested}}" *ngSwitchCase="'Prohib'" alt="logo Check">
+                    <label *ngSwitchCase="'N/A'">N/A</label>
+                  </span>
+                                </td>
+                                <td *ngIf="!overWrite" style="text-align: center;">
+                                    <span style="text-align: center;" [ngSwitch]="serviceData1.independece.ch1nsavalue">
+                    <img src="{{this.iconsWord.Check}}" *ngSwitchCase="'Allowed'" alt="logo Check">
+                    <img src="{{this.iconsWord.Warning}}" *ngSwitchCase="'ASTCC'" alt="logo Check">
+                    <img src="{{this.iconsWord.Error}}" *ngSwitchCase="'AA'" alt="logo Check">
+                    <img src="{{this.iconsWord.NotInterested}}" *ngSwitchCase="'Prohib'" alt="logo Check">
+                    <label *ngSwitchCase="'N/A'">N/A</label>
+                  </span>
+                                </td>
+                                <td *ngIf="overWrite" style="text-align: center">
+                                    <span *ngIf="highlight.includes(9)" style="text-align: center; border: 1px solid red; text-align: center;" [ngSwitch]="serviceData1.independece.ch1nsavalue">
+                    <img src="{{this.iconsWord.Check}}" *ngSwitchCase="'Allowed'" alt="logo Check">
+                    <img src="{{this.iconsWord.Warning}}" *ngSwitchCase="'ASTCC'" alt="logo Check">
+                    <img src="{{this.iconsWord.Error}}" *ngSwitchCase="'AA'" alt="logo Check">
+                    <img src="{{this.iconsWord.NotInterested}}" *ngSwitchCase="'Prohib'" alt="logo Check">
+                    <label style="color:red" *ngSwitchCase="'N/A'">N/A</label>
+                  </span>
+                                    <span *ngIf="!highlight.includes(9)" [ngSwitch]="serviceData1.independece.ch1nsavalue">
+                    <img src="{{this.iconsWord.Check}}" *ngSwitchCase="'Allowed'" alt="logo Check">
+                    <img src="{{this.iconsWord.Warning}}" *ngSwitchCase="'ASTCC'" alt="logo Check">
+                    <img src="{{this.iconsWord.Error}}" *ngSwitchCase="'AA'" alt="logo Check">
+                    <img src="{{this.iconsWord.NotInterested}}" *ngSwitchCase="'Prohib'" alt="logo Check">
+                    <label *ngSwitchCase="'N/A'">N/A</label>
+                  </span>
+                                </td>
+                                <td *ngIf="!overWrite" style="text-align: center;">
+                                    <span style="text-align: center;" [ngSwitch]="serviceData1.independece.ch2value">
+                    <img src="{{this.iconsWord.Check}}" *ngSwitchCase="'Allowed'" alt="logo Check">
+                    <img src="{{this.iconsWord.Warning}}" *ngSwitchCase="'ASTCC'" alt="logo Check">
+                    <img src="{{this.iconsWord.Error}}" *ngSwitchCase="'AA'" alt="logo Check">
+                    <img src="{{this.iconsWord.NotInterested}}" *ngSwitchCase="'Prohib'" alt="logo Check">
+                    <label *ngSwitchCase="'N/A'">N/A</label>
+                  </span>
+                                </td>
+                                <td *ngIf="overWrite" style="text-align: center">
+                                    <span *ngIf="highlight.includes(10)" style="text-align: center; border: 1px solid red; text-align: center;" [ngSwitch]="serviceData1.independece.ch1nsavalue" [ngSwitch]="serviceData1.independece.ch2value">
+                    <img src="{{this.iconsWord.Check}}" *ngSwitchCase="'Allowed'" alt="logo Check">
+                    <img src="{{this.iconsWord.Warning}}" *ngSwitchCase="'ASTCC'" alt="logo Check">
+                    <img src="{{this.iconsWord.Error}}" *ngSwitchCase="'AA'" alt="logo Check">
+                    <img src="{{this.iconsWord.NotInterested}}" *ngSwitchCase="'Prohib'" alt="logo Check">
+                    <label style="color:red" *ngSwitchCase="'N/A'">N/A</label>
+                  </span>
+                                    <span *ngIf="!highlight.includes(10)" [ngSwitch]="serviceData1.independece.ch2value">
+                    <img src="{{this.iconsWord.Check}}" *ngSwitchCase="'Allowed'" alt="logo Check">
+                    <img src="{{this.iconsWord.Warning}}" *ngSwitchCase="'ASTCC'" alt="logo Check">
+                    <img src="{{this.iconsWord.Error}}" *ngSwitchCase="'AA'" alt="logo Check">
+                    <img src="{{this.iconsWord.NotInterested}}" *ngSwitchCase="'Prohib'" alt="logo Check">
+                    <label *ngSwitchCase="'N/A'">N/A</label>
+                  </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-11 first-section pr-0 pt-2">
+                <!-- Independence Consideration -->
+                <h2 style=" font-family: 'Calibri (Body)'">Independence Considerations</h2>
+                <h5 style="font-size: 14.667px;  font-family: 'Calibri (Body)'">Read this section before moving into the specific considerations relevant for this service below</h5>
+                <h5 style="font-size: 14.667px;  font-family: 'Calibri (Body)'">Read the Overarching Independence Considerations section before moving into the specific considerations relevant for this service below</h5>
+                <h5 style=" font-size: 14.667px;  font-family: 'Calibri (Body)'">Select your form(s) of delivery to see related guidance</h5>
+
+                <div *ngFor="let item of serviceData1.delivery">
+                    <h4 style=" font-size: 14.667px;   font-family: 'Calibri (Body)'">{{item.DeliveryMethodName}}
+                    </h4>
+                    <h5 style="font-size: 14.667px;  font-family: 'Calibri (Body)'">Form of Delivery Guidance</h5>
+                    <div style=" font-size: 12px !important; font-family: 'Calibri (Body)'" [innerHTML]="item.DeliveryMethodDescription | safehtml"></div>
+                </div>
+                <div *ngIf="serviceData1.considerations">
+                    <h5 style="font-size: 14.667px; font-family: 'Calibri (Body)'">Independence considerations which generally apply to this service</h5>
+                    <div *ngFor=" let item of serviceData1.considerations">
+                        <h5 style=" font-size: 14.667px;  font-family: 'Calibri (Body)'">{{item.IndependenceName}}
+                        </h5>
+                        <div style="  font-family: 'Calibri (Body)'" [innerHTML]="'<strong>General Principles:&nbsp;</strong>' + item.GeneralPrinciples | safehtml"></div>
+                        <div style="  font-family: 'Calibri (Body)'" *ngIf="item.SpecificConsiderations != ''" [innerHTML]="'<strong>Service Specific Considerations:&nbsp;</strong>' +item.SpecificConsiderations | safehtml">
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- <app-independence-consideration [independence]="serviceData.considerations"></app-independence-consideration> -->
+        <section *ngIf="!isGlobal">
+            <section *ngIf="!loading">
+                <div>
+                    <h2 style="  font-family: 'Calibri (Body)'">Read additional location considerations </h2>
+                    <div *ngIf="considerations && considerations.region !== ''">
+                        <h4 style="  font-family: 'Calibri (Body)'">{{ region }} Independence Considerations
+                        </h4>
+                        <div>
+                            <div style="  font-family: 'Calibri (Body)'" [innerHTML]="considerations.region | safehtml">
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="considerations && considerations.location !== ''">
+                        <h4 style="  font-family: 'Calibri (Body)'">{{ country }} Independence Considerations
+                        </h4>
+                        <div>
+                            <div style="  font-family: 'Calibri (Body)'" [innerHTML]="considerations.location | safehtml">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+        <!-- <app-country-considerations [allCountries]="CountryData" [idService]="serviceData1.business.idService"
+      [countryCodeSelected]="country">
+    </app-country-considerations> -->
+        <!-- Conflicts Considerations -->
+        <hr>
+        <div class="section_independent__item" #conflictsDiv>
+            <h2 style="  font-family: 'Calibri (Body)'">Conflicts Considerations</h2>
+            <div class="col-12 conflicts_box" *ngIf="serviceData1.conflicts">
+                <div class="row border-0">
+                    <div class="col-12 border-0 p-0 conflict_box_title">
+                        <strong>
+              <span *ngIf="serviceData1.conflicts.checkRequired === 0">Conflict Check Not
+                Required</span>
+              <span *ngIf="serviceData1.conflicts.checkRequired === 1">Conflict Check Required:
+                Mandatory </span>
+              <span *ngIf="serviceData1.conflicts.checkRequired === 2">Conflict Check Required:
+                Potentially based on the
+                activity</span>
+            </strong>
+                    </div>
+                    <app-read-more [height]="48" *ngIf="serviceData1.conflicts" [enable]="false" [targetdiv]="conflictsDiv">
+                        <section *ngIf="serviceData1.conflicts.checkRequired === 0 && serviceData1.conflicts.never" [innerHTML]="serviceData1.conflicts.never | safehtml"></section>
+                        <section *ngIf="serviceData1.conflicts.checkRequired === 1 && serviceData1.conflicts.always" [innerHTML]="serviceData1.conflicts.always | safehtml"></section>
+                        <section *ngIf="serviceData1.conflicts.checkRequired === 2 && serviceData1.conflicts.counterparty" [innerHTML]="serviceData1.conflicts.counterparty | safehtml"></section>
+                    </app-read-more>
+                    <div *ngIf="serviceData1.conflicts.guidance || (serviceData1.conflictsDelivery && serviceData1.conflictsDelivery.length > 0)">
+                        <div *ngIf="serviceData1.conflicts.guidance != '' || (serviceData1.conflictsDelivery && serviceData1.conflictsDelivery.length > 0)">
+                            <div>
+                                <h2 style=" font-size: 14.667px; font-family: 'Calibri (Body)'"> Service Specific Conflicts Considerations </h2>
+                            </div>
+                            <div>
+                                <div>
+                                    <section *ngIf="serviceData1.conflicts.guidance != ''" [innerHTML]="serviceData1.conflicts.guidance | safehtml"></section>
+                                    <section *ngIf="serviceData1.conflictsDelivery && serviceData1.conflictsDelivery.length > 0">
+                                        <section *ngFor="let delivery of serviceData1.conflictsDelivery" [innerHTML]="'<strong>('+ delivery.nameDeliveryMethod + ')&nbsp;</strong>' + delivery.descriptionDeliveryMethod | safehtml">
+                                        </section>
+                                    </section>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <!-- Service Line Guidance -->
+        <div class="section_independent__item" #serviceDiv>
+            <h2 style="  font-family: 'Calibri (Body)'">Service Line Guidance</h2>
+            <div class="col-12 independent_description" *ngIf="serviceData1.business">
+                <div *ngIf="serviceData1.business.qualityConsiderations !== '' || guidanceRegionLocation.region !== '' || guidanceRegionLocation.location !== ''">
+                    <section style="font-size: 14.667px;   font-family: 'Calibri (Body)'" *ngIf="serviceData1.business.qualityConsiderations !== ''" [innerHTML]="serviceData1.business.qualityConsiderations | safehtml"></section>
+                    <div class="row">
+                        <section style=" font-size: 14.667px;  font-family: 'Calibri (Body)'" *ngIf="guidanceRegionLocation.region !== ''" [innerHTML]="guidanceRegionLocation.region | safehtml">
+                        </section>
+                    </div>
+                    <div class="row">
+                        <section style=" font-size: 14.667px;  font-family: 'Calibri (Body)'" *ngIf="guidanceRegionLocation.location !== ''" [innerHTML]="guidanceRegionLocation.location | safehtml">
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <!-- EY Technology -->
+        <div class="section_independent__item" #technologyDiv>
+            <h2 style="  font-family: 'Calibri (Body)'">EY Technology</h2>
+            <div *ngIf="serviceData1.technology">
+                <div>
+                    <section *ngFor="let item of serviceData1.technology">
+
+                        <div *ngIf="item.TechnologyDescription !== ''">{{item.TechnologyName}}</div>
+                        <div *ngIf="item.TechnologyDescription === ''">{{item.TechnologyName}}</div>
+
+                    </section>
+                    <section style="font-size: 14.667px;  font-family: 'Calibri (Body)'" *ngIf="serviceData1.business" [innerHTML]="serviceData1.business.guidanceEytechnology | safehtml"></section>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <!-- Other Consideration -->
+        <section *ngIf="serviceData1.isqm && serviceData1.isqm.Isqmcheck || serviceData1.isqm && serviceData1.isqm.ProcessorData">
+            <h2 style="  font-family: 'Calibri (Body)'" class="section_other__title">Other Considerations
+            </h2>
+            <div *ngIf="serviceData1.isqm.ProcessorData">
+                <strong>Data Processor</strong>
+                <p style="  font-family: 'Calibri (Body)'" class="pt-2 mb-0">
+                    {{serviceData1.isqm.ProcessorConsiderations}}</p>
+            </div>
+            <div *ngIf="serviceData1.isqm.Isqmcheck">
+                <strong>Subject to ISQM</strong>
+                <p style="  font-family: 'Calibri (Body)'" class="pt-2">
+                    {{serviceData1.isqm.Considerations}}</p>
+            </div>
+            <hr>
+        </section>
+
+        <!-- Location Offered -->
+        <section class="col-12 p-0 section_other">
+            <h2 style="  font-family: 'Calibri', 'Calibri', Calibri, 'Calibri', sans-serif">Locations Offered</h2>
+            <ul class="row" *ngFor="let item of this.locationsOffered">
+                <li style=" font-size: 14.667px;  font-family: 'Calibri (Body)'" *ngIf="item.Region === 'Global'">
+                    <h5 style=" font-size: 14.667px;  font-family: 'Calibri (Body)'">Americas, Asia Pacific, EMEIA:
+                    </h5>
+                    All
+                </li>
+                <li style=" font-size: 14.667px;  font-family: 'Calibri (Body)'" *ngIf="item.Region !== 'Global'">
+                    <b>{{item.Area}}</b> => <b>{{item.Region}}:</b> {{item.CountryNames}}
+                </li>
+            </ul>
+        </section>
+        <hr>
+        <!-- Service Contacts -->
+        <h2 style="  font-family: 'Calibri (Body)'">Service Contacts</h2>
+
+        <h4 style="font-size: 14.667px; font-family: 'Calibri (Body)'">Business Contacts</h4>
+        <div class="row">
+            <div class="col-sm-12 col-md-4 mb-3" *ngFor="let item of serviceData1.contactsl">
+                <div class="row">
+                    <div class="col-sm-10 col-md-10 pl-0">
+                        <p style="font-size: 14.667px; font-family: 'Calibri (Body)'" *ngIf="item.name != ''" class="mb-0">
+                            {{item.name}}</p>
+                        <p style="font-size: 14.667px; font-family: 'Calibri (Body)'" *ngIf="item.title != ''" class="second-text mb-0">{{item.title}}</p>
+                        <a *ngIf="item.url != '' && item.location" class="second-text text-truncate" href="{{item.url}}" target="_blank">{{item.location}}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h4 style="font-size: 14.667px; font-family: 'Calibri (Body)'">Quality & Independence</h4>
+        <div class="row">
+            <div class="col-sm-12 col-md-4 mb-3" *ngFor="let item of serviceData1.contactQuality">
+                <div class="row">
+                    <div class="col-sm-10 col-md-10 pl-0">
+                        <p style="  font-size: 14.667px; font-family: 'Calibri (Body)'" *ngIf="item.name != ''" class="mb-0">
+                            {{item.name}}</p>
+                        <p style="  font-size: 14.667px; font-family: 'Calibri (Body)'" *ngIf="item.title != ''" class="second-text mb-0">{{item.title}}</p>
+                        <a *ngIf="item.url != '' && item.location" class="second-text text-truncate" href="{{item.url}}" target="_blank">{{item.location}}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <!-- Finance Codes -->
+        <h2 style="  font-family: 'Calibri (Body)'">Finance Codes</h2>
+        <div class="row">
+            <div *ngIf="country === 'GLB' || mercuryModel ">
+                <h4 style=" font-size: 14.667px; font-family: 'Calibri (Body)'">Mercury Service Code(s)</h4>
+                <p style="font-size: 14.667px;font-family: 'Calibri (Body)'" *ngFor="let item of serviceData1.mercury">
+                    {{ item.MercuryCode }} - {{ item.Name }}
+                </p>
+            </div>
+            <div *ngIf="globalGfis.length > 0 || localGfis.length > 0">
+                <div class="row">
+                    <section *ngIf="!loadingFinance">
+                        <div *ngIf="globalGfis.length > 0">
+                            <h4 style="font-size: 14.667px; font-family: 'Calibri (Body)'">Global GFIS Service Code(s)
+                            </h4>
+                            <p style="font-size: 14.667px; font-family: 'Calibri (Body)'" *ngFor="let item of globalGfis">
+                                <label *ngIf="item.IsGlobal">{{ item.Gfiscode }} - {{ item.Name }}</label>
+                            </p>
+                        </div>
+                        <div *ngIf="localGfis.length > 0">
+                            <h4 style="  font-family: 'Calibri (Body)'">Local GFIS Service Code(s)
+                            </h4>
+                            <p style="font-family: 'Calibri (Body)'" *ngFor="let item of localGfis">
+                                <label *ngIf="!item.IsGlobal">{{ item.Gfiscode }} - {{ item.Name }}</label>
+                            </p>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 mt-2 pt-3 additional_text_finance">
+            <div *ngIf="serviceData1.header && serviceData1.header.financeText !== ''" [innerHTML]="serviceData1.header.financeText | safehtml">
+            </div>
+        </div>
+        <hr>
+        <!-- GTC Module -->
+        <div *ngIf="this.gtc !== '' ">
+            <section class="col-12 p-0 section_other">
+                <h2 style="font-family: 'Calibri (Body)'">GTC Module</h2>
+
+                <div *ngIf="serviceData1.isqm.Gtcmodule">
+                    <p style="font-size: 14.667px; font-family: 'Calibri (Body)'">
+                        {{this.gtc}}</p>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>

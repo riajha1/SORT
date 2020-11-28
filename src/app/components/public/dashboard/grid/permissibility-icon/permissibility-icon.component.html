@@ -1,0 +1,21 @@
+<span [ngSwitch]="highRestriction" *ngIf="enable">
+    <ng-container *ngFor="let iconArray of iconArray">
+        <span *ngIf="iconArray.icon !== null" matTooltip="{{iconArray.label}}" matTooltipPosition="above">
+            <i style="font-size: .85rem; padding-top: 3px" class="material-icons px-1" [ngStyle]="{'color': iconArray.color === '' ? defaultColor : iconArray.color}" *ngSwitchCase="iconArray.value">{{iconArray.icon}}</i>
+        </span>
+<span *ngIf="iconArray.icon === null" matTooltip="{{iconArray.label}}" matTooltipPosition="above">
+            <span class="transparent-bg list px-1" *ngSwitchCase="iconArray.value">{{iconArray.value}}</span>
+</span>
+</ng-container>
+</span>
+
+<span [ngSwitch]="highRestriction" *ngIf="!enable">
+    <ng-container *ngFor="let iconArray of iconArray">
+        <span *ngIf="iconArray.icon !== null" matTooltip="{{iconArray.label}}" matTooltipPosition="above">
+            <i style="font-size: .85rem" class="material-icons px-1" [ngStyle]="{'color': iconArray.color === '' ? defaultColor : iconArray.color}" *ngSwitchCase="iconArray.value">{{iconArray.icon}}</i>
+        </span>
+<span *ngIf="iconArray.icon === null" matTooltip="{{iconArray.label}}" matTooltipPosition="above">
+        <span class="transparent-bg px-1" *ngSwitchCase="iconArray.value">{{iconArray.value}}</span>
+</span>
+</ng-container>
+</span>

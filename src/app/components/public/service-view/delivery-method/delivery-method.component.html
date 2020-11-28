@@ -1,0 +1,60 @@
+<section class="delivery-section">
+    <div class="delivery-fix-flag" #deliveryDiv></div>
+    <section class="col-12" *ngIf="!(filter.client.GISId && filter.client.permissibility.length === 0 || filter.client.GISId && filter.client.permissibility.length === 1 && this.filter.client.permissibility[0].ch2) || filter.client.GISId && filter.client.permissibility.length === 0 && existDelivery || filter.client.GISId && filter.client.permissibility.length === 1 && this.filter.client.permissibility[0].ch2 && existDelivery">
+        <div class="col-12 mb-3 p-0 section__delivery">
+            <h1 class="section__delivery__title">Select your Form of Delivery to see related guidance
+                <a href="{{urlLink}}" target="_blanck">
+                    <i class="material-icons">info</i>
+                </a>
+            </h1>
+            <div class="row m-0">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4 section__delivery__left">
+                    <p class="mb-9" *ngIf="!(filter.client.GISId && filter.client.permissibility.length === 0 || !filter.client.GISId && filter.client.ClientName === 'Channel 2' || filter.client.GISId && filter.client.permissibility.length === 1 && filter.client.permissibility[0].ch2)">You may select different Forms of Delivery to see tailored guidance or choose Print option above to see all:</p>
+                    <p class="mb-9" *ngIf="filter.client.GISId && filter.client.permissibility.length === 0 || !filter.client.GISId && filter.client.ClientName === 'Channel 2' || filter.client.GISId && filter.client.permissibility.length === 1 && filter.client.permissibility[0].ch2">Only the following forms of delivery have considerations which may apply to Channel 2 client:</p>
+                    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                        <a #defaultOption class="nav-link mb-2 active d-none" data-toggle="pill" id="v-pills-default-tab" href="#v-pills-default" role="tab" aria-controls="v-pills-default" aria-selected="true" (click)="OnclickItem()">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" class="custom-control-input" id="defaultChecked1" name="defaultChecked">
+                                <label class="custom-control-label" for="defaultChecked1">default</label>
+                            </div>
+                        </a>
+                        <ng-container *ngFor="let item of delivery; let i = index">
+                            <a *ngIf="!filter.client.GISId && filter.client.ClientName === 'Channel 2' && deliveryChannel2.includes(item.DeliveryMethodName) ||
+                            !(filter.client.GISId && filter.client.permissibility.length === 0 || filter.client.GISId && this.filter.client.permissibility.length === 1 && this.filter.client.permissibility[0].ch2) ||
+                            filter.client.GISId && (filter.client.permissibility.length === 0 || this.filter.client.permissibility.length === 1 && this.filter.client.permissibility[0].ch2 ) && deliveryChannel2.includes(item.DeliveryMethodName)" (click)="getDeliveryOption($event.target.innerText)"
+                                class="nav-link mb-2" data-toggle="pill" id="{{'v-pills-'+ item.IdDeliveryMethod +'-tab'}}" attr.href="{{'#v-pills-'+ item.IdDeliveryMethod }}" role="tab" attr.aria-controls="{{'#v-pills-'+ item.IdDeliveryMethod }}" aria-selected="true">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" id="defaultInput{{ i }}" name="defaultInput{{ i }}">
+                                    <label class="custom-control-label" for="defaultInput{{ i }}">{{ item.DeliveryMethodName }}</label>
+                                </div>
+                            </a>
+                        </ng-container>
+
+                    </div>
+                </div>
+                <div class="col section__delivery__right">
+                    <div class="tab-content" id="v-pills-tabContent">
+                        <div class="tab-pane fade show active" id="v-pills-default" role="tabpanel" aria-labelledby="v-pills-default-tab">
+                            <div class="h-100 d-flex justify-content-center align-items-center">
+                                <p class="mb-0 text-muted">
+                                    Select a Form of Delivery to see additional information
+                                </p>
+                            </div>
+                        </div>
+                        <div *ngFor="let item of delivery" class="tab-pane fade" id="{{'v-pills-'+ item.IdDeliveryMethod }}" role="tabpanel" attr.aria-labelledby="{{'v-pills-'+ item.IdDeliveryMethod +'-tab'}}">
+
+                            <app-read-more [height]="heightDelivery" [enable]="item.readmore" *ngIf="item.readmore" [targetdiv]="deliveryDiv">
+                                <h6>Form of Delivery Guidance</h6>
+                                <div [innerHTML]="item.DeliveryMethodDescription | safehtml"></div>
+                            </app-read-more>
+                            <section *ngIf="!item.readmore">
+                                <h6>Form of Delivery Guidance</h6>
+                                <div [innerHTML]="item.DeliveryMethodDescription | safehtml"></div>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>

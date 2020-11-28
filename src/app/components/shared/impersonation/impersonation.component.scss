@@ -1,0 +1,17 @@
+@import "../../../../stylesheets/abstracts/variable";
+
+.vertical-align-middle {
+    vertical-align: middle;
+}
+
+.navbar-user {
+    background: $white-color;
+    font-family: $EYInterstate-Light;
+    font-size: .8rem;
+    & .form-control {
+        height: 27px !important;
+    }
+    & button {
+        font-size: .7rem !important;
+    }
+}

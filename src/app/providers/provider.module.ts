@@ -1,0 +1,76 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
+import {
+  ClientNeedService,
+  CompetencyDomainService,
+  CountriesService,
+  DeliveryMethodContentService,
+  FavoritesService,
+  IndependenceConsiderationsContentService,
+  InsertService,
+  SectorService,
+  ServiceLineService,
+  ServiceService,
+  ServicesService,
+  SolutionService,
+  SubserviceLineService,
+  UserService,
+  ContactService,
+  PermissibilityService,
+  ConflictConsiderationService,
+  OtherService,
+  FieldOfPlayService,
+  EyTechnologyService,
+  ExcelService,
+  LocationsOfferedService,
+  OriginServiceService,
+  LeftHandFilterService,
+  ServiceStatusService,
+  EditServiceService,
+  IndependenceRestrictionsReportService,
+  ConfigItemsService,
+  ServiceInventoryReport,
+  AdminUserAccessService,
+  RegionService} from './provider.index';
+
+@NgModule({
+  declarations: [],
+  imports: [
+    CommonModule
+  ],
+  providers: [
+    ClientNeedService,
+    CompetencyDomainService,
+    CountriesService,
+    DeliveryMethodContentService,
+    FavoritesService,
+    IndependenceConsiderationsContentService,
+    InsertService,
+    SectorService,
+    ServiceLineService,
+    ServiceService,
+    ServicesService,
+    SolutionService,
+    SubserviceLineService,
+    UserService,
+    ContactService,
+    PermissibilityService,
+    ConflictConsiderationService,
+    EyTechnologyService,
+    OtherService,
+    FieldOfPlayService,
+    ExcelService,
+    LocationsOfferedService,
+    OriginServiceService,
+    LeftHandFilterService,
+    ServiceStatusService,
+    EditServiceService,
+    ServiceInventoryReport,
+    ConfigItemsService,
+    IndependenceRestrictionsReportService,
+    AdminUserAccessService,
+    RegionService
+  ]
+})
+export class ProviderModule { }
